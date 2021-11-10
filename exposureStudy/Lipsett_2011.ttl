@@ -1,0 +1,274 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#>.
+@prefix xml: <http://www.w3.org/XML/1998/namespace>.
+@prefix expB: <http://geographicknowledge.de/vocab/ExposureBasis#>.
+@prefix envE: <http://geographicknowledge.de/vocab/environmentalExposure#>.
+@prefix envC: <http://www.geographicknowledge.de/vocab/EnvironmentalConcepts.rdf#>.
+@prefix ccd: <http://geographicknowledge.de/vocab/CoreConceptData.rdf#>.
+@prefix dcat:<https://www.w3.org/TR/vocab-dcat-2/>.
+@prefix dct: <http://purl.org/dc/terms/>.
+@prefix prov: <http://www.w3.org/ns/prov#>.
+@prefix stat: <http://statistics>.
+
+
+################Title of article: Long-term exposure to air pollution and cardiorespiratory disease in the California teachers study cohort
+
+
+
+
+################Person
+
+_:FemaleTeacher a envE:Female, envE:Teacher, expB:Person, ccd:ObjectQ.
+
+_:Living  expB:causedBy  _:FemaleTeacher.
+
+
+
+###################Activity
+
+_:Living a envE:Living, expB:Activity, ccd:EventQ.
+
+
+
+##################Environment
+
+_:PM10 a envE:PM10, ccd:FieldQ, ccd:RasterA, dcat:Dataset, expB:Environment.
+
+_:PM25 a envE:PM25, ccd:FieldQ, ccd:RasterA, dcat:Dataset, expB:Environment.
+
+_:Ozone a envE:Ozone, ccd:FieldQ, ccd:RasterA, dcat:Dataset, expB:Environment.
+
+_:NO2 a envE:NO2, ccd:FieldQ, ccd:RasterA, dcat:Dataset, expB:Environment.
+
+_:NOx a envE:NOx, ccd:FieldQ, ccd:RasterA, dcat:Dataset, expB:Environment.
+
+_:SO2 a envE:SO2, ccd:FieldQ, ccd:RasterA, dcat:Dataset, expB:Environment.
+
+_:CO a envE:CO, ccd:FieldQ, ccd:RasterA, dcat:Dataset, expB:Environment.
+
+
+
+##################Exposure
+
+_:PM10Exposure a envE:PM10Exposure, ccd:Field, dcat:Dataset, expB:Exposure; expB:causedBy _:PM10, _:Living.
+
+_:PM25Exposure a envE:PM25Exposure, ccd:Field, dcat:Dataset, expB:Exposure; expB:causedBy _:PM25, _:Living.
+
+_:OzoneExposure a envE:OzoneExposure, ccd:Field, dcat:Dataset, expB:Exposure; expB:causedBy _:Ozone, _:Living.
+
+_:NO2Exposure a envE:NO2Exposure, ccd:Field, dcat:Dataset, expB:Exposure; expB:causedBy _:NO2, _:Living.
+
+_:NOxExposure a envE:NOxExposure, ccd:Field, dcat:Dataset, expB:Exposure; expB:causedBy _:NOx, _:Living.
+
+_:SO2Exposure a envE:SO2Exposure, ccd:Field, dcat:Dataset, expB:Exposure; expB:causedBy _:SO2, _:Living.
+
+_:COExposure a envE:COExposure, ccd:Field, dcat:Dataset, expB:Exposure; expB:causedBy _:CO, _:Living.
+
+
+
+##################Risk
+
+_:LungCancerMortality a envE:LungCancerMortality, expB:Risk.
+
+_:AllCauseMortality a envE:AllCauseMortality, expB:Risk.
+
+_:CardiovascularMortality a envE:CardiovascularMortality, expB:Risk.
+
+_:NMRespiratoryMortality a envE:NMRespiratoryMortality, expB:Risk.
+
+_:IHDMortality a envE:IHDMortality, expB:Risk.
+
+_:CerebrovascularMortality a envE:CerebrovascularMortality, expB:Risk.
+
+_:MyocardialInfarctionIncidence a envE:MIIncidence, expB:Risk.
+
+_:StrokeIncidence a envE:StrokeIncidence, expB:Risk.
+
+
+_:LungCancerMortality expB:causedBy _:COExposure, _:SO2Exposure, _:NOxExposure, _:PM25Exposure, _:PM10Exposure, _:0zoneExposure, _:NO2Exposure.
+
+_:AllCauseMortality expB:causedBy _:COExposure, _:SO2Exposure, _:NOxExposure, _:PM25Exposure, _:PM10Exposure, _:0zoneExposure, _:NO2Exposure.
+
+_:CardiovascularMortality expB:causedBy _:COExposure, _:SO2Exposure, _:NOxExposure, _:PM25Exposure, _:PM10Exposure, _:0zoneExposure, _:NO2Exposure.
+
+_:NMRespiratoryMortality expB:causedBy _:COExposure, _:SO2Exposure, _:NOxExposure, _:PM25Exposure, _:PM10Exposure, _:0zoneExposure, _:NO2Exposure.
+
+_:IHDMortatlity expB:causedBy _:COExposure, _:SO2Exposure, _:NOxExposure, _:PM25Exposure, _:PM10Exposure, _:0zoneExposure, _:NO2Exposure.
+
+_:CerebrovascularMortality expB:causedBy _:COExposure, _:SO2Exposure, _:NOxExposure, _:PM25Exposure, _:PM10Exposure, _:0zoneExposure, _:NO2Exposure.
+
+_:MyocardialInfarctionIncidence expB:causedBy _:COExposure, _:SO2Exposure, _:NOxExposure, _:PM25Exposure, _:PM10Exposure, _:0zoneExposure, _:NO2Exposure.
+
+_:StrokeIncidense expB:causedBy _:COExposure, _:SO2Exposure, _:NOxExposure, _:PM25Exposure, _:PM10Exposure, _:0zoneExposure, _:NO2Exposure.
+
+
+
+##################Author's Conclusion
+
+#inv = investigated
+
+_:invstroke stat:invConsequence  _:StrokeIncidense. 
+_:invstroke stat:invCause _:PM10, _:PM25.
+_:invstroke a stat:Significant.
+
+_:invIHD stat:invConsequence  _:IHDMortality. 
+_:invIHD  stat:invCause _:PM25, _:PM10, _:NOx, _:Ozone.
+_:invIHD  a stat:Significant.
+
+_:invIHD stat:invConsequence  _:NMRespiratoryMortality. 
+_:invIHD  stat:invCause _:Ozone, _:PM10, _:PM25.
+_:invIHD  a stat:Significant.
+
+_:invCardM stat:invConsequence _:CardiovascularMortality.
+_:invCardM stat:invCause _:NOx.
+_:invCardM a stat:Significant.
+
+
+##Insignificant outcomes
+_:invlungc stat:invConsequence  _:LungCancerMortality. 
+_:invlungc  stat:invCause _:COExposure, _:SO2Exposure, _:NOxExposure, _:PM25Exposure, _:PM10Exposure, _:0zoneExposure, _:NO2Exposure.
+_:invlungc  a stat:Insignificant.
+
+_:invAllCause stat:invConsequence  _:AllCauseMortality. 
+_:invAllCause  stat:invCause _:COExposure, _:SO2Exposure, _:NOxExposure, _:PM25Exposure, _:PM10Exposure, _:0zoneExposure, _:NO2Exposure.
+_:invAllCause a stat:Insignificant.
+
+_:invCerebrovM stat:invConsequence _:CerebrovascularMortality. 
+_:invCerebrovM  stat:invCause _:COExposure, _:SO2Exposure, _:NOxExposure, _:PM25Exposure, _:PM10Exposure, _:0zoneExposure, _:NO2Exposure.
+_:invCerebrovM a stat:Insignificant.
+
+_:invMII stat:invConsequence _:MyocardialInfarctionIncidence. 
+_:invMII  stat:invCause _:COExposure, _:SO2Exposure, _:NOxExposure, _:PM25Exposure, _:PM10Exposure, _:0zoneExposure, _:NO2Exposure.
+_:invMII a stat:Insignificant.
+
+#This study provides evidence that long-term exposures to PM2.5,PM10, and NOx were associated with increased risks for IHD mortality. The increased risk of IHD mortality associated with long-term ozone exposure was most likely explicable by its correlation with particulate matter, whereas that for NOx was based on relatively small numbers of observations. These data also suggest associations of long-term ozone and particulate matter exposure with mortality from nonmalignant respiratory disease. That both measures of PM were associated with incident stroke provides support for the notion that these pollutants may play an etiological role in the development of circulatory disease
+
+
+
+##################Datasets
+
+########Raw Data
+#Air Pollution
+_:FixedSiteMonitors a envE:FixedSiteMonitors.
+_:FederalReferenceMethodMonitors a envE:FederalReferenceMethodMonitors.
+
+_:FixedSiteMonitors prov:used _:PM10Points, _:OzonePoints, _:NO2Points, _:NOxPoints, _:COPoints, _:SO2Points.
+_:FederalReferenceMethodMonitors prov:used _:PM25Points.
+
+_:FixedSiteMonitors a ccd:Point, ccd:FieldQ, dcat:Dataset, expB:Environment.
+_:FederalReferenceMethodMonitors a ccd:Point, ccd:FieldQ, dcat:Dataset, expB:Environment.
+
+
+#Study Population
+_:CTS a envE:CTS.
+
+
+
+########Person dataset
+
+#CTS = California Teachers Study 
+
+_:CTS a dcat:Dataset, ccd:PointA, expB:Person, envE:Teacher, envE:Female.
+_:Living expB:causedBy _:GeoCodedResidentialAddresses.  ##This is an assumption made by the authors that people live at an address for some amount of time
+_:ResidentialAddresses prov:wasDerivedFrom _:CTS.
+
+_:GeoCodedResidentialAddresses prov:wasGeneratedBy _:geocode.
+_:geocode prov:wasAssociatedWith <https://desktop.arcgis.com/en/arcmap/latest/manage-data/geocoding/what-is-geocoding.htm>.
+_:geocode prov:used _:ResidentialAddresses.
+_:ResidentialAddresses a ccd:Point, ccd:ObjectQ, dcat:Dataset, expB:Environment. 
+_:GeoCodedResidentialAddresses a ccd:Point, ccd:ObjectQ, dcat:Dataset, expB:Environment.
+
+
+
+##########Air Pollution Dataset
+
+#IDW = Inverse Distance Weighting
+_:IDW prov:wasAssociatedWith <https://pro.arcgis.com/en/pro-app/latest/tool-reference/spatial-analyst/idw.htm>.
+
+
+_:RepresentativeRangeNeighborhood prov:used _:OzoneRRNB20km, _:PM25RRNB20km, _:PM10RRNB10km, _:CORRNB3km, _:NOxRRNB3km, _:NO2RRNB3km, _:SO2RRNB3km.
+
+_:RepresentativeRangeNeighborhood a ccd:Point, ccd:FieldQ, dcat:Dataset, expB:Environment.
+
+
+_:RepresentativeRangeUrban prov:used _:OzoneRRU50km, _:PM25RRU20km, _:PM10RRU20km, _:CORRU5km, _:NOxRRU5km, _:NO2RRU5km, _:SO2RRU5km.
+
+_:RepresentativeRangeUrban a ccd:Point, ccd:FieldQ, dcat:Dataset, expB:Environment.
+
+####^^^do these need to be in the ontology too???
+
+
+_:PM10 prov:wasGeneratedBy _:IDW.
+_:IDW prov:wasAssociatedWith <https://pro.arcgis.com/en/pro-app/latest/tool-reference/spatial-analyst/idw.htm>.
+_:IDW prov:used _:PM10Points, _:PM10RRNB10km, _:PM10RRU20km.
+_:PM10Points a ccd:Point, ccd:FieldQ, dcat:Dataset, expB:Environment.
+
+_:Ozone prov:wasGeneratedBy _:IDW.
+_:IDW prov:used _:OzonePoints, _:OzoneRRNB20km, _:OzoneRRU50km.
+_:OzonePoints a ccd:Point, ccd:FieldQ, dcat:Dataset, expB:Environment.
+
+_:NO2 prov:wasGeneratedBy _:IDW.
+_:IDW prov:used _:NO2Points, _:NO2RRNB3km, _:NO2RRU5km.
+_:NO2Points a ccd:Point, ccd:FieldQ, dcat:Dataset, expB:Environment.
+
+_:NOx prov:wasGeneratedBy _:IDW.
+_:IDW prov:used _:NOxPoints, _:NOxRRNB3km, _:NOxRRU5km.
+_:NOxPoints a ccd:Point, ccd:FieldQ, dcat:Dataset, expB:Environment.
+
+_:CO prov:wasGeneratedBy _:IDW.
+_:IDW prov:used _:PM10Points, _:CORRNB3km, _:CORRU5km.
+_:COPoints a ccd:Point, ccd:FieldQ, dcat:Dataset, expB:Environment.
+
+_:SO2 prov:wasGeneratedBy _:IWD.
+_:IDW prov:used _:SO2Points, _:SO2RRNB3km, _:SO2RRU5km.
+_:SO2Points a ccd:Point, ccd:FieldQ, dcat:Dataset, expB:Environment.
+
+_:PM25 prov:wasGeneratedBy _:IWD.
+_:IDW prov:used _:PM25Points, _:PM25RRNB20km, _:PM25RRU20km.
+_:PM25Points a ccd:Point, ccd:FieldQ, dcat:Dataset, expB:Environment.
+
+
+
+##############Exposure Analysis
+#Exposure = monthly individual exposure estimates
+
+_:PM10Exposure prov:wasGeneratedBy <https://www.restore.ac.uk/geo-refer/91018mwors00y00000000.php>.
+_:PM10Exposure prov:used _:GeoCodedResidentialAddresses, _:PM10.
+
+_:OzoneExposure prov:wasGeneratedBy <https://www.restore.ac.uk/geo-refer/91018mwors00y00000000.php>.
+_:OzoneExposure prov:used _:GeoCodedResidentialAddresses, _:Ozone.
+
+_:NO2Exposure prov:wasGeneratedBy <https://www.restore.ac.uk/geo-refer/91018mwors00y00000000.php>.
+_:NO2Exposure prov:used _:GeoCodedResidentialAddresses, _:NO2.
+
+_:NOxExposure prov:wasGeneratedBy <https://www.restore.ac.uk/geo-refer/91018mwors00y00000000.php>.
+_:NOxExposure prov:used _:GeoCodedResidentialAddresses, _:NOx.
+
+_:COExposure prov:wasGeneratedBy <https://www.restore.ac.uk/geo-refer/91018mwors00y00000000.php>.
+_:COExposure prov:used _:GeoCodedResidentialAddresses, _:CO.
+
+_:SO2Exposure prov:wasGeneratedBy <https://www.restore.ac.uk/geo-refer/91018mwors00y00000000.php>.
+_:SO2Exposure prov:used _:GeoCodedResidentialAddresses, _:SO2.
+
+_:PM25Exposure prov:wasGeneratedBy <https://www.restore.ac.uk/geo-refer/91018mwors00y00000000.php>.
+_:PM25Exposure prov:used _:GeoCodedResidentialAddresses, _:PM25.
+
+
+
+################Validation 
+
+#can not find validation methods mentioned in this paper to fill out this section
+
+
+#################Stats/Health Risk Analysis
+
+#We used Cox proportional hazards models to estimate hazard ratios (HRs) and 95% confidence intervals (CIs) for associations between each pollutant and the outcomes of interest. 
+
+
+
+
+
+
+
+

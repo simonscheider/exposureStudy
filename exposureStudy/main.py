@@ -27,7 +27,6 @@ g = rdflib.Graph()
 
 g = load_RDF(g, 'Lipsett_2011.ttl')
 
-
-
+#Csilla
 
 

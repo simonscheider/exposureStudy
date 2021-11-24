@@ -65,20 +65,45 @@ for f in fields:
 #print(count)
 
 #All tools that genereated some environmental dataset
-query = """
-SELECT DISTINCT ?cctype ?datatype ?tool 
+queries = {}
+# queries[''] = """
+# SELECT DISTINCT ?cctype ?datatype ?tool
+# WHERE {
+#     ?x prov:wasGeneratedBy ?object .
+#     ?object prov:wasAssociatedWith ?tool.
+#     ?x a expB:Environment, dcat:Dataset.
+#     ?x a ?cctype .
+#     ?x a ?datatype .
+#     FILTER(?cctype  in (ccd:FieldQ, ccd:ObjectQ, ccd:EventQ, ccd:NetworkQ))
+#     FILTER(?datatype in (ccd:RasterA, ccd:VectorRegionA, ccd:LineA, ccd:PointA, ccd:PlainVectorRegionA, ccd:VectorTessellationA))
+# }"""
+queries['Which tools were used in an article to measure environments, and for which classes of environments?'] = """
+SELECT DISTINCT ?tool ?l ?y
 WHERE {
-    ?x prov:wasGeneratedBy ?object .
-    ?object prov:wasAssociatedWith ?tool.
-    ?x a expB:Environment, dcat:Dataset.   
-    ?x a ?cctype . 
-    ?x a ?datatype .
-    FILTER(?cctype  in (ccd:FieldQ, ccd:ObjectQ, ccd:EventQ, ccd:NetworkQ))     
-    FILTER(?datatype in (ccd:RasterA, ccd:VectorRegionA, ccd:LineA, ccd:PointA, ccd:PlainVectorRegionA, ccd:VectorTessellationA))
-}"""
-qres = g.query(query)
-for row in qres:
-    print(str(row.cctype)+ " " + str(row.datatype)+ " "+ str(row.tool))
+    ?x prov:wasGeneratedBy ?application .
+    ?application prov:wasAssociatedWith ?tool.    
+    ?x a expB:Environment, dcat:Dataset. 
+    OPTIONAL{?x a ?y. FILTER(?y not in (expB:Environment, dcat:Dataset)).}
+    OPTIONAL{?tool rdfs:label ?l.}           
+}
+"""
+
+queries['Which tools were used in an article to measure exposures, and for which classes of exposures?'] = """
+SELECT DISTINCT ?tool ?l ?y
+WHERE {
+    ?x prov:wasGeneratedBy ?application .
+    ?application prov:wasAssociatedWith ?tool.    
+    ?x a expB:Exposure, dcat:Dataset. 
+    OPTIONAL{?x a ?y. FILTER(?y not in (expB:Exposure, dcat:Dataset)).}
+    OPTIONAL{?tool rdfs:label ?l.}           
+}
+"""
+
+for question in queries:
+    qres = g.query(queries[question])
+    print(question)
+    for row in qres:
+        print(str(row))
 
 
 

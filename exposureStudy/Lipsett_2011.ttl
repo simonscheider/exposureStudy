@@ -51,23 +51,23 @@ _:CO a envE:CO, ccd:FieldQ, ccd:RasterA, dcat:Dataset, expB:Environment.
 
 ##################Exposure
 
-_:PM10Exposure a envE:PM10Exposure, ccd:Field, dcat:Dataset, expB:Exposure; expB:causedBy _:PM10, _:Living.
+_:PM10Exposure a envE:PM10Exposure, ccd:EventQ,  dcat:Dataset, expB:Exposure; expB:causedBy _:PM10, _:Living.
 
-_:PM25Exposure a envE:PM25Exposure, ccd:Field, dcat:Dataset, expB:Exposure; expB:causedBy _:PM25, _:Living.
+_:PM25Exposure a envE:PM25Exposure, ccd:EventQ, dcat:Dataset, expB:Exposure; expB:causedBy _:PM25, _:Living.
 
-_:OzoneExposure a envE:OzoneExposure, ccd:Field, dcat:Dataset, expB:Exposure; expB:causedBy _:Ozone, _:Living.
+_:OzoneExposure a envE:OzoneExposure, ccd:EventQ, dcat:Dataset, expB:Exposure; expB:causedBy _:Ozone, _:Living.
 
-_:NO2Exposure a envE:NO2Exposure, ccd:Field, dcat:Dataset, expB:Exposure; expB:causedBy _:NO2, _:Living.
+_:NO2Exposure a envE:NO2Exposure, ccd:EventQ, dcat:Dataset, expB:Exposure; expB:causedBy _:NO2, _:Living.
 
-_:NOxExposure a envE:NOxExposure, ccd:Field, dcat:Dataset, expB:Exposure; expB:causedBy _:NOx, _:Living.
+_:NOxExposure a envE:NOxExposure, ccd:EventQ, dcat:Dataset, expB:Exposure; expB:causedBy _:NOx, _:Living.
 
-_:SO2Exposure a envE:SO2Exposure, ccd:Field, dcat:Dataset, expB:Exposure; expB:causedBy _:SO2, _:Living.
+_:SO2Exposure a envE:SO2Exposure, ccd:EventQ, dcat:Dataset, expB:Exposure; expB:causedBy _:SO2, _:Living.
 
-_:COExposure a envE:COExposure, ccd:Field, dcat:Dataset, expB:Exposure; expB:causedBy _:CO, _:Living.
+_:COExposure a envE:COExposure, ccd:EventQ, dcat:Dataset, expB:Exposure; expB:causedBy _:CO, _:Living.
 
 
 
-##################Risk
+##################Risk  refer to ICD codes
 
 _:LungCancerMortality a envE:LungCancerMortality, expB:Risk.
 
@@ -156,8 +156,8 @@ _:FederalReferenceMethodMonitors a envE:FederalReferenceMethodMonitors.
 _:FixedSiteMonitors prov:used _:PM10Points, _:OzonePoints, _:NO2Points, _:NOxPoints, _:COPoints, _:SO2Points.
 _:FederalReferenceMethodMonitors prov:used _:PM25Points.
 
-_:FixedSiteMonitors a ccd:PointA, ccd:FieldQ, dcat:Dataset, expB:Environment.
-_:FederalReferenceMethodMonitors a ccd:PointA, ccd:FieldQ, dcat:Dataset, expB:Environment.
+_:FixedSiteMonitors a ccd:Point, ccd:FieldQ, dcat:Dataset, expB:Environment.
+_:FederalReferenceMethodMonitors a ccd:Point, ccd:FieldQ, dcat:Dataset, expB:Environment.
 
 
 #Study Population
@@ -176,7 +176,7 @@ _:ResidentialAddresses prov:wasDerivedFrom _:CTS.
 _:GeoCodedResidentialAddresses prov:wasGeneratedBy _:geocode.
 _:geocode prov:wasAssociatedWith <https://desktop.arcgis.com/en/arcmap/latest/manage-data/geocoding/what-is-geocoding.htm>.
 _:geocode prov:used _:ResidentialAddresses.
-_:ResidentialAddresses a ccd:PointA, ccd:ObjectQ, dcat:Dataset, expB:Environment. 
+_:ResidentialAddresses a ccd:Point, ccd:ObjectQ, dcat:Dataset, expB:Environment. 
 _:GeoCodedResidentialAddresses a ccd:PointA, ccd:ObjectQ, dcat:Dataset, expB:Environment.
 
 
@@ -189,12 +189,12 @@ _:IDW prov:wasAssociatedWith <https://pro.arcgis.com/en/pro-app/latest/tool-refe
 
 _:RepresentativeRangeNeighborhood prov:used _:OzoneRRNB20km, _:PM25RRNB20km, _:PM10RRNB10km, _:CORRNB3km, _:NOxRRNB3km, _:NO2RRNB3km, _:SO2RRNB3km.
 
-_:RepresentativeRangeNeighborhood a ccd:PointA, ccd:FieldQ, dcat:Dataset, expB:Environment.
+_:RepresentativeRangeNeighborhood a ccd:Point, ccd:FieldQ, dcat:Dataset, expB:Environment.
 
 
 _:RepresentativeRangeUrban prov:used _:OzoneRRU50km, _:PM25RRU20km, _:PM10RRU20km, _:CORRU5km, _:NOxRRU5km, _:NO2RRU5km, _:SO2RRU5km.
 
-_:RepresentativeRangeUrban a ccd:PointA, ccd:FieldQ, dcat:Dataset, expB:Environment.
+_:RepresentativeRangeUrban a ccd:Point, ccd:FieldQ, dcat:Dataset, expB:Environment.
 
 ####^^^do these need to be in the ontology too???
 
@@ -202,56 +202,58 @@ _:RepresentativeRangeUrban a ccd:PointA, ccd:FieldQ, dcat:Dataset, expB:Environm
 _:PM10 prov:wasGeneratedBy _:IDW.
 _:IDW prov:wasAssociatedWith <https://pro.arcgis.com/en/pro-app/latest/tool-reference/spatial-analyst/idw.htm>.
 _:IDW prov:used _:PM10Points, _:PM10RRNB10km, _:PM10RRU20km.
-_:PM10Points a ccd:PointA, ccd:FieldQ, dcat:Dataset, expB:Environment.
+_:PM10Points a ccd:Point, ccd:FieldQ, dcat:Dataset, expB:Environment.
 
 _:Ozone prov:wasGeneratedBy _:IDW.
 _:IDW prov:used _:OzonePoints, _:OzoneRRNB20km, _:OzoneRRU50km.
-_:OzonePoints a ccd:PointA, ccd:FieldQ, dcat:Dataset, expB:Environment.
+_:OzonePoints a ccd:Point, ccd:FieldQ, dcat:Dataset, expB:Environment.
 
 _:NO2 prov:wasGeneratedBy _:IDW.
 _:IDW prov:used _:NO2Points, _:NO2RRNB3km, _:NO2RRU5km.
-_:NO2Points a ccd:PointA, ccd:FieldQ, dcat:Dataset, expB:Environment.
+_:NO2Points a ccd:Point, ccd:FieldQ, dcat:Dataset, expB:Environment.
 
 _:NOx prov:wasGeneratedBy _:IDW.
 _:IDW prov:used _:NOxPoints, _:NOxRRNB3km, _:NOxRRU5km.
-_:NOxPoints a ccd:PointA, ccd:FieldQ, dcat:Dataset, expB:Environment.
+_:NOxPoints a ccd:Point, ccd:FieldQ, dcat:Dataset, expB:Environment.
 
 _:CO prov:wasGeneratedBy _:IDW.
 _:IDW prov:used _:PM10Points, _:CORRNB3km, _:CORRU5km.
-_:COPoints a ccd:PointA, ccd:FieldQ, dcat:Dataset, expB:Environment.
+_:COPoints a ccd:Point, ccd:FieldQ, dcat:Dataset, expB:Environment.
 
 _:SO2 prov:wasGeneratedBy _:IWD.
 _:IDW prov:used _:SO2Points, _:SO2RRNB3km, _:SO2RRU5km.
-_:SO2Points a ccd:PointA, ccd:FieldQ, dcat:Dataset, expB:Environment.
+_:SO2Points a ccd:Point, ccd:FieldQ, dcat:Dataset, expB:Environment.
 
 _:PM25 prov:wasGeneratedBy _:IWD.
 _:IDW prov:used _:PM25Points, _:PM25RRNB20km, _:PM25RRU20km.
-_:PM25Points a ccd:PointA, ccd:FieldQ, dcat:Dataset, expB:Environment.
+_:PM25Points a ccd:Point, ccd:FieldQ, dcat:Dataset, expB:Environment.
 
 
 
 ##############Exposure Analysis
 #Exposure = monthly individual exposure estimates
+_:exp prov:wasAssociatedWith <https://www.restore.ac.uk/geo-refer/91018mwors00y00000000.php>.
+<https://www.restore.ac.uk/geo-refer/91018mwors00y00000000.php> rdfs:label "Spatial Data Linkage".
 
-_:PM10Exposure prov:wasGeneratedBy <https://www.restore.ac.uk/geo-refer/91018mwors00y00000000.php>.
+_:PM10Exposure prov:wasGeneratedBy _:exp.
 _:PM10Exposure prov:used _:GeoCodedResidentialAddresses, _:PM10.
 
-_:OzoneExposure prov:wasGeneratedBy <https://www.restore.ac.uk/geo-refer/91018mwors00y00000000.php>.
+_:OzoneExposure prov:wasGeneratedBy _:exp.
 _:OzoneExposure prov:used _:GeoCodedResidentialAddresses, _:Ozone.
 
-_:NO2Exposure prov:wasGeneratedBy <https://www.restore.ac.uk/geo-refer/91018mwors00y00000000.php>.
+_:NO2Exposure prov:wasGeneratedBy _:exp.
 _:NO2Exposure prov:used _:GeoCodedResidentialAddresses, _:NO2.
 
-_:NOxExposure prov:wasGeneratedBy <https://www.restore.ac.uk/geo-refer/91018mwors00y00000000.php>.
+_:NOxExposure prov:wasGeneratedBy _:exp.
 _:NOxExposure prov:used _:GeoCodedResidentialAddresses, _:NOx.
 
-_:COExposure prov:wasGeneratedBy <https://www.restore.ac.uk/geo-refer/91018mwors00y00000000.php>.
+_:COExposure prov:wasGeneratedBy _:exp.
 _:COExposure prov:used _:GeoCodedResidentialAddresses, _:CO.
 
-_:SO2Exposure prov:wasGeneratedBy <https://www.restore.ac.uk/geo-refer/91018mwors00y00000000.php>.
+_:SO2Exposure prov:wasGeneratedBy _:exp.
 _:SO2Exposure prov:used _:GeoCodedResidentialAddresses, _:SO2.
 
-_:PM25Exposure prov:wasGeneratedBy <https://www.restore.ac.uk/geo-refer/91018mwors00y00000000.php>.
+_:PM25Exposure prov:wasGeneratedBy _:exp.
 _:PM25Exposure prov:used _:GeoCodedResidentialAddresses, _:PM25.
 
 

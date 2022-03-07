@@ -1,0 +1,82 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#>.
+@prefix xml: <http://www.w3.org/XML/1998/namespace>.
+@prefix expB: <http://geographicknowledge.de/vocab/ExposureBasis#>.
+@prefix dcat:<https://www.w3.org/TR/vocab-dcat-2/>.
+@prefix dct: <http://purl.org/dc/terms/>.
+@prefix prov: <http://www.w3.org/ns/prov#>.
+@prefix stat: <http://statistics>.
+
+
+#please validate all datasets: http://ttl.summerofcode.be/
+
+#For each entity you describe:
+# - use at least one expB: class (to fill the exposure model), 
+# - use one envE: class (to be more specific) and 
+# - for environmental phenomena use either one of ccd:FieldQ, ccd:ObjectQ, ccd:EventQ, ccd:NetworkQ class or alternatively one envC: class (the latter when talking about amounts and statistics (to generalize the environmental concept)
+# - for source datasets, use one ccd:LayerA subclass (to indicate data type) and dcat: for data descriptions (e.g. source URLs)
+# - for derivations and tools use prov:
+
+_:FemaleTeacher a expB:Person;rdfs:comment "female teacher".
+
+_:MyocardinalInfarction a expB:Risk;rdfs:comment "myocardinal infarction".
+
+_:Stroke a expB:Risk;rdfs:comment "stroke".
+
+_:MyocardinalInfarction expB:isPromotedBy _:PM10Exposure, _:PM25Exposure, _:O3Exopsure, _:NO2Exposure, _:NOxExposure, _:COExposure, _:SO2Exposure.
+
+_:Stroke expB:isPromotedBy _:PM10Exposure, _:PM25Exposure, _:O3Exopsure, _:NO2Exposure, _:NOxExposure, _:COExposure, _:SO2Exposure.
+
+_:PM10Exposure a expB:Exposure;rdfs:comment "exposure to PM10".
+
+_:PM25Exposure a expB:Exposure;rdfs:comment "exposure to PM25".
+
+_:O3Exposure a expB:Exposure;rdfs:comment "exposure to O3".
+
+_:NO2Exposure a expB:Exposure;rdfs:comment "exposure to NO2".
+
+_:NOxExposure a expB:Exposure;rdfs:comment "exposure to NOx".
+
+_:COExposure a expB:Exposure;rdfs:comment "exposure to CO".
+
+_:SO2Exposure a expB:Exposure;rdfs:comment "exposure to SO2".
+
+
+_:PM10Exposure expB:causedBy _:PM10.
+
+_:PM25Exposure expB:causedBy _:PM25.
+
+_:O3Exposure expB:causedBy _:03.
+
+_:NO2Exposure expB:causedBy _:NO2.
+
+_:NOxExposure expB:causedBy _:NOx.
+
+_:COExposure expB:causedBy _:CO.
+
+_:SO2Exposure expB:causedBy _:SO2.
+
+
+_:PM10 expB:causedBy _:LivingInCalifornia.
+
+_:PM25 expB:causedBy _:LivingInCalifornia.
+
+_:O3 expB:causedBy _:LivingInCalifornia.
+
+_:NO2 expB:causedBy _:LivingInCalifornia.
+
+_:NOx expB:causedBy _:LivingInCalifornia.
+
+_:CO expB:causedBy _:LivingInCalifornia.
+
+_:SO2 expB:causedBy _:LivingInCalifornia.
+
+_:LivingInCalifornia a expB:SpatialActivity;rdfs:comment "living in California". 
+
+_:LivingInCalifornia expB:causedBy  _:Monitors, _:Neighborhoods, _:Regions.
+
+
+_:Neighborhoods a expB:EnvironmentalFactor;rdfs:comment "neighborhoods".
+
+_:Regions a expB:EnvironmentalFactor;rdfs:comment "regions".

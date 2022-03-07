@@ -81,7 +81,7 @@ def locallyCloseWorld(g, property=expB.causedBy, all = expB.Activity):
 
 
 #load paper descriptions
-list_of_paper_descriptions= ['Helbich_2016.ttl']
+list_of_paper_descriptions= ['Helbich_2016.ttl','Lipsett_2011.ttl']
 basic_ontology = 'ExposureBasis.ttl'
 list_of_graphs = []
 for p in  list_of_paper_descriptions:

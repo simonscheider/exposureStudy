@@ -1,0 +1,145 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#>.
+@prefix xml: <http://www.w3.org/XML/1998/namespace>.
+@prefix expB: <http://geographicknowledge.de/vocab/exposureBasis#>.
+@prefix dcat:<https://www.w3.org/TR/vocab-dcat-2/>.
+@prefix dct: <http://purl.org/dc/terms/>.
+@prefix prov: <http://www.w3.org/ns/prov#>.
+@prefix stat: <http://statistics>.
+
+
+#please validate all datasets: http://ttl.summerofcode.be/
+
+#For each entity you describe:
+# - use at least one expB: class (to fill the exposure model), 
+# - use one envE: class (to be more specific) and 
+# - for environmental phenomena use either one of ccd:FieldQ, ccd:ObjectQ, ccd:EventQ, ccd:NetworkQ class or alternatively one envC: class (the latter when talking about amounts and statistics (to generalize the environmental concept)
+# - for source datasets, use one ccd:LayerA subclass (to indicate data type) and dcat: for data descriptions (e.g. source URLs)
+# - for derivations and tools use prov:
+
+
+_:obesity a expB:Risk;rdfs:comment "obesity".
+
+_:obesity expB:isHinderedBy _:PAexposure.
+
+_:PAexposure a expB:Exposure;rdfs:comment "exposure to pysical activity".
+
+_:PAexposure expB:causedBy _:schooltrips.
+
+_:schooltrips a expB:SpatialActivity. 
+
+_:schooltrips expB:causedBy  _:homes, _:schools, _:child, _:accidentdensity, _:propcul-de-sac, _:availabilityofmr, _:distance2mr, _:loggedproportionofgreen, _:windspeed, _:temperature, _:globalradiation, _:hourlyprecipitation.
+
+_:schooltrips rdfs:comment "walking or biking or motorized transport".
+_:schooltrips expB:has  _:Triplengths, _:Modes, _:weekday.
+
+_:homes a expB:EnvironmentalFactor;rdfs:comment "homes".
+
+_:schools a dcat:Dataset, expB:EnvironmentalFactor;rdfs:comment "schools".
+#_:schools dcat:distribution 
+
+_:child a expB:Person, dcat:Dataset;rdfs:comment "GPS data of moving children".
+
+_:child expB:has _:age.
+
+_:child expB:has _:gender.
+
+_:child expB:has _:BMI.
+
+
+
+_:majorroads a dcat:Dataset, expB:EnvironmentalFactor ; prov:wasDerivedFrom _:roads.
+
+_:availabilityofmr prov:wasDerivedFrom _:majorroads.
+
+_:availabilityofmr a expB:EnvironmentalFactor, dcat:Dataset.
+
+_:distance2mr prov:wasDerivedFrom _:majorroads.
+
+_:distance2mr a expB:EnvironmentalFactor, dcat:Dataset. 
+
+_:proportionofcyclingpathlengths a expB:EnvironmentalFactor, dcat:Dataset.
+_:proportionofcyclingpathlengths prov:wasDerivedFrom _:cyclingstreets.
+_:cyclingstreets a  dcat:Dataset; prov:wasDerivedFrom _:roads.
+
+_:accident a dcat:Dataset, expB:EnvironmentalFactor.
+
+_:accidentdensity prov:wasDerivedFrom _:accident.
+
+_:accidentdensity a expB:EnvironmentalFactor, dcat:Dataset.
+
+#_:schooltrips expB:has _:availabilityofmr.
+
+_:propcul-de-sac prov:wasDerivedFrom _:cul-de-sac.
+
+_:propcul-de-sac a expB:EnvironmentalFactor, dcat:Dataset.
+
+_:cul-de-sac a dcat:Dataset, expB:EnvironmentalFactor; prov:wasDerivedFrom _:roads.
+
+_:propwayints a expB:EnvironmentalFactor, dcat:Dataset.
+
+_:propwayints prov:wasDerivedFrom _:intersections.
+
+_:intersections a dcat:Dataset, expB:EnvironmentalFactor;prov:wasDerivedFrom _:roads.
+
+_:landusediversity a dcat:Dataset, expB:EnvironmentalFactor.
+
+_:landusediversity prov:wasDerivedFrom _:LGNlanduse.
+
+_:LGNlanduse dcat:distribution <https://www.wur.nl/nl/Onderzoek-Resultaten/Onderzoeksinstituten/Environmental-Research/Faciliteiten-tools/Kaarten-en-GIS-bestanden/Landelijk-Grondgebruik-Nederland/Wat-is-LGN.htm>.
+
+_:buildingusagediversity a dcat:Dataset, expB:EnvironmentalFactor.
+_:buildingusagediversity prov:wasDerivedFrom _:buildings. 
+_:buildingroughness a dcat:Dataset,  expB:EnvironmentalFactor.
+_:buildingroughness prov:wasDerivedFrom _:buildings. 
+ _:buildings dcat:distribution <https://www.kadaster.nl/zakelijk/registraties/basisregistraties/bag>.
+ 
+ _:closenessindex a dcat:Dataset, expB:EnvironmentalFactor.
+ _:closenessindex prov:wasDerivedFrom _:streetnetwork. 
+ _:betweennessindex a dcat:Dataset,  expB:EnvironmentalFactor.
+ _:betweennessindex prov:wasDerivedFrom _:streetnetwork.
+ _:streetnetwork a dcat:Dataset, expB:EnvironmentalFactor;
+ prov:wasDerivedFrom _:roads.
+ 
+ _:streetdensity a dcat:Datast, expB:EnvironmentalFactor.
+  _:streetdensity prov:wasDerivedFrom _:roads.
+ _:roads a dcat:Dataset, expB:EnvironmentalFactor.
+
+_:schooltrips a dcat:Dataset.
+_:schooltrips prov:wasDerivedFrom _:child, _:accidentdensity, _:propcul-de-sac, _:availabilityofmr, _:distance2mr, _:loggedproportionofgreen, _:windspeed, _:temperature, _:globalradiation, _:hourlyprecipitation.
+#GPS data is used to derive the trips, and environmental data is used to derive attributes of trips
+
+####How to include: Physico chemical environment? Temp? Windspeed?
+
+_:windspeed a dcat:Dataset, expB:EnvironmentalFactor;
+dcat:distribution <https://www.knmi.nl/nederland-nu/klimatologie/uurgegevens>.
+
+_:temperature a dcat:Dataset,  expB:EnvironmentalFactor.
+_:temperature dcat:distribution <https://www.knmi.nl/nederland-nu/klimatologie/uurgegevens>.
+_:globalradiation a dcat:Dataset,  expB:EnvironmentalFactor.
+_:globalradiation dcat:distribution <https://www.knmi.nl/nederland-nu/klimatologie/uurgegevens>.
+_:hourlyprecipitation a dcat:Dataset,  expB:EnvironmentalFactor.
+_:hourlyprecipitation dcat:distribution <https://www.knmi.nl/nederland-nu/klimatologie/uurgegevens>.
+
+_:green a dcat:Dataset, expB:EnvironmentalFactor.
+_:green prov:wasDerivedFrom  _:LGNlanduse.
+
+_:loggedproportionofgreen a expB:EnvironmentalFactor, dcat:Dataset.
+
+_:loggedproportionofgreen prov:wasDerivedFrom _:green.
+
+###How to encode Tools?: see https://www.w3.org/TR/prov : prov:wasGeneratedBy, prov:used, prov:wasDerivedFrom
+
+_:accidentdensity prov:wasGeneratedBy _:a1 .
+_:a1 prov:wasAssociatedWith <https://cran.r-project.org/web/packages/kdensity/>.
+_:a1 prov:used _:accident.
+
+
+### Stat models
+_:Modes stat:dependentVOf  _:model1.
+_:model1 stat:dependsOnV _:accidentdensity, _:propcul-de-sac, _:availabilityofmr, _:distance2mr, _:loggedproportionofgreen, _:windspeed, _:temperature, _:globalradiation, _:hourlyprecipitation.
+_:model1 prov:wasAssociatedWith <https://cran.r-project.org/web/packages/glmm/index.html>.
+
+
+

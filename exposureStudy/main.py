@@ -150,7 +150,7 @@ queries = {}
 # """
 
 queries['What kind of exposures are modeled in this paper?'] = """
-SELECT DISTINCT ?x ?c ?y
+SELECT DISTINCT ?c ?y
 WHERE {        
     ?x a expB:Exposure. 
     ?x rdfs:comment ?c
@@ -158,15 +158,43 @@ WHERE {
     }              
 }
 """
-queries['Which activities cause exposure and who is exposed?'] = """
-SELECT DISTINCT ?xc ?yc ?zc
+queries['Which activities are involved in the exposure and who is exposed?'] = """
+SELECT DISTINCT ?yc ?zc
 WHERE {        
     ?x a expB:Exposure. 
     ?x rdfs:comment ?xc.
-    ?x expB:causedBy ?y. ?y a expB:Activity. ?y rdfs:comment ?yc.
-    ?y expB:causedBy ?z. ?z a expB:Person. ?z rdfs:comment ?zc.                   
+    ?x expB:causedBy ?y. ?y a expB:Activity. ?y rdfs:comment ?yc. 
+    ?y expB:causedBy ?z. ?z a expB:Person. ?z rdfs:comment ?zc.                      
 }
 """
+queries['What are subjects exposed to?'] = """
+SELECT DISTINCT ?yc
+WHERE {        
+    ?x a expB:Exposure. 
+    ?x rdfs:comment ?c.
+    ?x expB:causedBy ?y. ?y rdfs:comment ?yc.                 
+}
+"""
+queries['What is their risk of exposure?'] = """
+SELECT DISTINCT ?yc
+WHERE {        
+    ?x a expB:Exposure. 
+    ?x rdfs:comment ?c.
+    ?x expB:causes+ ?y. ?y a expB:Risk. ?y rdfs:comment ?yc.                 
+}
+"""
+queries['Which environmental factors influence the exposure and from which datasets were they derived?'] = """
+SELECT DISTINCT ?yc ?zc ?d
+WHERE {        
+    ?x a expB:Exposure. 
+    ?x rdfs:comment ?xc.
+    ?x expB:causedBy+ ?y. ?y a expB:EnvironmentalFactor. ?y rdfs:comment ?yc.
+    ?y prov:wasDerivedFrom* ?z. ?z a dcat:Dataset; rdfs:comment ?zc.  
+    FILTER NOT EXISTS {?z prov:wasDerivedFrom ?u}
+    OPTIONAL{?z dcat:distribution ?d}                    
+}
+"""
+
 for idx,p in enumerate(list_of_paper_descriptions):
     print("paper: " + p)
     g = list_of_graphs[idx]

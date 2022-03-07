@@ -39,7 +39,7 @@ _:homes a expB:EnvironmentalFactor;rdfs:comment "homes".
 _:schools a dcat:Dataset, expB:EnvironmentalFactor;rdfs:comment "schools".
 #_:schools dcat:distribution 
 
-_:child a expB:Person, dcat:Dataset;rdfs:comment "GPS data of moving children".
+_:child a expB:Person, dcat:Dataset;rdfs:comment "School children (GPS tracks)".
 
 _:child expB:has _:age.
 
@@ -49,83 +49,83 @@ _:child expB:has _:BMI.
 
 
 
-_:majorroads a dcat:Dataset, expB:EnvironmentalFactor ; prov:wasDerivedFrom _:roads.
+_:majorroads a dcat:Dataset, expB:EnvironmentalFactor ; prov:wasDerivedFrom _:roads;rdfs:comment "major roads".
 
 _:availabilityofmr prov:wasDerivedFrom _:majorroads.
 
-_:availabilityofmr a expB:EnvironmentalFactor, dcat:Dataset.
+_:availabilityofmr a expB:EnvironmentalFactor, dcat:Dataset;rdfs:comment "availability of major roads".
 
 _:distance2mr prov:wasDerivedFrom _:majorroads.
 
-_:distance2mr a expB:EnvironmentalFactor, dcat:Dataset. 
+_:distance2mr a expB:EnvironmentalFactor, dcat:Dataset;rdfs:comment "distance 2 major roads". 
 
-_:proportionofcyclingpathlengths a expB:EnvironmentalFactor, dcat:Dataset.
+_:proportionofcyclingpathlengths a expB:EnvironmentalFactor, dcat:Dataset;rdfs:comment "proportion of cycling path lengths".
 _:proportionofcyclingpathlengths prov:wasDerivedFrom _:cyclingstreets.
-_:cyclingstreets a  dcat:Dataset; prov:wasDerivedFrom _:roads.
+_:cyclingstreets a  dcat:Dataset; prov:wasDerivedFrom _:roads;rdfs:comment "cycling streets".
 
-_:accident a dcat:Dataset, expB:EnvironmentalFactor.
+_:accident a dcat:Dataset, expB:EnvironmentalFactor;rdfs:comment "accidents".
 
 _:accidentdensity prov:wasDerivedFrom _:accident.
 
-_:accidentdensity a expB:EnvironmentalFactor, dcat:Dataset.
+_:accidentdensity a expB:EnvironmentalFactor, dcat:Dataset ;rdfs:comment "accident density".
 
 #_:schooltrips expB:has _:availabilityofmr.
 
 _:propcul-de-sac prov:wasDerivedFrom _:cul-de-sac.
 
-_:propcul-de-sac a expB:EnvironmentalFactor, dcat:Dataset.
+_:propcul-de-sac a expB:EnvironmentalFactor, dcat:Dataset;rdfs:comment "proportion of cul-de-sac".
 
-_:cul-de-sac a dcat:Dataset, expB:EnvironmentalFactor; prov:wasDerivedFrom _:roads.
+_:cul-de-sac a dcat:Dataset, expB:EnvironmentalFactor; prov:wasDerivedFrom _:roads;rdfs:comment "cul-de-sac".
 
-_:propwayints a expB:EnvironmentalFactor, dcat:Dataset.
+_:propwayints a expB:EnvironmentalFactor, dcat:Dataset;rdfs:comment "proportion of way intersections".
 
 _:propwayints prov:wasDerivedFrom _:intersections.
 
-_:intersections a dcat:Dataset, expB:EnvironmentalFactor;prov:wasDerivedFrom _:roads.
+_:intersections a dcat:Dataset, expB:EnvironmentalFactor;prov:wasDerivedFrom _:roads;rdfs:comment "proportion of way intersections".
 
-_:landusediversity a dcat:Dataset, expB:EnvironmentalFactor.
+_:landusediversity a dcat:Dataset, expB:EnvironmentalFactor;rdfs:comment "land use diversity".
 
 _:landusediversity prov:wasDerivedFrom _:LGNlanduse.
 
-_:LGNlanduse dcat:distribution <https://www.wur.nl/nl/Onderzoek-Resultaten/Onderzoeksinstituten/Environmental-Research/Faciliteiten-tools/Kaarten-en-GIS-bestanden/Landelijk-Grondgebruik-Nederland/Wat-is-LGN.htm>.
+_:LGNlanduse a dcat:Dataset;dcat:distribution <https://www.wur.nl/nl/Onderzoek-Resultaten/Onderzoeksinstituten/Environmental-Research/Faciliteiten-tools/Kaarten-en-GIS-bestanden/Landelijk-Grondgebruik-Nederland/Wat-is-LGN.htm>;rdfs:comment "land use LGN".
 
-_:buildingusagediversity a dcat:Dataset, expB:EnvironmentalFactor.
+_:buildingusagediversity a dcat:Dataset, expB:EnvironmentalFactor;rdfs:comment "building usage diversity".
 _:buildingusagediversity prov:wasDerivedFrom _:buildings. 
-_:buildingroughness a dcat:Dataset,  expB:EnvironmentalFactor.
+_:buildingroughness a dcat:Dataset,  expB:EnvironmentalFactor;rdfs:comment "building roughness".
 _:buildingroughness prov:wasDerivedFrom _:buildings. 
- _:buildings dcat:distribution <https://www.kadaster.nl/zakelijk/registraties/basisregistraties/bag>.
+ _:buildings dcat:distribution <https://www.kadaster.nl/zakelijk/registraties/basisregistraties/bag>;rdfs:comment "buildings BAG".
  
- _:closenessindex a dcat:Dataset, expB:EnvironmentalFactor.
+ _:closenessindex a dcat:Dataset, expB:EnvironmentalFactor;rdfs:comment "closeness index".
  _:closenessindex prov:wasDerivedFrom _:streetnetwork. 
- _:betweennessindex a dcat:Dataset,  expB:EnvironmentalFactor.
+ _:betweennessindex a dcat:Dataset,  expB:EnvironmentalFactor;rdfs:comment "betweenness index".
  _:betweennessindex prov:wasDerivedFrom _:streetnetwork.
- _:streetnetwork a dcat:Dataset, expB:EnvironmentalFactor;
+ _:streetnetwork a dcat:Dataset, expB:EnvironmentalFactor;rdfs:comment "street network";
  prov:wasDerivedFrom _:roads.
  
- _:streetdensity a dcat:Datast, expB:EnvironmentalFactor.
+ _:streetdensity a dcat:Datast, expB:EnvironmentalFactor;rdfs:comment "street density".
   _:streetdensity prov:wasDerivedFrom _:roads.
- _:roads a dcat:Dataset, expB:EnvironmentalFactor.
+ _:roads a dcat:Dataset, expB:EnvironmentalFactor;rdfs:comment "roads".
 
-_:schooltrips a dcat:Dataset.
-_:schooltrips prov:wasDerivedFrom _:child, _:accidentdensity, _:propcul-de-sac, _:availabilityofmr, _:distance2mr, _:loggedproportionofgreen, _:windspeed, _:temperature, _:globalradiation, _:hourlyprecipitation.
+#_:schooltrips a dcat:Dataset.
+#_:schooltrips prov:wasDerivedFrom _:child, _:accidentdensity, _:propcul-de-sac, _:availabilityofmr, _:distance2mr, _:loggedproportionofgreen, _:windspeed, _:temperature, _:globalradiation, _:hourlyprecipitation.
 #GPS data is used to derive the trips, and environmental data is used to derive attributes of trips
 
 ####How to include: Physico chemical environment? Temp? Windspeed?
 
-_:windspeed a dcat:Dataset, expB:EnvironmentalFactor;
+_:windspeed a dcat:Dataset, expB:EnvironmentalFactor;rdfs:comment "wind speed";
 dcat:distribution <https://www.knmi.nl/nederland-nu/klimatologie/uurgegevens>.
 
-_:temperature a dcat:Dataset,  expB:EnvironmentalFactor.
+_:temperature a dcat:Dataset,  expB:EnvironmentalFactor;rdfs:comment "temperature".
 _:temperature dcat:distribution <https://www.knmi.nl/nederland-nu/klimatologie/uurgegevens>.
-_:globalradiation a dcat:Dataset,  expB:EnvironmentalFactor.
+_:globalradiation a dcat:Dataset,  expB:EnvironmentalFactor;rdfs:comment "global radiation".
 _:globalradiation dcat:distribution <https://www.knmi.nl/nederland-nu/klimatologie/uurgegevens>.
-_:hourlyprecipitation a dcat:Dataset,  expB:EnvironmentalFactor.
+_:hourlyprecipitation a dcat:Dataset,  expB:EnvironmentalFactor;rdfs:comment "hourly precitpitation".
 _:hourlyprecipitation dcat:distribution <https://www.knmi.nl/nederland-nu/klimatologie/uurgegevens>.
 
-_:green a dcat:Dataset, expB:EnvironmentalFactor.
+_:green a dcat:Dataset, expB:EnvironmentalFactor;rdfs:comment "green landuse".
 _:green prov:wasDerivedFrom  _:LGNlanduse.
 
-_:loggedproportionofgreen a expB:EnvironmentalFactor, dcat:Dataset.
+_:loggedproportionofgreen a expB:EnvironmentalFactor, dcat:Dataset;rdfs:comment "proportion of green landuse".
 
 _:loggedproportionofgreen prov:wasDerivedFrom _:green.
 

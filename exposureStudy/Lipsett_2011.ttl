@@ -2,7 +2,7 @@
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#>.
 @prefix xml: <http://www.w3.org/XML/1998/namespace>.
-@prefix expB: <http://geographicknowledge.de/vocab/ExposureBasis#>.
+@prefix expB: <http://geographicknowledge.de/vocab/exposureBasis#>.
 @prefix dcat:<https://www.w3.org/TR/vocab-dcat-2/>.
 @prefix dct: <http://purl.org/dc/terms/>.
 @prefix prov: <http://www.w3.org/ns/prov#>.
@@ -18,65 +18,59 @@
 # - for source datasets, use one ccd:LayerA subclass (to indicate data type) and dcat: for data descriptions (e.g. source URLs)
 # - for derivations and tools use prov:
 
-_:FemaleTeacher a expB:Person;rdfs:comment "female teacher".
+_:FemaleTeacher a expB:Person, dcat:Dataset;rdfs:comment "Female Teacher".
 
-_:MyocardinalInfarction a expB:Risk;rdfs:comment "myocardinal infarction".
-
-_:Stroke a expB:Risk;rdfs:comment "stroke".
-
-_:MyocardinalInfarction expB:isPromotedBy _:PM10Exposure, _:PM25Exposure, _:O3Exopsure, _:NO2Exposure, _:NOxExposure, _:COExposure, _:SO2Exposure.
-
-_:Stroke expB:isPromotedBy _:PM10Exposure, _:PM25Exposure, _:O3Exopsure, _:NO2Exposure, _:NOxExposure, _:COExposure, _:SO2Exposure.
-
-_:PM10Exposure a expB:Exposure;rdfs:comment "exposure to PM10".
-
-_:PM25Exposure a expB:Exposure;rdfs:comment "exposure to PM25".
-
-_:O3Exposure a expB:Exposure;rdfs:comment "exposure to O3".
-
-_:NO2Exposure a expB:Exposure;rdfs:comment "exposure to NO2".
-
-_:NOxExposure a expB:Exposure;rdfs:comment "exposure to NOx".
-
-_:COExposure a expB:Exposure;rdfs:comment "exposure to CO".
-
-_:SO2Exposure a expB:Exposure;rdfs:comment "exposure to SO2".
+_:MyocardinalInfarction a expB:Risk;rdfs:comment "Myocardinal Infarction".
+_:Stroke a expB:Risk;rdfs:comment "Stroke".
 
 
-_:PM10Exposure expB:causedBy _:PM10.
+_:MyocardinalInfarction expB:isPromotedBy _:PM10Exposure, _:PM25Exposure, _:O3Exposure, _:NO2Exposure, _:NOxExposure, _:COExposure, _:SO2Exposure.
 
-_:PM25Exposure expB:causedBy _:PM25.
+_:Stroke expB:isPromotedBy _:PM10Exposure, _:PM25Exposure, _:O3Exposure, _:NO2Exposure, _:NOxExposure, _:COExposure, _:SO2Exposure.
 
-_:O3Exposure expB:causedBy _:03.
+_:PM10Exposure a expB:Exposure,dcat:Dataset;rdfs:comment "PM 10 exposure";expB:causedBy _:LivingInCalifornia,_:PM10.
 
-_:NO2Exposure expB:causedBy _:NO2.
+_:PM25Exposure a expB:Exposure,dcat:Dataset;rdfs:comment "PM 2.5 exposure";expB:causedBy _:LivingInCalifornia,_:PM25.
 
-_:NOxExposure expB:causedBy _:NOx.
+_:O3Exposure a expB:Exposure,dcat:Dataset;rdfs:comment "O3 exposure";expB:causedBy _:LivingInCalifornia,_:O3.
 
-_:COExposure expB:causedBy _:CO.
+_:NO2Exposure a expB:Exposure,dcat:Dataset;rdfs:comment "NO2 exposure";expB:causedBy _:LivingInCalifornia,_:NO2.
 
-_:SO2Exposure expB:causedBy _:SO2.
+_:NOxExposure a expB:Exposure,dcat:Dataset;rdfs:comment "NOx exposure";expB:causedBy _:LivingInCalifornia,_:NOx.
 
+_:COExposure a expB:Exposure,dcat:Dataset;rdfs:comment "CO exposure";expB:causedBy _:LivingInCalifornia,_:CO.
 
-_:PM10 expB:causedBy _:LivingInCalifornia.
-
-_:PM25 expB:causedBy _:LivingInCalifornia.
-
-_:O3 expB:causedBy _:LivingInCalifornia.
-
-_:NO2 expB:causedBy _:LivingInCalifornia.
-
-_:NOx expB:causedBy _:LivingInCalifornia.
-
-_:CO expB:causedBy _:LivingInCalifornia.
-
-_:SO2 expB:causedBy _:LivingInCalifornia.
-
-_:LivingInCalifornia a expB:SpatialActivity;rdfs:comment "living in California". 
-
-_:LivingInCalifornia expB:causedBy  _:Monitors, _:Neighborhoods, _:Regions.
+_:SO2Exposure a expB:Exposure,dcat:Dataset;rdfs:comment "SO2 exposure";expB:causedBy _:LivingInCalifornia,_:SO2.
 
 
-_:Neighborhoods a expB:EnvironmentalFactor;rdfs:comment "neighborhoods".
+_:PM10 a dcat:Dataset,expB:EnvironmentalFactor;rdfs:comment "PM 10 concentration raster";expB:causes _:PM10Exposure; prov:wasDerivedFrom _:PM10monitoringstations.
 
-_:Regions a expB:EnvironmentalFactor;rdfs:comment "regions".
+_:PM25 a dcat:Dataset,expB:EnvironmentalFactor;rdfs:comment "PM 25 concentration raster";expB:causes _:PM25Exposure; prov:wasDerivedFrom _:PM25monitoringstations.
+
+_:O3 a dcat:Dataset,expB:EnvironmentalFactor;rdfs:comment "O3 concentration raster";expB:causes _:O3Exposure; prov:wasDerivedFrom _:O3monitoringstations.
+
+_:NO2 a dcat:Dataset,expB:EnvironmentalFactor;rdfs:comment "NO2 concentration raster";expB:causes _:NO2Exposure; prov:wasDerivedFrom _:NO2monitoringstations.
+
+_:NOx a dcat:Dataset,expB:EnvironmentalFactor;rdfs:comment "NOx concentration raster";expB:causes _:NOxExposure; prov:wasDerivedFrom _:NOxmonitoringstations.
+
+_:CO a dcat:Dataset,expB:EnvironmentalFactor;rdfs:comment "CO concentration raster";expB:causes _:COExposure; prov:wasDerivedFrom _:COmonitoringstations.
+
+_:SO2 a dcat:Dataset,expB:EnvironmentalFactor;rdfs:comment "SO2 concentration raster";expB:causes _:SO2Exposure; prov:wasDerivedFrom _:SO2monitoringstations.
+
+
+_:PM10monitoringstations a dcat:Dataset ;rdfs:comment "PM 10 monitoring stations";dcat:distribution <https://www.epa.gov/amtic/air-monitoring-methods-criteria-pollutants>.
+_:PM25monitoringstations a dcat:Dataset ;rdfs:comment "PM 25 monitoring stations";dcat:distribution <https://www.epa.gov/amtic/air-monitoring-methods-criteria-pollutants>.
+_:O3monitoringstations a dcat:Dataset ;rdfs:comment "O3 monitoring stations".
+_:NO2monitoringstations a dcat:Dataset ;rdfs:comment "NO2 monitoring stations".
+_:NOxmonitoringstations a dcat:Dataset ;rdfs:comment "NOx monitoring stations".
+_:COmonitoringstations a dcat:Dataset ;rdfs:comment "CO monitoring stations".
+_:SO2monitoringstations a dcat:Dataset ;rdfs:comment "SO monitoring stations".
+
+_:LivingInCalifornia a expB:SpatialActivity;rdfs:comment "Living in California".
+
+_:LivingInCalifornia expB:causedBy  _:Monitors, _:Neighborhoods, _:Regions,_:FemaleTeacher.
+
+
+_:Neighborhoods a expB:EnvironmentalFactor;rdfs:comment "Neighborhoods".
+
+_:Regions a expB:EnvironmentalFactor;rdfs:comment "Regions".

@@ -34,7 +34,7 @@ _:schooltrips expB:causedBy  _:homes, _:schools, _:child, _:accidentdensity, _:p
 _:schooltrips rdfs:comment "walking or biking or motorized transport".
 _:schooltrips expB:has  _:Triplengths, _:Modes, _:weekday.
 
-_:homes a expB:EnvironmentalFactor;rdfs:comment "homes".
+_:homes a dcat:Dataset,expB:EnvironmentalFactor;rdfs:comment "homes".
 
 _:schools a dcat:Dataset, expB:EnvironmentalFactor;rdfs:comment "schools".
 #_:schools dcat:distribution 
@@ -119,7 +119,7 @@ _:temperature a dcat:Dataset,  expB:EnvironmentalFactor;rdfs:comment "temperatur
 _:temperature dcat:distribution <https://www.knmi.nl/nederland-nu/klimatologie/uurgegevens>.
 _:globalradiation a dcat:Dataset,  expB:EnvironmentalFactor;rdfs:comment "global radiation".
 _:globalradiation dcat:distribution <https://www.knmi.nl/nederland-nu/klimatologie/uurgegevens>.
-_:hourlyprecipitation a dcat:Dataset,  expB:EnvironmentalFactor;rdfs:comment "hourly precitpitation".
+_:hourlyprecipitation a dcat:Dataset,  expB:EnvironmentalFactor;rdfs:comment "hourly precipitation".
 _:hourlyprecipitation dcat:distribution <https://www.knmi.nl/nederland-nu/klimatologie/uurgegevens>.
 
 _:green a dcat:Dataset, expB:EnvironmentalFactor;rdfs:comment "green landuse".

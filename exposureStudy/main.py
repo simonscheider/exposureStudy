@@ -81,7 +81,7 @@ def locallyCloseWorld(g, property=expB.causedBy, all = expB.Activity):
 
 
 #load paper descriptions
-list_of_paper_descriptions= ['Helbich_2016.ttl','Lipsett_2011.ttl']
+list_of_paper_descriptions= ['Helbich_2016.ttl','Lipsett_2011.ttl'] #
 basic_ontology = 'ExposureBasis.ttl'
 list_of_graphs = []
 for p in  list_of_paper_descriptions:
@@ -163,16 +163,17 @@ SELECT DISTINCT ?yc ?zc
 WHERE {        
     ?x a expB:Exposure. 
     ?x rdfs:comment ?xc.
-    ?x expB:causedBy ?y. ?y a expB:Activity. ?y rdfs:comment ?yc. 
-    ?y expB:causedBy ?z. ?z a expB:Person. ?z rdfs:comment ?zc.                      
+    ?x expB:causedBy ?y. ?y a expB:Activity.  
+    OPTIONAL{?y rdfs:comment ?yc. ?y expB:causedBy ?z. ?z a expB:Person. ?z rdfs:comment ?zc.}                      
 }
 """
 queries['What are subjects exposed to?'] = """
 SELECT DISTINCT ?yc
-WHERE {        
-    ?x a expB:Exposure. 
-    ?x rdfs:comment ?c.
-    ?x expB:causedBy ?y. ?y rdfs:comment ?yc.                 
+WHERE    
+    {
+    ?x a expB:Exposure. ?x expB:causedBy ?y.  ?y rdfs:comment ?yc.
+    FILTER NOT EXISTS{?x a expB:ActiveExposure. ?y a expB:EnvironmentalFactor. }     
+    FILTER NOT EXISTS{?x a expB:PassiveExposure. ?y a expB:Activity. } 
 }
 """
 queries['What is their risk of exposure?'] = """

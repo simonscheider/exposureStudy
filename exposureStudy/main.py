@@ -195,6 +195,13 @@ WHERE {
     OPTIONAL{?z dcat:distribution ?d}                    
 }
 """
+queries['What are the environmental stressors?']= """
+SELECT DISTINCT ?xc
+WHERE {
+    ?x a expB:EnvironmentalFactor; rdfs:comment ?xc. 
+    ?y a expB:RiskPromotingExposure; expB:causedBy ?x .  
+}
+"""
 
 for idx,p in enumerate(list_of_paper_descriptions):
     print("paper: " + p)

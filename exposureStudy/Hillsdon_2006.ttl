@@ -1,0 +1,50 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#>.
+@prefix xml: <http://www.w3.org/XML/1998/namespace>.
+@prefix expB: <http://geographicknowledge.de/vocab/exposureBasis#>.
+@prefix dcat:<https://www.w3.org/TR/vocab-dcat-2/>.
+@prefix dct: <http://purl.org/dc/terms/>.
+@prefix prov: <http://www.w3.org/ns/prov#>.
+@prefix stat: <http://statistics>.
+
+
+#please validate all datasets: http://ttl.summerofcode.be/
+
+#For each entity you describe:
+# - use at least one expB: class (to fill the exposure model), 
+# - use one envE: class (to be more specific) and 
+# - for environmental phenomena use either one of ccd:FieldQ, ccd:ObjectQ, ccd:EventQ, ccd:NetworkQ class or alternatively one envC: class (the latter when talking about amounts and statistics (to generalize the environmental concept)
+# - for source datasets, use one ccd:LayerA subclass (to indicate data type) and dcat: for data descriptions (e.g. source URLs)
+# - for derivations and tools use prov:
+
+
+_:Adult a dcat:Dataset, expB:Person;rdfs:comment "adults in Norwich, England"; dcat:distribution <https://www.epic-norfolk.org.uk/>.
+
+_:obesity a expB:Risk;rdfs:comment "obesity".
+
+_:HealthIssues a expB:Risk;rdfs:comment "health issues".
+
+_:obesity expB:isHinderedBy _:PAexposure.
+
+_:HealthIssues expB:isHinderedBy _:PAexposure.
+
+_:PAexposure a dcat:Dataset, expB:Exposure;rdfs:comment "exposure to physical activity"; dcat:distribution <https://www.measurement-toolkit.mrc.ac.uk/instrument/1>.
+
+_:PAexposure expB:causedBy _:PhysicalActivity.
+
+_:PhysicalActivity a expB:Activity;rdfs:comment "physical activity".
+
+_:PhyscialActivity expB:causedBy  _:Adult,_:LargeUrbanGreenSpace, _:QualityUrbanGreenSpace, _:DistanceToGreenSpace, _:DistanceToCityBoundary.
+
+_:LargeUrbanGreenSpace a dcat:Dataset, expB:EnvironmentalFactor;rdfs:comment "large urban green space".
+
+_:QualityUrbanGreenSpace a dcat:Dataset, expB:EnvironmentalFactor;rdfs:comment "quality urban green space".
+
+_:DistanceToGreenSpace a dcat:Dataset, expB:EnvironmentalFactor;rdfs:comment "distance to green space".
+
+_:DistanceToCityBoundary a dcat:Dataset, expB:EnvironmentalFactor;rdfs:comment "distance to city boundary".
+
+
+#Study did not find a correlation between access to urban green space and physical activity!
+

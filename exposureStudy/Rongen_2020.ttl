@@ -1,0 +1,44 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#>.
+@prefix xml: <http://www.w3.org/XML/1998/namespace>.
+@prefix expB: <http://geographicknowledge.de/vocab/ExposureBasis#>.
+@prefix dcat:<https://www.w3.org/TR/vocab-dcat-2/>.
+@prefix dct: <http://purl.org/dc/terms/>.
+@prefix prov: <http://www.w3.org/ns/prov#>.
+@prefix stat: <http://statistics>.
+
+
+#please validate all datasets: http://ttl.summerofcode.be/
+
+#For each entity you describe:
+# - use at least one expB: class (to fill the exposure model), 
+# - use one envE: class (to be more specific) and 
+# - for environmental phenomena use either one of ccd:FieldQ, ccd:ObjectQ, ccd:EventQ, ccd:NetworkQ class or alternatively one envC: class (the latter when talking about amounts and statistics (to generalize the environmental concept)
+# - for source datasets, use one ccd:LayerA subclass (to indicate data type) and dcat: for data descriptions (e.g. source URLs)
+# - for derivations and tools use prov:
+
+_:Adults a dcat:Dataset, expB:Person;rdfs:comment "adults in the Netherlands"; dcat:distribution <https://www.flycatcher.eu/nl/>.
+
+_:obesity a expB:Risk;rdfs:comment "obesity".
+
+_:PoorDiet a expB:Risk;rdfs:comment "poor diet".
+
+_:obesity expB:isPromotedBy _:FastFoodOutlets, _:EatingAtFastFoodOutlets, _:PercievedSocialNorms.
+
+_:PoorDiet expB:isPromotedBy _:FastFoodOutlets, _:EatingAtFastFoodOutlets, _:PercievedSocialNorms.
+
+_:FastFoodOutlets a dcat:Dataset, expB:Environment;rdfs:comment "fast food outlets"; dcat:distribution <https://locatus.com/applicatie/retail-facts/>.
+
+_:EatingAtFastFoodOutlets a dcat:Dataset, expB:Activity;rdfs:comment "eating at fast food outlets".
+
+_:PercievedSocialNorms a dcat:Dataset, expB:Exposure;rdfs:comment "percieved social norms".
+
+_:PercievedSocialNorms expB:causedBy _:Neighborhood.
+
+_:Neighborhood a dcat:Dataset, expB:EnvironmentalFactor;rdfs:comment "neighborhood".
+
+_:EatingAtFastFoodOutlets expB:causedBy  _:Neighborhood, _:FastFoodOutlets, _:PerceivedSocialNorms.
+
+
+

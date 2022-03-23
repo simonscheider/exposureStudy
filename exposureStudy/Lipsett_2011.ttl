@@ -9,8 +9,6 @@
 @prefix stat: <http://statistics>.
 
 
-#please validate all datasets: http://ttl.summerofcode.be/
-
 #For each entity you describe:
 # - use at least one expB: class (to fill the exposure model), 
 # - use one envE: class (to be more specific) and 
@@ -18,7 +16,8 @@
 # - for source datasets, use one ccd:LayerA subclass (to indicate data type) and dcat: for data descriptions (e.g. source URLs)
 # - for derivations and tools use prov:
 
-_:FemaleTeacher a expB:Person, dcat:Dataset;rdfs:comment "Female Teacher".
+
+_:FemaleTeacher a expB:Person, dcat:Dataset;rdfs:comment "Female Teacher"; prov:wasDerivedFrom _:CTS.
 
 _:MyocardinalInfarction a expB:Risk;rdfs:comment "Myocardinal Infarction".
 _:Stroke a expB:Risk;rdfs:comment "Stroke".
@@ -58,14 +57,6 @@ _:CO a dcat:Dataset,expB:EnvironmentalFactor;rdfs:comment "CO concentration rast
 _:SO2 a dcat:Dataset,expB:EnvironmentalFactor;rdfs:comment "SO2 concentration raster";expB:causes _:SO2Exposure; prov:wasDerivedFrom _:SO2monitoringstations.
 
 
-_:PM10monitoringstations a dcat:Dataset ;rdfs:comment "PM 10 monitoring stations";dcat:distribution <https://www.epa.gov/amtic/air-monitoring-methods-criteria-pollutants>.
-_:PM25monitoringstations a dcat:Dataset ;rdfs:comment "PM 25 monitoring stations";dcat:distribution <https://www.epa.gov/amtic/air-monitoring-methods-criteria-pollutants>.
-_:O3monitoringstations a dcat:Dataset ;rdfs:comment "O3 monitoring stations".
-_:NO2monitoringstations a dcat:Dataset ;rdfs:comment "NO2 monitoring stations".
-_:NOxmonitoringstations a dcat:Dataset ;rdfs:comment "NOx monitoring stations".
-_:COmonitoringstations a dcat:Dataset ;rdfs:comment "CO monitoring stations".
-_:SO2monitoringstations a dcat:Dataset ;rdfs:comment "SO monitoring stations".
-
 _:LivingInCalifornia a expB:SpatialActivity;rdfs:comment "Living in California".
 
 _:LivingInCalifornia expB:causedBy  _:Monitors, _:Neighborhoods, _:Regions,_:FemaleTeacher.
@@ -74,3 +65,27 @@ _:LivingInCalifornia expB:causedBy  _:Monitors, _:Neighborhoods, _:Regions,_:Fem
 _:Neighborhoods a expB:EnvironmentalFactor;rdfs:comment "Neighborhoods".
 
 _:Regions a expB:EnvironmentalFactor;rdfs:comment "Regions".
+
+
+#Datasets
+
+_:CTS a dcat:Dataset ;rdfs:comment "California Teachers Study Cohort"; dcat:distribution <https://public.tableau.com/app/profile/california.teachers.study/viz/MortalityintheCTS1998-2018/MortalityintheCTS>.
+_:PM10monitoringstations a dcat:Dataset ;rdfs:comment "PM 10 monitoring stations";dcat:distribution <https://www.epa.gov/amtic/air-monitoring-methods-criteria-pollutants>.
+_:PM25monitoringstations a dcat:Dataset ;rdfs:comment "PM 25 monitoring stations";dcat:distribution <https://www.epa.gov/amtic/air-monitoring-methods-criteria-pollutants>.
+_:O3monitoringstations a dcat:Dataset ;rdfs:comment "O3 monitoring stations";dcat:distribution <https://www.epa.gov/amtic/air-monitoring-methods-criteria-pollutants>.
+_:NO2monitoringstations a dcat:Dataset ;rdfs:comment "NO2 monitoring stations";dcat:distribution <https://www.epa.gov/amtic/air-monitoring-methods-criteria-pollutants>.
+_:NOxmonitoringstations a dcat:Dataset ;rdfs:comment "NOx monitoring stations";dcat:distribution <https://www.epa.gov/amtic/air-monitoring-methods-criteria-pollutants>.
+_:COmonitoringstations a dcat:Dataset ;rdfs:comment "CO monitoring stations";dcat:distribution <https://www.epa.gov/amtic/air-monitoring-methods-criteria-pollutants>.
+_:SO2monitoringstations a dcat:Dataset ;rdfs:comment "SO monitoring stations";dcat:distribution <https://www.epa.gov/amtic/air-monitoring-methods-criteria-pollutants>.
+
+
+###CTS
+#initiated in 1995. 133,479 current and former public school professionals in California. 
+#Questionaires given in 1995, 1997, 2000. Annual follow up includes updating names and residential addresses. Study population was 124,614 women.
+
+
+
+
+ 
+
+

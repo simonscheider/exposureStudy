@@ -1,0 +1,42 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#>.
+@prefix xml: <http://www.w3.org/XML/1998/namespace>.
+@prefix expB: <http://geographicknowledge.de/vocab/ExposureBasis#>.
+@prefix dcat:<https://www.w3.org/TR/vocab-dcat-2/>.
+@prefix dct: <http://purl.org/dc/terms/>.
+@prefix prov: <http://www.w3.org/ns/prov#>.
+@prefix stat: <http://statistics>.
+
+
+#please validate all datasets: http://ttl.summerofcode.be/
+
+#For each entity you describe:
+# - use at least one expB: class (to fill the exposure model), 
+# - use one envE: class (to be more specific) and 
+# - for environmental phenomena use either one of ccd:FieldQ, ccd:ObjectQ, ccd:EventQ, ccd:NetworkQ class or alternatively one envC: class (the latter when talking about amounts and statistics (to generalize the environmental concept)
+# - for source datasets, use one ccd:LayerA subclass (to indicate data type) and dcat: for data descriptions (e.g. source URLs)
+# - for derivations and tools use prov:
+
+
+_:children a dcat:Dataset, expB:Person;rdfs:comment "children aged 11 to 18 years old".
+
+_:PoorBehavioralHealth a expB:Risk;rdfs:comment "delinquent and/or aggressive behavior".
+
+_:PoorBehavioralHealth expB:isPromotedBy _:ViolentCrimeExposure, _:NonViolentCrimeExposure.
+
+_:ViolentCrimeExposure expB:causedBy _:WitnessingViolentCrime, _:KnowingaViolentCrimeVictim, _:BeingaViolentCrimeVictim, _:Crime.
+
+_:NonViolentCrimeExposure expB:causedBy _:WitnessingNonViolentCrime, _:KnowingaNonViolentCrimeVictim, _:BeingaNonViolentCrimeVictim, _:Crime.
+
+_:ViolentCrimeExposure a dcat:Dataset, expB:Exposure;rdfs:comment "violent crime exposure".
+
+_:NonViolentCrimeExposure a dcat:Dataset, expB:Exposure;rdfs:comment "nonviolent crime exposure".
+
+_:Crime a dcat:Dataset, expB:Activity;rdfs:comment "crime".
+
+_:Crime expB:causedBy  _:AreaLevelCrimeRates, _:Neighborhood.
+
+_:Neighborhood a expB:EnvironmentalFactor;rdfs:comment "neighborhood".
+
+_:AreaLevelCrimeRates a dcat:Dataset.

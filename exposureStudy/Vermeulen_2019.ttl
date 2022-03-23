@@ -1,0 +1,46 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#>.
+@prefix xml: <http://www.w3.org/XML/1998/namespace>.
+@prefix expB: <http://geographicknowledge.de/vocab/exposureBasis#>.
+@prefix dcat:<https://www.w3.org/TR/vocab-dcat-2/>.
+@prefix dct: <http://purl.org/dc/terms/>.
+@prefix prov: <http://www.w3.org/ns/prov#>.
+@prefix stat: <http://statistics>.
+
+
+#please validate all datasets: http://ttl.summerofcode.be/
+
+#For each entity you describe:
+# - use at least one expB: class (to fill the exposure model), 
+# - use one envE: class (to be more specific) and 
+# - for environmental phenomena use either one of ccd:FieldQ, ccd:ObjectQ, ccd:EventQ, ccd:NetworkQ class or alternatively one envC: class (the latter when talking about amounts and statistics (to generalize the environmental concept)
+# - for source datasets, use one ccd:LayerA subclass (to indicate data type) and dcat: for data descriptions (e.g. source URLs)
+# - for derivations and tools use prov:
+
+
+_:NeverSmokingWomen a dcat:Dataset, expB:Person;rdfs:comment "never smoking women in the Chinese counties Xuanwei and Fuyuan"; dcat:distribution <https://www.cdc.gov/nchs/icd/icd9cm.htm>.
+
+_:LungCancer a expB:Risk;rdfs:comment "lung cancer".
+
+_:LungCancer expB:isPromotedBy _:SmokeyCoalExposure, _:SmokelessCoalExposure.
+
+_:SmokeyCoalExposure a dcat:Dataset, expB:Exposure;rdfs:comment "exposure to smokey coal"; dcat:distribution <https://pubs.acs.org/doi/10.1021/es502201s>, <https://onlinelibrary.wiley.com/doi/10.1111/ina.12255>, <https://onlinelibrary.wiley.com/doi/10.1111/ina.12251>.
+
+_:SmokelessCoalExposure a dcat:Dataset, expB:Exposure;rdfs:comment "exposure to smokeless coal"; dcat:distribution <https://pubs.acs.org/doi/10.1021/es502201s>, <https://onlinelibrary.wiley.com/doi/10.1111/ina.12255>, <https://onlinelibrary.wiley.com/doi/10.1111/ina.12251>.
+
+_:SmokeyCoalExposure expB:causedBy _:IndoorFuelUse.
+
+_:SmokelessCoalExposure expB:causedBy _:IndoorFuelUse.
+
+_:IndoorFuelUse a dcat:Dataset, expB:SpatialActivity;rdfs:comment "indoor fuel use, data collected on a questionaire".
+
+_:IndoorFuelUse expB:causedBy _:NeverSmokingWomen,_:CoalDeposits, _:SocioEconomicStatus, _:HouseholdCharacteristics, _:Homes.
+  
+_:CoalDeposits a dcat:Dataset, expB:EnvironmentalFactor;rdfs:comment "coal deposits or mines"; dcat:distribution <https://onlinelibrary.wiley.com/doi/10.1002/ijc.32034L>.
+
+_:Homes a dcat:Dataset, expB:EnvironmentalFactor; rdfs:comment "homes located in Chinese Counties Xuanwei or Fuyuan, data collected on a questionaire".
+
+_:SocioEconomicStatus a dcat:Dataset, expB:EnvironmentalFactor;rdfs:comment "socio-economic status".
+_:HouseholdCharacteristics a dcat:Dataset, expB:EnvironmentalFactor;rdfs:comment "household characteristics".
+

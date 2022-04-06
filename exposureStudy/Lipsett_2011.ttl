@@ -70,13 +70,14 @@ _:Regions a expB:EnvironmentalFactor;rdfs:comment "Regions".
 #Datasets
 
 _:CTS a dcat:Dataset ;rdfs:comment "California Teachers Study Cohort"; dcat:distribution <https://public.tableau.com/app/profile/california.teachers.study/viz/MortalityintheCTS1998-2018/MortalityintheCTS>.
-_:PM10monitoringstations a dcat:Dataset ;rdfs:comment "PM 10 monitoring stations";dcat:distribution <https://www.epa.gov/amtic/air-monitoring-methods-criteria-pollutants>.
-_:PM25monitoringstations a dcat:Dataset ;rdfs:comment "PM 25 monitoring stations";dcat:distribution <https://www.epa.gov/amtic/air-monitoring-methods-criteria-pollutants>.
-_:O3monitoringstations a dcat:Dataset ;rdfs:comment "O3 monitoring stations";dcat:distribution <https://www.epa.gov/amtic/air-monitoring-methods-criteria-pollutants>.
-_:NO2monitoringstations a dcat:Dataset ;rdfs:comment "NO2 monitoring stations";dcat:distribution <https://www.epa.gov/amtic/air-monitoring-methods-criteria-pollutants>.
-_:NOxmonitoringstations a dcat:Dataset ;rdfs:comment "NOx monitoring stations";dcat:distribution <https://www.epa.gov/amtic/air-monitoring-methods-criteria-pollutants>.
-_:COmonitoringstations a dcat:Dataset ;rdfs:comment "CO monitoring stations";dcat:distribution <https://www.epa.gov/amtic/air-monitoring-methods-criteria-pollutants>.
-_:SO2monitoringstations a dcat:Dataset ;rdfs:comment "SO monitoring stations";dcat:distribution <https://www.epa.gov/amtic/air-monitoring-methods-criteria-pollutants>.
+_:PM10monitoringstations a dcat:Dataset ;rdfs:comment "PM 10 monitoring stations";dcat:distribution <https://www.arb.ca.gov/adam>.
+_:PM25monitoringstations a dcat:Dataset ;rdfs:comment "PM 2.5 monitoring stations";dcat:distribution <https://www.arb.ca.gov/adam>.
+_:O3monitoringstations a dcat:Dataset ;rdfs:comment "O3 monitoring stations";dcat:distribution <https://www.arb.ca.gov/adam>.
+_:NO2monitoringstations a dcat:Dataset ;rdfs:comment "NO2 monitoring stations";dcat:distribution <https://www.arb.ca.gov/adam>.
+_:NOxmonitoringstations a dcat:Dataset ;rdfs:comment "NOx monitoring stations";dcat:distribution <https://www.arb.ca.gov/adam>.
+_:COmonitoringstations a dcat:Dataset ;rdfs:comment "CO monitoring stations";dcat:distribution <https://www.arb.ca.gov/adam>.
+_:SO2monitoringstations a dcat:Dataset ;rdfs:comment "SO monitoring stations";dcat:distribution <https://www.arb.ca.gov/adam>.
+#https://www.epa.gov/amtic/air-monitoring-methods-criteria-pollutants
 
 
 ###CTS

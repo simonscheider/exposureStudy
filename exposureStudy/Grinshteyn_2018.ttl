@@ -2,7 +2,7 @@
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#>.
 @prefix xml: <http://www.w3.org/XML/1998/namespace>.
-@prefix expB: <http://geographicknowledge.de/vocab/ExposureBasis#>.
+@prefix expB: <http://geographicknowledge.de/vocab/exposureBasis#>.
 @prefix dcat:<https://www.w3.org/TR/vocab-dcat-2/>.
 @prefix dct: <http://purl.org/dc/terms/>.
 @prefix prov: <http://www.w3.org/ns/prov#>.
@@ -21,22 +21,42 @@
 
 _:children a dcat:Dataset, expB:Person;rdfs:comment "children aged 11 to 18 years old".
 
+_:living a expB:Activity;rdfs:comment "living in crime neighborhoods".
+
+_:living expB:causedBy _:children.
+
 _:PoorBehavioralHealth a expB:Risk;rdfs:comment "delinquent and/or aggressive behavior".
 
-_:PoorBehavioralHealth expB:isPromotedBy _:ViolentCrimeExposure, _:NonViolentCrimeExposure.
+_:PoorBehavioralHealth expB:isPromotedBy _:WitnessingViolentCrime, _:KnowingaViolentCrimeVictim,_:BeingaViolentCrimeVictim,_:WitnessingNonViolentCrime,_:KnowingaNonViolentCrimeVictim,_:BeingaNonViolentCrimeVictim.
 
-_:ViolentCrimeExposure expB:causedBy _:WitnessingViolentCrime, _:KnowingaViolentCrimeVictim, _:BeingaViolentCrimeVictim, _:Crime.
+_:WitnessingViolentCrime expB:causedBy  _:ViolentCrime, _:living.
+_:KnowingaViolentCrimeVictim expB:causedBy  _:ViolentCrime, _:living.
+_:BeingaViolentCrimeVictim expB:causedBy  _:ViolentCrime, _:living.
 
-_:NonViolentCrimeExposure expB:causedBy _:WitnessingNonViolentCrime, _:KnowingaNonViolentCrimeVictim, _:BeingaNonViolentCrimeVictim, _:Crime.
+#_:WitnessingViolentCrime, _:KnowingaViolentCrimeVictim, _:BeingaViolentCrimeVictim,
 
-_:ViolentCrimeExposure a dcat:Dataset, expB:Exposure;rdfs:comment "violent crime exposure".
+_:WitnessingNonViolentCrime expB:causedBy  _:NonViolentCrime, _:living.
+_:KnowingaNonViolentCrimeVictim expB:causedBy  _:NonViolentCrime, _:living.
+_:BeingaNonViolentCrimeVictim expB:causedBy  _:NonViolentCrime, _:living.
 
-_:NonViolentCrimeExposure a dcat:Dataset, expB:Exposure;rdfs:comment "nonviolent crime exposure".
+#_:WitnessingNonViolentCrime, _:KnowingaNonViolentCrimeVictim, _:BeingaNonViolentCrimeVictim,
 
-_:Crime a dcat:Dataset, expB:Activity;rdfs:comment "crime".
+_:WitnessingViolentCrime a dcat:Dataset, expB:Exposure;rdfs:comment "witnessed violent crime exposure".
+_:KnowingaViolentCrimeVictim a dcat:Dataset, expB:Exposure;rdfs:comment "hear say violent crime exposure".
+_:BeingaViolentCrimeVictim a dcat:Dataset, expB:Exposure;rdfs:comment "victim of violent crime exposure".
 
-_:Crime expB:causedBy  _:AreaLevelCrimeRates, _:Neighborhood.
+_:WitnessingNonViolentCrime a dcat:Dataset, expB:Exposure;rdfs:comment "witnessed non violent crime exposure".
+_:KnowingaNonViolentCrimeVictim a dcat:Dataset, expB:Exposure;rdfs:comment "hear say non violent crime exposure".
+_:BeingaNonViolentCrimeVictim a dcat:Dataset, expB:Exposure;rdfs:comment "victim of non violent crime exposure".
+
+_:ViolentCrime a dcat:Dataset, expB:EnvironmentalFactor;rdfs:comment "violent crime".
+
+_:NonViolentCrime a dcat:Dataset, expB:EnvironmentalFactor;rdfs:comment "non violent crime".
+
+_:ViolentCrime expB:causedBy  _:AreaLevelCrimeRates, _:Neighborhood.
+_:NonViolentCrime expB:causedBy  _:AreaLevelCrimeRates, _:Neighborhood.
 
 _:Neighborhood a expB:EnvironmentalFactor;rdfs:comment "neighborhood".
 
-_:AreaLevelCrimeRates a dcat:Dataset.
+_:Neighborhood expB:has _:AreaLevelCrimeRates.
+_:AreaLevelCrimeRates a dcat:Dataset,expB:EnvironmentalFactor;rdfs:comment "crime rates".

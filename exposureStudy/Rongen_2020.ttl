@@ -2,7 +2,7 @@
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#>.
 @prefix xml: <http://www.w3.org/XML/1998/namespace>.
-@prefix expB: <http://geographicknowledge.de/vocab/ExposureBasis#>.
+@prefix expB: <http://geographicknowledge.de/vocab/exposureBasis#>.
 @prefix dcat:<https://www.w3.org/TR/vocab-dcat-2/>.
 @prefix dct: <http://purl.org/dc/terms/>.
 @prefix prov: <http://www.w3.org/ns/prov#>.
@@ -20,25 +20,29 @@
 
 _:Adults a dcat:Dataset, expB:Person;rdfs:comment "adults in the Netherlands"; dcat:distribution <https://www.flycatcher.eu/nl/>.
 
+_:Adults expB:has _:PercievedSocialNorms.
+
 _:obesity a expB:Risk;rdfs:comment "obesity".
 
-_:PoorDiet a expB:Risk;rdfs:comment "poor diet".
+_:PoorDiet a expB:Exposure;rdfs:comment "poor diet".
 
-_:obesity expB:isPromotedBy _:FastFoodOutlets, _:EatingAtFastFoodOutlets, _:PercievedSocialNorms.
+_:obesity expB:isPromotedBy _:PoorDiet.
 
-_:PoorDiet expB:isPromotedBy _:FastFoodOutlets, _:EatingAtFastFoodOutlets, _:PercievedSocialNorms.
+_:PoorDiet expB:isPromotedBy _:EatingAtFastFoodOutlets.
 
-_:FastFoodOutlets a dcat:Dataset, expB:Environment;rdfs:comment "fast food outlets"; dcat:distribution <https://locatus.com/applicatie/retail-facts/>.
+_:EatingAtFastFoodOutlets expB:isPromotedBy _:FastFoodOutlets.
+
+_:EatingAtFastFoodOutlets expB:causedBy _:Adults,_:PercievedSocialNorms.
+
+_:FastFoodOutlets a dcat:Dataset, expB:EnvironmentalFactor;rdfs:comment "fast food outlets"; dcat:distribution <https://locatus.com/applicatie/retail-facts/>.
 
 _:EatingAtFastFoodOutlets a dcat:Dataset, expB:Activity;rdfs:comment "eating at fast food outlets".
 
-_:PercievedSocialNorms a dcat:Dataset, expB:Exposure;rdfs:comment "percieved social norms".
+_:PercievedSocialNorms a dcat:Dataset, expB:Quality;rdfs:comment "percieved social norms".
 
 _:PercievedSocialNorms expB:causedBy _:Neighborhood.
 
 _:Neighborhood a dcat:Dataset, expB:EnvironmentalFactor;rdfs:comment "neighborhood".
-
-_:EatingAtFastFoodOutlets expB:causedBy  _:Neighborhood, _:FastFoodOutlets, _:PerceivedSocialNorms.
 
 
 

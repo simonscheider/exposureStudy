@@ -6,6 +6,9 @@
 from rdflib import *
 import owlrl
 from owlrl import OWLRL_Semantics
+from rdflib import Namespace
+import pandas as pd
+from rdflib.namespace import NamespaceManager
 import os
 from pprint import pprint
 from SPARQLWrapper import SPARQLWrapper, JSON
@@ -26,18 +29,18 @@ prov = Namespace("http://www.w3.org/ns/prov#")
 owl = Namespace("http://www.w3.org/2002/07/owl#")
 
 def prefix(g):
-    g.bind('dbo', URIRef("http://dbpedia.org/ontology/"))
-    g.bind('dbp', URIRef("http://dbpedia.org/resource/"))
-    g.bind('dc', URIRef("http://purl.org/dc/elements/1.1/"))
-    g.bind('dct', URIRef("http://purl.org/dc/terms/"))
-    g.bind('dcat', URIRef("https://www.w3.org/TR/vocab-dcat-2/"))
-    g.bind('expB', URIRef("http://geographicknowledge.de/vocab/exposureBasis#"))
-    g.bind('envE', URIRef("http://geographicknowledge.de/vocab/environmentalExposure#"))
-    g.bind('envC', URIRef("http://www.geographicknowledge.de/vocab/EnvironmentalConcepts.rdf#"))
-    g.bind('ccd', URIRef("http://geographicknowledge.de/vocab/CoreConceptData.rdf#"))
-    g.bind('prov', URIRef("http://www.w3.org/ns/prov#"))
-    g.bind('rdfs', URIRef("http://www.w3.org/2000/01/rdf-schema#"))
-    g.bind('owl', URIRef("http://www.w3.org/2002/07/owl#"))
+    g.bind('dbo', Namespace("http://dbpedia.org/ontology/"))
+    g.bind('dbp', Namespace("http://dbpedia.org/resource/"))
+    g.bind('dc', Namespace("http://purl.org/dc/elements/1.1/"))
+    g.bind('dct', Namespace("http://purl.org/dc/terms/"))
+    g.bind('dcat', Namespace("https://www.w3.org/TR/vocab-dcat-2/"))
+    g.bind('expB', Namespace("http://geographicknowledge.de/vocab/exposureBasis#"))
+    g.bind('envE', Namespace("http://geographicknowledge.de/vocab/environmentalExposure#"))
+    g.bind('envC', Namespace("http://www.geographicknowledge.de/vocab/EnvironmentalConcepts.rdf#"))
+    g.bind('ccd', Namespace("http://geographicknowledge.de/vocab/CoreConceptData.rdf#"))
+    g.bind('prov', Namespace("http://www.w3.org/ns/prov#"))
+    g.bind('rdfs', Namespace("http://www.w3.org/2000/01/rdf-schema#"))
+    g.bind('owl', Namespace("http://www.w3.org/2002/07/owl#"))
 
 def n_triples( g, n=None ):
     """ Prints the number of triples in graph g """
@@ -65,7 +68,7 @@ def locallyCloseWorld(g, property=expB.causedBy, all = expB.Activity):
             else:
                 allconstraint = False
         if allconstraint:
-            print("add all constraint for property:" +property)
+            #print("add all constraint for property:" +property)
             # """
             # [ rdf:type owl:Restriction ;
             #         owl:onProperty :causedBy ;
@@ -163,8 +166,8 @@ SELECT DISTINCT ?yc ?zc
 WHERE {        
     ?x a expB:Exposure. 
     ?x rdfs:comment ?xc.
-    ?x expB:causedBy ?y. ?y a expB:Activity.  
-    OPTIONAL{?y rdfs:comment ?yc. ?y expB:causedBy ?z. ?z a expB:Person. ?z rdfs:comment ?zc.}                      
+    ?x expB:causedBy ?y. ?y a expB:Activity. ?y rdfs:comment ?yc.  
+    OPTIONAL{?y expB:causedBy ?z. ?z a expB:Person. ?z rdfs:comment ?zc.}                      
 }
 """
 queries['What are subjects exposed to?'] = """
@@ -202,15 +205,64 @@ WHERE {
     ?y a expB:RiskPromotingExposure; expB:causedBy ?x .  
 }
 """
-
+pp = {}
 for idx,p in enumerate(list_of_paper_descriptions):
-    print("paper: " + p)
+    paper = p.split('.')[0]
+    print("paper: " + paper)
     g = list_of_graphs[idx]
+    d = {}
+    pp[paper]=d
     for question in queries:
         qres = g.query(queries[question])
-        print(question)
+        #print(question)
+        d[question]={}
+        #key = None
+        #item = ''
+        key = None
         for row in qres:
-            print(str(row))
+            for idx, r in enumerate(row):
+                if isinstance(r, URIRef):
+                    name = r.n3(g.namespace_manager)
+                elif r is None:
+                    name = 'None'
+                else:
+                    name = str(r)
+                if idx ==0:
+                    if key != name or key is None:
+                        key = name
+                        d[question][key]=[]
+                else:
+                    if name != 'owl:Thing' and name != key:
+                        (d[question][key]).append(name)
+
+
+
+                #print(item)
+    #print(d)
+table = []
+pd.set_option('display.max_colwidth', -1)
+for paper in pp.keys():
+    row = pd.DataFrame()
+    for idx, question in enumerate(queries):
+        if idx < 3 and idx >= 0:
+            df = pd.DataFrame({question:[], 'Context':[]})
+            answers = pp[paper][question].keys()
+            for a in answers:
+                    context = ', '.join(pp[paper][question][a])
+                    newrow= {question:a, 'Context': context}
+                    df = df.append(newrow,ignore_index=True)
+            #print(df)
+            row = pd.concat([row,df], join = 'outer', axis = 1)
+
+    row.insert(loc=0,column='Paper', value=paper)
+    table.append(row)
+table = pd.concat(table)
+lat = table.to_latex(multirow=True, index =False,na_rep='',column_format=''.join(['p{1cm}']*len(table.columns))).replace('NaN', '').replace('{}', '')
+with open('mytable.tex', 'w') as tf:
+    tf.write(lat)
+print(lat)
+#table.append(row)
+#print(table)
 
 
 

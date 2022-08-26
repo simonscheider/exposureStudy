@@ -25,7 +25,7 @@ _:living a expB:Activity;rdfs:comment "living in crime neighborhoods".
 
 _:living expB:causedBy _:children.
 
-_:PoorBehavioralHealth a expB:Risk;rdfs:comment "delinquent and/or aggressive behavior".
+_:PoorBehavioralHealth a expB:Risk;rdfs:comment "adverse behavioural health characteristics (aggressive, hyperactive, noncompliant, undercontrolled)". #"delinquent and/or aggressive behavior".
 
 _:PoorBehavioralHealth expB:isPromotedBy _:WitnessingViolentCrime, _:KnowingaViolentCrimeVictim,_:BeingaViolentCrimeVictim,_:WitnessingNonViolentCrime,_:KnowingaNonViolentCrimeVictim,_:BeingaNonViolentCrimeVictim.
 
@@ -49,14 +49,14 @@ _:WitnessingNonViolentCrime a dcat:Dataset, expB:Exposure;rdfs:comment "witnesse
 _:KnowingaNonViolentCrimeVictim a dcat:Dataset, expB:Exposure;rdfs:comment "hear say non violent crime exposure".
 _:BeingaNonViolentCrimeVictim a dcat:Dataset, expB:Exposure;rdfs:comment "victim of non violent crime exposure".
 
-_:ViolentCrime a dcat:Dataset, expB:EnvironmentalFactor;rdfs:comment "violent crime".
+_:ViolentCrime a dcat:Dataset,expB:EnvironmentalFactor;rdfs:comment "violent crime". # expB:Activity;rdfs:comment "violent crime". 
 
 _:NonViolentCrime a dcat:Dataset, expB:EnvironmentalFactor;rdfs:comment "non violent crime".
 
 _:ViolentCrime expB:causedBy  _:AreaLevelCrimeRates, _:Neighborhood.
 _:NonViolentCrime expB:causedBy  _:AreaLevelCrimeRates, _:Neighborhood.
 
-_:Neighborhood a expB:EnvironmentalFactor;rdfs:comment "neighborhood".
+_:Neighborhood a dcat:Dataset,expB:EnvironmentalFactor;rdfs:comment "neighborhood".
 
 _:Neighborhood expB:has _:AreaLevelCrimeRates.
 _:AreaLevelCrimeRates a dcat:Dataset,expB:EnvironmentalFactor;rdfs:comment "crime rates".

@@ -67,6 +67,7 @@ def locallyCloseWorld(g, property=expB.causedBy, all = expB.Active):
                 allconstraint = True
             else:
                 allconstraint = False
+                break
         if allconstraint:
             #print("add all constraint for property:" +property)
             # """
@@ -81,10 +82,41 @@ def locallyCloseWorld(g, property=expB.causedBy, all = expB.Active):
             g.add((constr,owl.onProperty, property))
             g.add((constr,owl.allValuesFrom, all))
 
+testquery= """
+SELECT DISTINCT ?causec ?causecl
+WHERE {        
+    ?x a expB:Exposure. 
+    ?x rdfs:comment ?c.
+    ?x expB:causedBy ?cause. 
+    ?cause rdfs:comment ?causec.
+    ?cause expB:causedBy ?ccause.
+    ?ccause rdfs:comment ?ccausec.
+    OPTIONAL{?ccause a ?ccausecl. FILTER(?ccausecl not in (expB:Exposure, dcat:Dataset)). FILTER(!isBlank(?ccausecl))}
+    OPTIONAL{?cause a ?causecl. FILTER(?causecl not in (expB:Exposure, dcat:Dataset)). FILTER(!isBlank(?causecl))}              
+}
+"""
+testquery2= """
+SELECT DISTINCT ?c ?yc ?ycl
+WHERE {      
+    OPTIONAL{?x rdfs:comment ?c.}
+    ?x a  ?xc.
+    ?xc owl:allValuesFrom expB:Active.  
+    ?x expB:causedBy ?y.
+    OPTIONAL{?y rdfs:comment ?yc. } 
+    OPTIONAL{?y a ?ycl. }                 
+}
+"""
+def test(g, t = testquery2):
+    qres = g.query(t)
+    print("now testing:")
+    for row in qres:
+        print(row)
+
 
 
 #load paper descriptions
-list_of_paper_descriptions= ['Helbich_2016.ttl','Lipsett_2011.ttl','Vermeulen_2019.ttl','Rongen_2020.ttl','Grinshteyn_2018.ttl','Hillsdon_2006.ttl'] #
+#list_of_paper_descriptions= ['Helbich_2016.ttl','Lipsett_2011.ttl','Vermeulen_2019.ttl','Rongen_2020.ttl','Grinshteyn_2018.ttl','Hillsdon_2006.ttl'] #
+list_of_paper_descriptions= ['Grinshteyn_2018.ttl'] #
 basic_ontology = 'ExposureBasis.ttl'
 list_of_graphs = []
 for p in  list_of_paper_descriptions:
@@ -92,12 +124,19 @@ for p in  list_of_paper_descriptions:
     g = load_RDF(g, p)
     load_RDF(g, basic_ontology)
     prefix(g)
+    #test(g)
     print("Inference")
     owlrl.DeductiveClosure(OWLRL_Semantics, rdfs_closure=True).expand(g)
-    locallyCloseWorld(g, property=expB.causedBy, all=expB.Activity)
+    test(g)
+    locallyCloseWorld(g, property=expB.causedBy, all=expB.Active)
+    #test(g)
+    #g.serialize(destination=p+"test"+".ttl")
+    test(g)
     print("Inference")
     owlrl.DeductiveClosure(OWLRL_Semantics,rdfs_closure=True).expand(g)
     list_of_graphs.append(g)
+    g.serialize(destination=p + "test" + ".ttl")
+    #test(g)
 
 #load ontology
 #load_RDF(g, 'ExposureBasis.ttl')

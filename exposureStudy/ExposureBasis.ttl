@@ -7,7 +7,7 @@
 @base <http://geographicknowledge.de/vocab/exposureBasis> .
 
 <http://geographicknowledge.de/vocab/exposureBasis> rdf:type owl:Ontology ;
-                                                     rdfs:comment "Ontology of basic classes and arrows needed for modeling exposure"@en .
+                                                     rdfs:comment "Ontology of basic classes and causal arrows needed for modeling exposure"@en .
 
 #################################################################
 #    Object Properties
@@ -58,24 +58,43 @@
 #    Classes
 #################################################################
 
+###  http://geographicknowledge.de/vocab/exposureBasis#Active
+:Active rdf:type owl:Class ;
+        owl:equivalentClass [ rdf:type owl:Class ;
+                              owl:unionOf ( :Activity
+                                            [ rdf:type owl:Restriction ;
+                                              owl:onProperty :causedBy ;
+                                              owl:someValuesFrom :Activity
+                                            ]
+                                          )
+                            ] ;
+        rdfs:subClassOf :Bearer ;
+        rdfs:comment "Either an activity or caused by some activity. This class is used to define what it means to be actively exposed."@en .
+
+
 ###  http://geographicknowledge.de/vocab/exposureBasis#ActiveExposure
 :ActiveExposure rdf:type owl:Class ;
                 owl:equivalentClass [ owl:intersectionOf ( :Exposure
                                                            [ rdf:type owl:Restriction ;
                                                              owl:onProperty :causedBy ;
-                                                             owl:allValuesFrom :Activity
+                                                             owl:allValuesFrom :Active
                                                            ]
                                                          ) ;
                                       rdf:type owl:Class
                                     ] ;
                 rdfs:subClassOf :Exposure ;
-                owl:disjointWith :PassiveExposure ;
-                rdfs:comment "Being exposed to some health relevant activity (only), not to environmental factors. Since this is open world, we define this class as disjoint from passive exposure."@en .
+                rdfs:comment "Exposure caused only by active things, e.g. by some activity, or some environmental factor that is itself caused by some activity."@en .
 
 
 ###  http://geographicknowledge.de/vocab/exposureBasis#Activity
 :Activity rdf:type owl:Class ;
-          rdfs:subClassOf :Bearer .
+          rdfs:subClassOf :Bearer ,
+                          [ rdf:type owl:Restriction ;
+                            owl:onProperty :causedBy ;
+                            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                            owl:onClass :Person
+                          ] ;
+          rdfs:comment "An activity is caused by one person"@en .
 
 
 ###  http://geographicknowledge.de/vocab/exposureBasis#Bearer
@@ -97,8 +116,13 @@
 
 ###  http://geographicknowledge.de/vocab/exposureBasis#Exposure
 :Exposure rdf:type owl:Class ;
-          rdfs:subClassOf :Bearer ;
-          rdfs:comment "Amount of exposure to some factor"@en .
+          rdfs:subClassOf :Bearer ,
+                          [ rdf:type owl:Restriction ;
+                            owl:onProperty :causedBy ;
+                            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                            owl:onClass :Activity
+                          ] ;
+          rdfs:comment "Amount of exposure of the person involved in the causing activity to something."@en .
 
 
 ###  http://geographicknowledge.de/vocab/exposureBasis#HealthRelevantActivity
@@ -146,16 +170,13 @@
                                                                  ) ;
                                               rdf:type owl:Class
                                             ] ;
-                        rdfs:subClassOf :Exposure .
+                        rdfs:subClassOf :Exposure ;
+                        rdfs:comment "An exposure which either prevents or promotes some health risk"@en .
 
 
 ###  http://geographicknowledge.de/vocab/exposureBasis#PassiveExposure
 :PassiveExposure rdf:type owl:Class ;
                  owl:equivalentClass [ owl:intersectionOf ( :Exposure
-                                                            [ rdf:type owl:Restriction ;
-                                                              owl:onProperty :causedBy ;
-                                                              owl:someValuesFrom :Activity
-                                                            ]
                                                             [ rdf:type owl:Restriction ;
                                                               owl:onProperty :causedBy ;
                                                               owl:someValuesFrom :EnvironmentalFactor
@@ -164,7 +185,7 @@
                                        rdf:type owl:Class
                                      ] ;
                  rdfs:subClassOf :Exposure ;
-                 rdfs:comment "Being exposed to some environmental factor when performing some activity"@en .
+                 rdfs:comment "Being exposed to some environmental factor"@en .
 
 
 ###  http://geographicknowledge.de/vocab/exposureBasis#Person
@@ -181,7 +202,7 @@
 ###  http://geographicknowledge.de/vocab/exposureBasis#Risk
 :Risk rdf:type owl:Class ;
       rdfs:subClassOf :Bearer ;
-      rdfs:comment "Health risk of being exposed to some factor"@en .
+      rdfs:comment "Health risk"@en .
 
 
 ###  http://geographicknowledge.de/vocab/exposureBasis#RiskPreventingExposure

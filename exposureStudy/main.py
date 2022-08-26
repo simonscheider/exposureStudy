@@ -57,7 +57,7 @@ def load_RDF( g, fn ):
     return g
 
 #:Local closed world recognition
-def locallyCloseWorld(g, property=expB.causedBy, all = expB.Activity):
+def locallyCloseWorld(g, property=expB.causedBy, all = expB.Active):
     for s in g.subjects(property, None):
         allconstraint = False
         objects = g.objects(s, property)
@@ -232,7 +232,7 @@ for idx,p in enumerate(list_of_paper_descriptions):
                         key = name
                         d[question][key]=[]
                 else:
-                    if name != 'owl:Thing' and name != key:
+                    if name not in ('owl:Thing', 'expB:Bearer', 'expB:HealthRelevantExposure', 'expB:Active') and name != key:
                         (d[question][key]).append(name)
 
 

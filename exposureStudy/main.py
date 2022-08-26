@@ -115,8 +115,8 @@ def test(g, t = testquery2):
 
 
 #load paper descriptions
-#list_of_paper_descriptions= ['Helbich_2016.ttl','Lipsett_2011.ttl','Vermeulen_2019.ttl','Rongen_2020.ttl','Grinshteyn_2018.ttl','Hillsdon_2006.ttl'] #
-list_of_paper_descriptions= ['Grinshteyn_2018.ttl'] #
+list_of_paper_descriptions= ['Helbich_2016.ttl','Lipsett_2011.ttl','Vermeulen_2019.ttl','Rongen_2020.ttl','Grinshteyn_2018.ttl','Hillsdon_2006.ttl'] #
+#list_of_paper_descriptions= ['Grinshteyn_2018.ttl'] #
 basic_ontology = 'ExposureBasis.ttl'
 list_of_graphs = []
 for p in  list_of_paper_descriptions:
@@ -131,11 +131,10 @@ for p in  list_of_paper_descriptions:
     locallyCloseWorld(g, property=expB.causedBy, all=expB.Active)
     #test(g)
     #g.serialize(destination=p+"test"+".ttl")
-    test(g)
     print("Inference")
     owlrl.DeductiveClosure(OWLRL_Semantics,rdfs_closure=True).expand(g)
     list_of_graphs.append(g)
-    g.serialize(destination=p + "test" + ".ttl")
+    #g.serialize(destination=p + "test" + ".ttl")
     #test(g)
 
 #load ontology
@@ -283,7 +282,7 @@ pd.set_option('display.max_colwidth', -1)
 for paper in pp.keys():
     row = pd.DataFrame()
     for idx, question in enumerate(queries):
-        if idx < 3 and idx >= 0:
+        if idx < 6 and idx >= 3:
             df = pd.DataFrame({question:[], 'Context':[]})
             answers = pp[paper][question].keys()
             for a in answers:

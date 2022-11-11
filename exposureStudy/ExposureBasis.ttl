@@ -1,0 +1,292 @@
+@prefix : <http://geographicknowledge.de/vocab/exposureBasis#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@base <http://geographicknowledge.de/vocab/exposureBasis> .
+
+<http://geographicknowledge.de/vocab/exposureBasis> rdf:type owl:Ontology ;
+                                                     owl:imports <http://geographicknowledge.de/vocab/AMMO> ,
+                                                                 <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl> ;
+                                                     rdfs:comment "Ontology of basic classes and causal arrows needed for modeling environmental exposure. The ontology can be used to distinguish the elements constituting different exposure measurements (activities, involved persons, environmental factors, doses and risks). It also can be used to classify different typs of exposure."@en .
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  http://geographicknowledge.de/vocab/exposureBasis#causedBy
+:causedBy rdf:type owl:ObjectProperty ;
+          owl:inverseOf :causes ;
+          rdfs:comment "Exposure factor caused by another factor"@en .
+
+
+###  http://geographicknowledge.de/vocab/exposureBasis#causes
+:causes rdf:type owl:ObjectProperty ;
+        rdfs:domain owl:Thing ;
+        rdfs:range owl:Thing .
+
+
+###  http://geographicknowledge.de/vocab/exposureBasis#has
+:has rdf:type owl:ObjectProperty ;
+     rdfs:domain :Bearer ;
+     rdfs:range :Quality .
+
+
+###  http://geographicknowledge.de/vocab/exposureBasis#hinders
+:hinders rdf:type owl:ObjectProperty ;
+         rdfs:subPropertyOf :causes ;
+         owl:inverseOf :isHinderedBy ;
+         owl:propertyDisjointWith :promotes .
+
+
+###  http://geographicknowledge.de/vocab/exposureBasis#isHinderedBy
+:isHinderedBy rdf:type owl:ObjectProperty ;
+              rdfs:subPropertyOf :causedBy .
+
+
+###  http://geographicknowledge.de/vocab/exposureBasis#isPromotedBy
+:isPromotedBy rdf:type owl:ObjectProperty ;
+              rdfs:subPropertyOf :causedBy ;
+              owl:inverseOf :promotes .
+
+
+###  http://geographicknowledge.de/vocab/exposureBasis#promotes
+:promotes rdf:type owl:ObjectProperty ;
+          rdfs:subPropertyOf :causes .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://geographicknowledge.de/vocab/exposureBasis#Active
+:Active rdf:type owl:Class ;
+        owl:equivalentClass [ rdf:type owl:Class ;
+                              owl:unionOf ( :Activity
+                                            [ rdf:type owl:Restriction ;
+                                              owl:onProperty :causedBy ;
+                                              owl:someValuesFrom :Activity
+                                            ]
+                                          )
+                            ] ;
+        rdfs:subClassOf :Bearer ;
+        rdfs:comment "Either an activity or caused by some activity. This class is used to define what it means to be actively exposed."@en .
+
+
+###  http://geographicknowledge.de/vocab/exposureBasis#ActiveExposure
+:ActiveExposure rdf:type owl:Class ;
+                owl:equivalentClass [ owl:intersectionOf ( :Exposure
+                                                           [ rdf:type owl:Restriction ;
+                                                             owl:onProperty :causedBy ;
+                                                             owl:allValuesFrom :Active
+                                                           ]
+                                                         ) ;
+                                      rdf:type owl:Class
+                                    ] ;
+                rdfs:subClassOf :Exposure ;
+                rdfs:comment "Exposure caused only by active things, e.g. by some activity, or some environmental factor that is itself caused by some activity."@en .
+
+
+###  http://geographicknowledge.de/vocab/exposureBasis#Activity
+:Activity rdf:type owl:Class ;
+          rdfs:subClassOf :Bearer ,
+                          <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Action> ,
+                          [ rdf:type owl:Restriction ;
+                            owl:onProperty :causedBy ;
+                            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                            owl:onClass :Person
+                          ] ;
+          rdfs:comment "An activity is caused by one person"@en .
+
+
+###  http://geographicknowledge.de/vocab/exposureBasis#Bearer
+:Bearer rdf:type owl:Class ;
+        rdfs:comment "The bearer of a quality"@en .
+
+
+###  http://geographicknowledge.de/vocab/exposureBasis#Dose
+:Dose rdf:type owl:Class ;
+      rdfs:subClassOf <http://geographicknowledge.de/vocab/AMMO#Amount> ;
+      rdfs:comment "The effect of some exposure on the body"@en .
+
+
+###  http://geographicknowledge.de/vocab/exposureBasis#EnvironmentalFactor
+:EnvironmentalFactor rdf:type owl:Class ;
+                     rdfs:subClassOf :Bearer ,
+                                     <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalPlace> ;
+                     rdfs:comment "Environment playing a role in some exposure. Can be conceptualized in different ways (see core concepts)"@en .
+
+
+###  http://geographicknowledge.de/vocab/exposureBasis#Exposure
+:Exposure rdf:type owl:Class ;
+          rdfs:subClassOf <http://geographicknowledge.de/vocab/AMMO#Amount> ,
+                          [ rdf:type owl:Restriction ;
+                            owl:onProperty :causedBy ;
+                            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                            owl:onClass :Activity
+                          ] ;
+          rdfs:comment "Amount of exposure of the person involved in the causing activity to something."@en .
+
+
+###  http://geographicknowledge.de/vocab/exposureBasis#HealthRelevantActivity
+:HealthRelevantActivity rdf:type owl:Class ;
+                        owl:equivalentClass [ owl:intersectionOf ( :Activity
+                                                                   [ rdf:type owl:Restriction ;
+                                                                     owl:onProperty :causes ;
+                                                                     owl:someValuesFrom :HealthRelevantExposure
+                                                                   ]
+                                                                 ) ;
+                                              rdf:type owl:Class
+                                            ] ;
+                        rdfs:subClassOf :Activity ;
+                        rdfs:comment "activity that is a cause for some exposure that causes some risk. For example, running or eating"@en .
+
+
+###  http://geographicknowledge.de/vocab/exposureBasis#HealthRelevantDose
+:HealthRelevantDose rdf:type owl:Class ;
+                    owl:equivalentClass [ owl:intersectionOf ( :Dose
+                                                               [ rdf:type owl:Restriction ;
+                                                                 owl:onProperty :causes ;
+                                                                 owl:someValuesFrom :Risk
+                                                               ]
+                                                             ) ;
+                                          rdf:type owl:Class
+                                        ] ;
+                    rdfs:subClassOf :Dose .
+
+
+###  http://geographicknowledge.de/vocab/exposureBasis#HealthRelevantExposure
+:HealthRelevantExposure rdf:type owl:Class ;
+                        owl:equivalentClass [ owl:intersectionOf ( :Exposure
+                                                                   [ rdf:type owl:Restriction ;
+                                                                     owl:onProperty :causes ;
+                                                                     owl:someValuesFrom :HealthRelevantDose
+                                                                   ]
+                                                                 ) ;
+                                              rdf:type owl:Class
+                                            ] ,
+                                            [ owl:intersectionOf ( :Exposure
+                                                                   [ rdf:type owl:Restriction ;
+                                                                     owl:onProperty :causes ;
+                                                                     owl:someValuesFrom :Risk
+                                                                   ]
+                                                                 ) ;
+                                              rdf:type owl:Class
+                                            ] ;
+                        rdfs:subClassOf :Exposure ;
+                        rdfs:comment "An exposure which either prevents or promotes some health risk"@en .
+
+
+###  http://geographicknowledge.de/vocab/exposureBasis#PassiveExposure
+:PassiveExposure rdf:type owl:Class ;
+                 owl:equivalentClass [ owl:intersectionOf ( :Exposure
+                                                            [ rdf:type owl:Restriction ;
+                                                              owl:onProperty :causedBy ;
+                                                              owl:someValuesFrom :EnvironmentalFactor
+                                                            ]
+                                                          ) ;
+                                       rdf:type owl:Class
+                                     ] ;
+                 rdfs:subClassOf :Exposure ;
+                 rdfs:comment "Being exposed to some environmental factor"@en .
+
+
+###  http://geographicknowledge.de/vocab/exposureBasis#Person
+:Person rdf:type owl:Class ;
+        rdfs:subClassOf <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Person> ;
+        rdfs:comment "A person as a cause for activities"@en .
+
+
+###  http://geographicknowledge.de/vocab/exposureBasis#Quality
+:Quality rdf:type owl:Class ;
+         rdfs:subClassOf <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Quality> ;
+         rdfs:comment "Quality of some entity relevant for measuring exposure. For instance, the duration of a trip activity"@en .
+
+
+###  http://geographicknowledge.de/vocab/exposureBasis#Risk
+:Risk rdf:type owl:Class ;
+      rdfs:subClassOf :Bearer ;
+      rdfs:comment "Health risk"@en .
+
+
+###  http://geographicknowledge.de/vocab/exposureBasis#RiskPreventingExposure
+:RiskPreventingExposure rdf:type owl:Class ;
+                        owl:equivalentClass [ owl:intersectionOf ( :Exposure
+                                                                   [ rdf:type owl:Restriction ;
+                                                                     owl:onProperty :hinders ;
+                                                                     owl:someValuesFrom :Risk
+                                                                   ]
+                                                                 ) ;
+                                              rdf:type owl:Class
+                                            ] ,
+                                            [ owl:intersectionOf ( :Exposure
+                                                                   [ rdf:type owl:Restriction ;
+                                                                     owl:onProperty :hinders ;
+                                                                     owl:someValuesFrom :RiskPromotingDose
+                                                                   ]
+                                                                 ) ;
+                                              rdf:type owl:Class
+                                            ] ;
+                        rdfs:subClassOf :HealthRelevantExposure .
+
+
+###  http://geographicknowledge.de/vocab/exposureBasis#RiskPromotingDose
+:RiskPromotingDose rdf:type owl:Class ;
+                   owl:equivalentClass [ owl:intersectionOf ( :Dose
+                                                              [ rdf:type owl:Restriction ;
+                                                                owl:onProperty :promotes ;
+                                                                owl:someValuesFrom :Risk
+                                                              ]
+                                                            ) ;
+                                         rdf:type owl:Class
+                                       ] ;
+                   rdfs:subClassOf :HealthRelevantDose .
+
+
+###  http://geographicknowledge.de/vocab/exposureBasis#RiskPromotingExposure
+:RiskPromotingExposure rdf:type owl:Class ;
+                       owl:equivalentClass [ owl:intersectionOf ( :Exposure
+                                                                  [ rdf:type owl:Restriction ;
+                                                                    owl:onProperty :promotes ;
+                                                                    owl:someValuesFrom :Risk
+                                                                  ]
+                                                                ) ;
+                                             rdf:type owl:Class
+                                           ] ,
+                                           [ owl:intersectionOf ( :Exposure
+                                                                  [ rdf:type owl:Restriction ;
+                                                                    owl:onProperty :promotes ;
+                                                                    owl:someValuesFrom :RiskPromotingDose
+                                                                  ]
+                                                                ) ;
+                                             rdf:type owl:Class
+                                           ] ;
+                       rdfs:subClassOf :HealthRelevantExposure .
+
+
+###  http://geographicknowledge.de/vocab/exposureBasis#SpatialActivity
+:SpatialActivity rdf:type owl:Class ;
+                 rdfs:subClassOf :Activity ;
+                 rdfs:comment "Activity that influences your position in space"@en .
+
+
+###  http://geographicknowledge.de/vocab/exposureBasis#Stressor
+:Stressor rdf:type owl:Class ;
+          owl:equivalentClass [ owl:intersectionOf ( :EnvironmentalFactor
+                                                     [ rdf:type owl:Restriction ;
+                                                       owl:onProperty :promotes ;
+                                                       owl:someValuesFrom :RiskPromotingExposure
+                                                     ]
+                                                   ) ;
+                                rdf:type owl:Class
+                              ] ;
+          rdfs:subClassOf :EnvironmentalFactor ;
+          rdfs:comment "A stressor is an environmental factor that promotes an exposure which promotes a health risk"@en .
+
+
+###  http://geographicknowledge.de/vocab/AMMO#Amount
+<http://geographicknowledge.de/vocab/AMMO#Amount> rdf:type owl:Class .
+
+
+###  Generated by the OWL API (version 4.5.6.2018-09-06T00:27:41Z) https://github.com/owlcs/owlapi

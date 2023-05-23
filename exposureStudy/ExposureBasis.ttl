@@ -131,7 +131,7 @@
                             owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
                             owl:onClass :Activity
                           ] ;
-          rdfs:comment "Amount of exposure of the person involved in the causing activity to something."@en .
+          rdfs:comment "Amount of exposure of the person involved in the causing activity. Person can be exposed to the causing activity or to some environmental factor."@en .
 
 
 ###  http://geographicknowledge.de/vocab/exposureBasis#HealthRelevantActivity
@@ -197,10 +197,22 @@
                  rdfs:comment "Being exposed to some environmental factor"@en .
 
 
+###  http://geographicknowledge.de/vocab/exposureBasis#Perceptual
+:Perceptual rdf:type owl:Class ;
+            rdfs:subClassOf :Exposure ;
+            rdfs:comment "When factors constituting the exposure are related via perception, e.g., perception of crime risk."@en .
+
+
 ###  http://geographicknowledge.de/vocab/exposureBasis#Person
 :Person rdf:type owl:Class ;
         rdfs:subClassOf <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Person> ;
         rdfs:comment "A person as a cause for activities"@en .
+
+
+###  http://geographicknowledge.de/vocab/exposureBasis#Physiological
+:Physiological rdf:type owl:Class ;
+               rdfs:subClassOf :Exposure ;
+               rdfs:comment "When factors constituting the exposure are related via physiological contact, e.g., air pollution via breathing."@en .
 
 
 ###  http://geographicknowledge.de/vocab/exposureBasis#Quality

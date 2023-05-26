@@ -2,14 +2,15 @@
 <rdf:RDF xmlns="http://geographicknowledge.de/vocab/exposureBasis#"
      xml:base="http://geographicknowledge.de/vocab/exposureBasis"
      xmlns:dc="http://purl.org/dc/elements/1.1/"
+     xmlns:exp="http://geographicknowledge.de/vocab/exposureBasis#"
      xmlns:owl="http://www.w3.org/2002/07/owl#"
      xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
      xmlns:xml="http://www.w3.org/XML/1998/namespace"
      xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
      xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
     <owl:Ontology rdf:about="http://geographicknowledge.de/vocab/exposureBasis">
-        <owl:imports rdf:resource="http://geographicknowledge.de/vocab/AMMO"/>
-        <owl:imports rdf:resource="http://geographicknowledge.de/vocab/GeoAMMO"/>
+        <owl:imports rdf:resource="http://geographicknowledge.de/vocab/AMMO.ttl"/>
+        <owl:imports rdf:resource="http://geographicknowledge.de/vocab/GeoAMMO.ttl"/>
         <owl:imports rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl"/>
         <rdfs:comment xml:lang="en">Ontology of basic classes and causal arrows needed for modeling environmental exposure. The ontology can be used to distinguish the elements constituting different exposure measurements (activities, involved persons, environmental factors, doses and risks). It also can be used to classify different typs of exposure.</rdfs:comment>
     </owl:Ontology>

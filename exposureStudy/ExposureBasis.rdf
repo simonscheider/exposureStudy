@@ -1,0 +1,457 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns="http://geographicknowledge.de/vocab/exposureBasis#"
+     xml:base="http://geographicknowledge.de/vocab/exposureBasis"
+     xmlns:dc="http://purl.org/dc/elements/1.1/"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
+    <owl:Ontology rdf:about="http://geographicknowledge.de/vocab/exposureBasis">
+        <owl:imports rdf:resource="http://geographicknowledge.de/vocab/AMMO"/>
+        <owl:imports rdf:resource="http://geographicknowledge.de/vocab/GeoAMMO"/>
+        <owl:imports rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl"/>
+        <rdfs:comment xml:lang="en">Ontology of basic classes and causal arrows needed for modeling environmental exposure. The ontology can be used to distinguish the elements constituting different exposure measurements (activities, involved persons, environmental factors, doses and risks). It also can be used to classify different typs of exposure.</rdfs:comment>
+    </owl:Ontology>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Object Properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://geographicknowledge.de/vocab/exposureBasis#causedBy -->
+
+    <owl:ObjectProperty rdf:about="http://geographicknowledge.de/vocab/exposureBasis#causedBy">
+        <owl:inverseOf rdf:resource="http://geographicknowledge.de/vocab/exposureBasis#causes"/>
+        <rdfs:comment xml:lang="en">Exposure factor caused by another factor</rdfs:comment>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://geographicknowledge.de/vocab/exposureBasis#causes -->
+
+    <owl:ObjectProperty rdf:about="http://geographicknowledge.de/vocab/exposureBasis#causes">
+        <rdfs:domain rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://geographicknowledge.de/vocab/exposureBasis#has -->
+
+    <owl:ObjectProperty rdf:about="http://geographicknowledge.de/vocab/exposureBasis#has">
+        <rdfs:range rdf:resource="http://geographicknowledge.de/vocab/exposureBasis#Quality"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://geographicknowledge.de/vocab/exposureBasis#hinders -->
+
+    <owl:ObjectProperty rdf:about="http://geographicknowledge.de/vocab/exposureBasis#hinders">
+        <rdfs:subPropertyOf rdf:resource="http://geographicknowledge.de/vocab/exposureBasis#causes"/>
+        <owl:inverseOf rdf:resource="http://geographicknowledge.de/vocab/exposureBasis#isHinderedBy"/>
+        <owl:propertyDisjointWith rdf:resource="http://geographicknowledge.de/vocab/exposureBasis#promotes"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://geographicknowledge.de/vocab/exposureBasis#isHinderedBy -->
+
+    <owl:ObjectProperty rdf:about="http://geographicknowledge.de/vocab/exposureBasis#isHinderedBy">
+        <rdfs:subPropertyOf rdf:resource="http://geographicknowledge.de/vocab/exposureBasis#causedBy"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://geographicknowledge.de/vocab/exposureBasis#isPromotedBy -->
+
+    <owl:ObjectProperty rdf:about="http://geographicknowledge.de/vocab/exposureBasis#isPromotedBy">
+        <rdfs:subPropertyOf rdf:resource="http://geographicknowledge.de/vocab/exposureBasis#causedBy"/>
+        <owl:inverseOf rdf:resource="http://geographicknowledge.de/vocab/exposureBasis#promotes"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://geographicknowledge.de/vocab/exposureBasis#promotes -->
+
+    <owl:ObjectProperty rdf:about="http://geographicknowledge.de/vocab/exposureBasis#promotes">
+        <rdfs:subPropertyOf rdf:resource="http://geographicknowledge.de/vocab/exposureBasis#causes"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://geographicknowledge.de/vocab/AMMO#Amount -->
+
+    <owl:Class rdf:about="http://geographicknowledge.de/vocab/AMMO#Amount"/>
+    
+
+
+    <!-- http://geographicknowledge.de/vocab/exposureBasis#Active -->
+
+    <owl:Class rdf:about="http://geographicknowledge.de/vocab/exposureBasis#Active">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://geographicknowledge.de/vocab/exposureBasis#Activity"/>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://geographicknowledge.de/vocab/exposureBasis#causedBy"/>
+                        <owl:someValuesFrom rdf:resource="http://geographicknowledge.de/vocab/exposureBasis#Activity"/>
+                    </owl:Restriction>
+                </owl:unionOf>
+            </owl:Class>
+        </owl:equivalentClass>
+        <rdfs:comment xml:lang="en">Either an activity or caused by some activity. This class is used to define what it means to be actively exposed.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://geographicknowledge.de/vocab/exposureBasis#ActiveExposure -->
+
+    <owl:Class rdf:about="http://geographicknowledge.de/vocab/exposureBasis#ActiveExposure">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://geographicknowledge.de/vocab/exposureBasis#Exposure"/>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://geographicknowledge.de/vocab/exposureBasis#causedBy"/>
+                        <owl:allValuesFrom rdf:resource="http://geographicknowledge.de/vocab/exposureBasis#Active"/>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="http://geographicknowledge.de/vocab/exposureBasis#Exposure"/>
+        <rdfs:comment xml:lang="en">Exposure caused only by active things, e.g. by some activity, or some environmental factor that is itself caused by some activity.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://geographicknowledge.de/vocab/exposureBasis#Activity -->
+
+    <owl:Class rdf:about="http://geographicknowledge.de/vocab/exposureBasis#Activity">
+        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Action"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://geographicknowledge.de/vocab/exposureBasis#causedBy"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="http://geographicknowledge.de/vocab/exposureBasis#Person"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <owl:disjointWith rdf:resource="http://geographicknowledge.de/vocab/exposureBasis#Dose"/>
+        <owl:disjointWith rdf:resource="http://geographicknowledge.de/vocab/exposureBasis#EnvironmentalFactor"/>
+        <owl:disjointWith rdf:resource="http://geographicknowledge.de/vocab/exposureBasis#Exposure"/>
+        <owl:disjointWith rdf:resource="http://geographicknowledge.de/vocab/exposureBasis#Person"/>
+        <owl:disjointWith rdf:resource="http://geographicknowledge.de/vocab/exposureBasis#Risk"/>
+        <rdfs:comment xml:lang="en">An activity is caused by one person</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://geographicknowledge.de/vocab/exposureBasis#Dose -->
+
+    <owl:Class rdf:about="http://geographicknowledge.de/vocab/exposureBasis#Dose">
+        <rdfs:subClassOf rdf:resource="http://geographicknowledge.de/vocab/GeoAMMO#AccumulationAmount"/>
+        <owl:disjointWith rdf:resource="http://geographicknowledge.de/vocab/exposureBasis#EnvironmentalFactor"/>
+        <owl:disjointWith rdf:resource="http://geographicknowledge.de/vocab/exposureBasis#Exposure"/>
+        <owl:disjointWith rdf:resource="http://geographicknowledge.de/vocab/exposureBasis#Person"/>
+        <owl:disjointWith rdf:resource="http://geographicknowledge.de/vocab/exposureBasis#Risk"/>
+        <rdfs:comment xml:lang="en">The effect of some exposure on the body</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://geographicknowledge.de/vocab/exposureBasis#EnvironmentalFactor -->
+
+    <owl:Class rdf:about="http://geographicknowledge.de/vocab/exposureBasis#EnvironmentalFactor">
+        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalPlace"/>
+        <owl:disjointWith rdf:resource="http://geographicknowledge.de/vocab/exposureBasis#Exposure"/>
+        <owl:disjointWith rdf:resource="http://geographicknowledge.de/vocab/exposureBasis#Person"/>
+        <owl:disjointWith rdf:resource="http://geographicknowledge.de/vocab/exposureBasis#Risk"/>
+        <rdfs:comment xml:lang="en">Environment playing a role in some exposure. Can be conceptualized in different ways (see core concepts)</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://geographicknowledge.de/vocab/exposureBasis#Exposure -->
+
+    <owl:Class rdf:about="http://geographicknowledge.de/vocab/exposureBasis#Exposure">
+        <rdfs:subClassOf rdf:resource="http://geographicknowledge.de/vocab/GeoAMMO#AccumulationAmount"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://geographicknowledge.de/vocab/exposureBasis#causedBy"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="http://geographicknowledge.de/vocab/exposureBasis#Activity"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <owl:disjointWith rdf:resource="http://geographicknowledge.de/vocab/exposureBasis#Person"/>
+        <owl:disjointWith rdf:resource="http://geographicknowledge.de/vocab/exposureBasis#Risk"/>
+        <rdfs:comment xml:lang="en">Amount of exposure of the person involved in the causing activity. Person can be exposed to the causing activity or to some environmental factor.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://geographicknowledge.de/vocab/exposureBasis#HealthRelevantActivity -->
+
+    <owl:Class rdf:about="http://geographicknowledge.de/vocab/exposureBasis#HealthRelevantActivity">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://geographicknowledge.de/vocab/exposureBasis#Activity"/>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://geographicknowledge.de/vocab/exposureBasis#causes"/>
+                        <owl:someValuesFrom rdf:resource="http://geographicknowledge.de/vocab/exposureBasis#HealthRelevantExposure"/>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="http://geographicknowledge.de/vocab/exposureBasis#Activity"/>
+        <rdfs:comment xml:lang="en">activity that is a cause for some exposure that causes some risk. For example, running or eating</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://geographicknowledge.de/vocab/exposureBasis#HealthRelevantDose -->
+
+    <owl:Class rdf:about="http://geographicknowledge.de/vocab/exposureBasis#HealthRelevantDose">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://geographicknowledge.de/vocab/exposureBasis#Dose"/>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://geographicknowledge.de/vocab/exposureBasis#causes"/>
+                        <owl:someValuesFrom rdf:resource="http://geographicknowledge.de/vocab/exposureBasis#Risk"/>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="http://geographicknowledge.de/vocab/exposureBasis#Dose"/>
+    </owl:Class>
+    
+
+
+    <!-- http://geographicknowledge.de/vocab/exposureBasis#HealthRelevantExposure -->
+
+    <owl:Class rdf:about="http://geographicknowledge.de/vocab/exposureBasis#HealthRelevantExposure">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://geographicknowledge.de/vocab/exposureBasis#Exposure"/>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://geographicknowledge.de/vocab/exposureBasis#causes"/>
+                        <owl:someValuesFrom rdf:resource="http://geographicknowledge.de/vocab/exposureBasis#HealthRelevantDose"/>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </owl:equivalentClass>
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://geographicknowledge.de/vocab/exposureBasis#Exposure"/>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://geographicknowledge.de/vocab/exposureBasis#causes"/>
+                        <owl:someValuesFrom rdf:resource="http://geographicknowledge.de/vocab/exposureBasis#Risk"/>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="http://geographicknowledge.de/vocab/exposureBasis#Exposure"/>
+        <rdfs:comment xml:lang="en">An exposure which either prevents or promotes some health risk</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://geographicknowledge.de/vocab/exposureBasis#PassiveExposure -->
+
+    <owl:Class rdf:about="http://geographicknowledge.de/vocab/exposureBasis#PassiveExposure">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://geographicknowledge.de/vocab/exposureBasis#Exposure"/>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://geographicknowledge.de/vocab/exposureBasis#causedBy"/>
+                        <owl:someValuesFrom rdf:resource="http://geographicknowledge.de/vocab/exposureBasis#EnvironmentalFactor"/>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="http://geographicknowledge.de/vocab/exposureBasis#Exposure"/>
+        <rdfs:comment xml:lang="en">Being exposed to some environmental factor</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://geographicknowledge.de/vocab/exposureBasis#Perceptual -->
+
+    <owl:Class rdf:about="http://geographicknowledge.de/vocab/exposureBasis#Perceptual">
+        <rdfs:subClassOf rdf:resource="http://geographicknowledge.de/vocab/exposureBasis#Exposure"/>
+        <rdfs:comment xml:lang="en">When factors constituting the exposure are related via perception, e.g., perception of crime risk.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://geographicknowledge.de/vocab/exposureBasis#Person -->
+
+    <owl:Class rdf:about="http://geographicknowledge.de/vocab/exposureBasis#Person">
+        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Person"/>
+        <owl:disjointWith rdf:resource="http://geographicknowledge.de/vocab/exposureBasis#Risk"/>
+        <rdfs:comment xml:lang="en">A person as a cause for activities</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://geographicknowledge.de/vocab/exposureBasis#Physiological -->
+
+    <owl:Class rdf:about="http://geographicknowledge.de/vocab/exposureBasis#Physiological">
+        <rdfs:subClassOf rdf:resource="http://geographicknowledge.de/vocab/exposureBasis#Exposure"/>
+        <rdfs:comment xml:lang="en">When factors constituting the exposure are related via physiological contact, e.g., air pollution via breathing.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://geographicknowledge.de/vocab/exposureBasis#Quality -->
+
+    <owl:Class rdf:about="http://geographicknowledge.de/vocab/exposureBasis#Quality">
+        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Quality"/>
+        <rdfs:comment xml:lang="en">Quality of some entity relevant for measuring exposure. For instance, the duration of a trip activity</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://geographicknowledge.de/vocab/exposureBasis#Risk -->
+
+    <owl:Class rdf:about="http://geographicknowledge.de/vocab/exposureBasis#Risk">
+        <rdfs:subClassOf rdf:resource="http://geographicknowledge.de/vocab/exposureBasis#Quality"/>
+        <rdfs:comment xml:lang="en">Health risk</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://geographicknowledge.de/vocab/exposureBasis#RiskPreventingExposure -->
+
+    <owl:Class rdf:about="http://geographicknowledge.de/vocab/exposureBasis#RiskPreventingExposure">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://geographicknowledge.de/vocab/exposureBasis#Exposure"/>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://geographicknowledge.de/vocab/exposureBasis#hinders"/>
+                        <owl:someValuesFrom rdf:resource="http://geographicknowledge.de/vocab/exposureBasis#Risk"/>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </owl:equivalentClass>
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://geographicknowledge.de/vocab/exposureBasis#Exposure"/>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://geographicknowledge.de/vocab/exposureBasis#hinders"/>
+                        <owl:someValuesFrom rdf:resource="http://geographicknowledge.de/vocab/exposureBasis#RiskPromotingDose"/>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="http://geographicknowledge.de/vocab/exposureBasis#HealthRelevantExposure"/>
+    </owl:Class>
+    
+
+
+    <!-- http://geographicknowledge.de/vocab/exposureBasis#RiskPromotingDose -->
+
+    <owl:Class rdf:about="http://geographicknowledge.de/vocab/exposureBasis#RiskPromotingDose">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://geographicknowledge.de/vocab/exposureBasis#Dose"/>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://geographicknowledge.de/vocab/exposureBasis#promotes"/>
+                        <owl:someValuesFrom rdf:resource="http://geographicknowledge.de/vocab/exposureBasis#Risk"/>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="http://geographicknowledge.de/vocab/exposureBasis#HealthRelevantDose"/>
+    </owl:Class>
+    
+
+
+    <!-- http://geographicknowledge.de/vocab/exposureBasis#RiskPromotingExposure -->
+
+    <owl:Class rdf:about="http://geographicknowledge.de/vocab/exposureBasis#RiskPromotingExposure">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://geographicknowledge.de/vocab/exposureBasis#Exposure"/>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://geographicknowledge.de/vocab/exposureBasis#promotes"/>
+                        <owl:someValuesFrom rdf:resource="http://geographicknowledge.de/vocab/exposureBasis#Risk"/>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </owl:equivalentClass>
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://geographicknowledge.de/vocab/exposureBasis#Exposure"/>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://geographicknowledge.de/vocab/exposureBasis#promotes"/>
+                        <owl:someValuesFrom rdf:resource="http://geographicknowledge.de/vocab/exposureBasis#RiskPromotingDose"/>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="http://geographicknowledge.de/vocab/exposureBasis#HealthRelevantExposure"/>
+    </owl:Class>
+    
+
+
+    <!-- http://geographicknowledge.de/vocab/exposureBasis#SpatialActivity -->
+
+    <owl:Class rdf:about="http://geographicknowledge.de/vocab/exposureBasis#SpatialActivity">
+        <rdfs:subClassOf rdf:resource="http://geographicknowledge.de/vocab/exposureBasis#Activity"/>
+        <rdfs:comment xml:lang="en">Activity that influences your position in space</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://geographicknowledge.de/vocab/exposureBasis#Stressor -->
+
+    <owl:Class rdf:about="http://geographicknowledge.de/vocab/exposureBasis#Stressor">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://geographicknowledge.de/vocab/exposureBasis#EnvironmentalFactor"/>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://geographicknowledge.de/vocab/exposureBasis#promotes"/>
+                        <owl:someValuesFrom rdf:resource="http://geographicknowledge.de/vocab/exposureBasis#RiskPromotingExposure"/>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="http://geographicknowledge.de/vocab/exposureBasis#EnvironmentalFactor"/>
+        <rdfs:comment xml:lang="en">A stressor is an environmental factor that promotes an exposure which promotes a health risk</rdfs:comment>
+    </owl:Class>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 4.5.6.2018-09-06T00:27:41Z) https://github.com/owlcs/owlapi -->
+

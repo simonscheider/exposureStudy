@@ -4,6 +4,6 @@
     <uri id="Imports Wizard Entry" name="http://geographicknowledge.de/vocab/AMMO" uri="http://geographicknowledge.de/vocab/AMMO.ttl"/>
     <uri id="Imports Wizard Entry" name="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl" uri="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
     <group id="Folder Repository, directory=, recursive=true, Auto-Update=true, version=2" prefer="public" xml:base="">
-        <uri id="Automatically generated entry, Timestamp=1685111698485" name="http://geographicknowledge.de/vocab/exposureBasis" uri="ExposureBasis.rdf"/>
+        <uri id="Automatically generated entry, Timestamp=1685186095415" name="http://geographicknowledge.de/vocab/exposureBasis" uri="ExposureBasis.rdf"/>
     </group>
 </catalog>

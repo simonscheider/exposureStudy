@@ -191,6 +191,26 @@
     
 
 
+    <!-- http://geographicknowledge.de/vocab/exposureBasis#EnvironmentalStressor -->
+
+    <owl:Class rdf:about="http://geographicknowledge.de/vocab/exposureBasis#EnvironmentalStressor">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://geographicknowledge.de/vocab/exposureBasis#EnvironmentalFactor"/>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://geographicknowledge.de/vocab/exposureBasis#promotes"/>
+                        <owl:someValuesFrom rdf:resource="http://geographicknowledge.de/vocab/exposureBasis#RiskPromotingExposure"/>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="http://geographicknowledge.de/vocab/exposureBasis#EnvironmentalFactor"/>
+        <rdfs:comment xml:lang="en">A stressor is an environmental factor that promotes an exposure which promotes a health risk</rdfs:comment>
+    </owl:Class>
+    
+
+
     <!-- http://geographicknowledge.de/vocab/exposureBasis#Exposure -->
 
     <owl:Class rdf:about="http://geographicknowledge.de/vocab/exposureBasis#Exposure">
@@ -429,26 +449,6 @@
     <owl:Class rdf:about="http://geographicknowledge.de/vocab/exposureBasis#SpatialActivity">
         <rdfs:subClassOf rdf:resource="http://geographicknowledge.de/vocab/exposureBasis#Activity"/>
         <rdfs:comment xml:lang="en">Activity that influences your position in space</rdfs:comment>
-    </owl:Class>
-    
-
-
-    <!-- http://geographicknowledge.de/vocab/exposureBasis#Stressor -->
-
-    <owl:Class rdf:about="http://geographicknowledge.de/vocab/exposureBasis#Stressor">
-        <owl:equivalentClass>
-            <owl:Class>
-                <owl:intersectionOf rdf:parseType="Collection">
-                    <rdf:Description rdf:about="http://geographicknowledge.de/vocab/exposureBasis#EnvironmentalFactor"/>
-                    <owl:Restriction>
-                        <owl:onProperty rdf:resource="http://geographicknowledge.de/vocab/exposureBasis#promotes"/>
-                        <owl:someValuesFrom rdf:resource="http://geographicknowledge.de/vocab/exposureBasis#RiskPromotingExposure"/>
-                    </owl:Restriction>
-                </owl:intersectionOf>
-            </owl:Class>
-        </owl:equivalentClass>
-        <rdfs:subClassOf rdf:resource="http://geographicknowledge.de/vocab/exposureBasis#EnvironmentalFactor"/>
-        <rdfs:comment xml:lang="en">A stressor is an environmental factor that promotes an exposure which promotes a health risk</rdfs:comment>
     </owl:Class>
 </rdf:RDF>
 

@@ -21,7 +21,7 @@ dct = Namespace("http://purl.org/dc/terms/")
 dcat= Namespace("https://www.w3.org/TR/vocab-dcat-2/")
 rdf = Namespace("http://www.w3.org/1999/02/22-rdf-syntax-ns#")
 rdfs = Namespace("http://www.w3.org/2000/01/rdf-schema#")
-expB = Namespace("http://geographicknowledge.de/vocab/exposureBasis#")
+exp = Namespace("http://geographicknowledge.de/vocab/exposureBasis#")
 envE = Namespace("http://geographicknowledge.de/vocab/environmentalExposure#")
 envC= Namespace("http://www.geographicknowledge.de/vocab/EnvironmentalConcepts.rdf#")
 ccd = Namespace("http://geographicknowledge.de/vocab/CoreConceptData.rdf#")
@@ -34,7 +34,7 @@ def prefix(g):
     g.bind('dc', Namespace("http://purl.org/dc/elements/1.1/"))
     g.bind('dct', Namespace("http://purl.org/dc/terms/"))
     g.bind('dcat', Namespace("https://www.w3.org/TR/vocab-dcat-2/"))
-    g.bind('expB', Namespace("http://geographicknowledge.de/vocab/exposureBasis#"))
+    g.bind('exp', Namespace("http://geographicknowledge.de/vocab/exposureBasis#"))
     g.bind('envE', Namespace("http://geographicknowledge.de/vocab/environmentalExposure#"))
     g.bind('envC', Namespace("http://www.geographicknowledge.de/vocab/EnvironmentalConcepts.rdf#"))
     g.bind('ccd', Namespace("http://geographicknowledge.de/vocab/CoreConceptData.rdf#"))
@@ -57,7 +57,7 @@ def load_RDF( g, fn ):
     return g
 
 #:Local closed world recognition
-def locallyCloseWorld(g, property=expB.causedBy, all = expB.Active):
+def locallyCloseWorld(g, property=exp.causedBy, all = exp.Active):
     for s in g.subjects(property, None):
         allconstraint = False
         objects = g.objects(s, property)
@@ -85,14 +85,14 @@ def locallyCloseWorld(g, property=expB.causedBy, all = expB.Active):
 testquery= """
 SELECT DISTINCT ?causec ?causecl
 WHERE {        
-    ?x a expB:Exposure. 
+    ?x a exp:Exposure. 
     ?x rdfs:comment ?c.
-    ?x expB:causedBy ?cause. 
+    ?x exp:causedBy ?cause. 
     ?cause rdfs:comment ?causec.
-    ?cause expB:causedBy ?ccause.
+    ?cause exp:causedBy ?ccause.
     ?ccause rdfs:comment ?ccausec.
-    OPTIONAL{?ccause a ?ccausecl. FILTER(?ccausecl not in (expB:Exposure, dcat:Dataset)). FILTER(!isBlank(?ccausecl))}
-    OPTIONAL{?cause a ?causecl. FILTER(?causecl not in (expB:Exposure, dcat:Dataset)). FILTER(!isBlank(?causecl))}              
+    OPTIONAL{?ccause a ?ccausecl. FILTER(?ccausecl not in (exp:Exposure, dcat:Dataset)). FILTER(!isBlank(?ccausecl))}
+    OPTIONAL{?cause a ?causecl. FILTER(?causecl not in (exp:Exposure, dcat:Dataset)). FILTER(!isBlank(?causecl))}              
 }
 """
 testquery2= """
@@ -100,8 +100,8 @@ SELECT DISTINCT ?c ?yc ?ycl
 WHERE {      
     OPTIONAL{?x rdfs:comment ?c.}
     ?x a  ?xc.
-    ?xc owl:allValuesFrom expB:Active.  
-    ?x expB:causedBy ?y.
+    ?xc owl:allValuesFrom exp:Active.  
+    ?x exp:causedBy ?y.
     OPTIONAL{?y rdfs:comment ?yc. } 
     OPTIONAL{?y a ?ycl. }                 
 }
@@ -128,7 +128,7 @@ for p in  list_of_paper_descriptions:
     print("Inference")
     owlrl.DeductiveClosure(OWLRL_Semantics, rdfs_closure=True).expand(g)
     test(g)
-    locallyCloseWorld(g, property=expB.causedBy, all=expB.Active)
+    locallyCloseWorld(g, property=exp.causedBy, all=exp.Active)
     #test(g)
     #g.serialize(destination=p+"test"+".ttl")
     print("Inference")
@@ -137,32 +137,15 @@ for p in  list_of_paper_descriptions:
     #g.serialize(destination=p + "test" + ".ttl")
     #test(g)
 
-#load ontology
-#load_RDF(g, 'ExposureBasis.ttl')
-
-#Add local closed world assumption for causal inference:
-
-
-
-
-#Find all nodes that are instances of FieldQ and find their other classes
-# fields = g.subjects(object=ccd.FieldQ, predicate=rdf.type)
-# count =0
-# for f in fields:
-#     count += 1
-#     for o in g.objects(subject=f, predicate=rdf.type):
-#         pass
-#         #print(str(o))
-#print(count)
-
-#All tools that genereated some environmental dataset
+#Formulate queries
 queries = {}
+#All tools that genereated some environmental dataset
 # queries[''] = """
 # SELECT DISTINCT ?cctype ?datatype ?tool
 # WHERE {
 #     ?x prov:wasGeneratedBy ?object .
 #     ?object prov:wasAssociatedWith ?tool.
-#     ?x a expB:Environment, dcat:Dataset.
+#     ?x a exp:Environment, dcat:Dataset.
 #     ?x a ?cctype .
 #     ?x a ?datatype .
 #     FILTER(?cctype  in (ccd:FieldQ, ccd:ObjectQ, ccd:EventQ, ccd:NetworkQ))
@@ -173,8 +156,8 @@ queries = {}
 # WHERE {
 #     ?x prov:wasGeneratedBy ?application .
 #     ?application prov:wasAssociatedWith ?tool.
-#     ?x a expB:Environment, dcat:Dataset.
-#     OPTIONAL{?x a ?y. FILTER(?y not in (expB:Environment, dcat:Dataset)).}
+#     ?x a exp:Environment, dcat:Dataset.
+#     OPTIONAL{?x a ?y. FILTER(?y not in (exp:Environment, dcat:Dataset)).}
 #     OPTIONAL{?tool rdfs:label ?l.}
 # }
 # """
@@ -184,8 +167,8 @@ queries = {}
 # WHERE {
 #     ?x prov:wasGeneratedBy ?application .
 #     ?application prov:wasAssociatedWith ?tool.
-#     ?x a expB:Exposure, dcat:Dataset.
-#     OPTIONAL{?x a ?y. FILTER(?y not in (expB:Exposure, dcat:Dataset)).}
+#     ?x a exp:Exposure, dcat:Dataset.
+#     OPTIONAL{?x a ?y. FILTER(?y not in (exp:Exposure, dcat:Dataset)).}
 #     OPTIONAL{?tool rdfs:label ?l.}
 # }
 # """
@@ -193,44 +176,44 @@ queries = {}
 queries['What kind of exposures are modeled in this paper?'] = """
 SELECT DISTINCT ?c ?y
 WHERE {        
-    ?x a expB:Exposure. 
+    ?x a exp:Exposure. 
     ?x rdfs:comment ?c
-    OPTIONAL{?x a ?y. FILTER(?y not in (expB:Exposure, dcat:Dataset)). FILTER(!isBlank(?y))
+    OPTIONAL{?x a ?y. FILTER(?y not in (exp:Exposure, dcat:Dataset)). FILTER(!isBlank(?y))
     }              
 }
 """
 queries['Which activities are involved in the exposure and who is exposed?'] = """
 SELECT DISTINCT ?yc ?zc
 WHERE {        
-    ?x a expB:Exposure. 
+    ?x a exp:Exposure. 
     ?x rdfs:comment ?xc.
-    ?x expB:causedBy ?y. ?y a expB:Activity. ?y rdfs:comment ?yc.  
-    OPTIONAL{?y expB:causedBy ?z. ?z a expB:Person. ?z rdfs:comment ?zc.}                      
+    ?x exp:causedBy ?y. ?y a exp:Activity. ?y rdfs:comment ?yc.  
+    OPTIONAL{?y exp:causedBy ?z. ?z a exp:Person. ?z rdfs:comment ?zc.}                      
 }
 """
 queries['What are subjects exposed to?'] = """
 SELECT DISTINCT ?yc
 WHERE    
     {
-    ?x a expB:Exposure. ?x expB:causedBy ?y.  ?y rdfs:comment ?yc.
-    FILTER NOT EXISTS{?x a expB:ActiveExposure. ?y a expB:EnvironmentalFactor. }     
-    FILTER NOT EXISTS{?x a expB:PassiveExposure. ?y a expB:Activity. } 
+    ?x a exp:Exposure. ?x exp:causedBy ?y.  ?y rdfs:comment ?yc.
+    FILTER NOT EXISTS{?x a exp:ActiveExposure. ?y a exp:EnvironmentalFactor. }     
+    FILTER NOT EXISTS{?x a exp:PassiveExposure. ?y a exp:Activity. } 
 }
 """
 queries['What is their risk of exposure?'] = """
 SELECT DISTINCT ?yc
 WHERE {        
-    ?x a expB:Exposure. 
+    ?x a exp:Exposure. 
     ?x rdfs:comment ?c.
-    ?x expB:causes+ ?y. ?y a expB:Risk. ?y rdfs:comment ?yc.                 
+    ?x exp:causes+ ?y. ?y a exp:Risk. ?y rdfs:comment ?yc.                 
 }
 """
 queries['Which environmental factors influence the exposure and from which datasets were they derived?'] = """
 SELECT DISTINCT ?yc ?zc ?d
 WHERE {        
-    ?x a expB:Exposure. 
+    ?x a exp:Exposure. 
     ?x rdfs:comment ?xc.
-    ?x expB:causedBy+ ?y. ?y a expB:EnvironmentalFactor. ?y rdfs:comment ?yc.
+    ?x exp:causedBy+ ?y. ?y a exp:EnvironmentalFactor. ?y rdfs:comment ?yc.
     ?y prov:wasDerivedFrom* ?z. ?z a dcat:Dataset; rdfs:comment ?zc.  
     FILTER NOT EXISTS {?z prov:wasDerivedFrom ?u}
     OPTIONAL{?z dcat:distribution ?d}                    
@@ -239,11 +222,13 @@ WHERE {
 queries['What are the environmental stressors?']= """
 SELECT DISTINCT ?xc
 WHERE {
-    ?x a expB:EnvironmentalFactor; rdfs:comment ?xc. 
-    ?y a expB:RiskPromotingExposure; expB:causedBy ?x .  
+    ?x a exp:EnvironmentalFactor; rdfs:comment ?xc. 
+    ?y a exp:RiskPromotingExposure; exp:causedBy ?x .  
 }
 """
+
 pp = {}
+#Run queries over articles
 for idx,p in enumerate(list_of_paper_descriptions):
     paper = p.split('.')[0]
     print("paper: " + paper)
@@ -270,19 +255,19 @@ for idx,p in enumerate(list_of_paper_descriptions):
                         key = name
                         d[question][key]=[]
                 else:
-                    if name not in ('owl:Thing', 'expB:HealthRelevantExposure', 'expB:Active') and name != key:
+                    if name not in ('owl:Thing', 'exp:HealthRelevantExposure', 'exp:Active') and name != key:
                         (d[question][key]).append(name)
 
 
 
-                #print(item)
-    #print(d)
+#Write all results into tables (table 2 = idx < 3 and idx >= 0; table 3 = idx < 6 and idx >= 3:)
 table = []
 pd.set_option('display.max_colwidth', -1)
 for paper in pp.keys():
     row = pd.DataFrame()
     for idx, question in enumerate(queries):
-        if idx < 6 and idx >= 3:
+        #if idx < 6 and idx >= 3:
+        if idx < 3 and idx >= 0:
             df = pd.DataFrame({question:[], 'Context':[]})
             answers = pp[paper][question].keys()
             for a in answers:
@@ -296,7 +281,8 @@ for paper in pp.keys():
     table.append(row)
 table = pd.concat(table)
 lat = table.to_latex(multirow=True, index =False,na_rep='',column_format=''.join(['p{1cm}']*len(table.columns))).replace('NaN', '').replace('{}', '')
-with open('mytable.tex', 'w') as tf:
+#with open('table3.tex', 'w') as tf:
+with open('table2.tex', 'w') as tf:
     tf.write(lat)
 print(lat)
 #table.append(row)

@@ -270,7 +270,7 @@ for idx,p in enumerate(list_of_paper_descriptions):
                         key = name
                         d[question][key]=[]
                 else:
-                    if name not in ('owl:Thing', 'expB:Bearer', 'expB:HealthRelevantExposure', 'expB:Active') and name != key:
+                    if name not in ('owl:Thing', 'expB:HealthRelevantExposure', 'expB:Active') and name != key:
                         (d[question][key]).append(name)
 
 

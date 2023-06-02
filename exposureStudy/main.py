@@ -1,18 +1,17 @@
-# This is a sample Python script.
+"""
+This script is part of the publication "Ontology of passive and active exposure".
+It is used to load ontology based RDF descriptions of exposure related articles
+and to run inferences and queries over these descriptions in order to distinguish approaches
+towards exposure measurement in the article.
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+authors: Simon Scheider, Csilla Vamos
+"""
 
 from rdflib import *
 import owlrl
 from owlrl import OWLRL_Semantics
 from rdflib import Namespace
 import pandas as pd
-from rdflib.namespace import NamespaceManager
-import os
-from pprint import pprint
-from SPARQLWrapper import SPARQLWrapper, JSON
-
 
 dbo = Namespace("http://dbpedia.org/ontology/")
 dbp = Namespace("http://dbpedia.org/resource/")
@@ -22,8 +21,6 @@ dcat= Namespace("https://www.w3.org/TR/vocab-dcat-2/")
 rdf = Namespace("http://www.w3.org/1999/02/22-rdf-syntax-ns#")
 rdfs = Namespace("http://www.w3.org/2000/01/rdf-schema#")
 exp = Namespace("http://geographicknowledge.de/vocab/exposureBasis#")
-envE = Namespace("http://geographicknowledge.de/vocab/environmentalExposure#")
-envC= Namespace("http://www.geographicknowledge.de/vocab/EnvironmentalConcepts.rdf#")
 ccd = Namespace("http://geographicknowledge.de/vocab/CoreConceptData.rdf#")
 prov = Namespace("http://www.w3.org/ns/prov#")
 owl = Namespace("http://www.w3.org/2002/07/owl#")
@@ -35,8 +32,6 @@ def prefix(g):
     g.bind('dct', Namespace("http://purl.org/dc/terms/"))
     g.bind('dcat', Namespace("https://www.w3.org/TR/vocab-dcat-2/"))
     g.bind('exp', Namespace("http://geographicknowledge.de/vocab/exposureBasis#"))
-    g.bind('envE', Namespace("http://geographicknowledge.de/vocab/environmentalExposure#"))
-    g.bind('envC', Namespace("http://www.geographicknowledge.de/vocab/EnvironmentalConcepts.rdf#"))
     g.bind('ccd', Namespace("http://geographicknowledge.de/vocab/CoreConceptData.rdf#"))
     g.bind('prov', Namespace("http://www.w3.org/ns/prov#"))
     g.bind('rdfs', Namespace("http://www.w3.org/2000/01/rdf-schema#"))

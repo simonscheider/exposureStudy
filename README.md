@@ -6,7 +6,7 @@ and to run inferences and queries over these descriptions in order to distinguis
 towards exposure measurement in the article.
 
 ## Data sources
-- *Ontology of active and passive exposure* (OWL 2) : ExposureBasis.ttl(rdf) 
+- *Ontology of active and passive exposure* (OWL 2) : [ExposureBasis.ttl](exposureStudy/ExposureBasis.ttl)
 - *Article descriptions in RDF* : Helbich_2016.ttl,Lipsett_2011.ttl,Vermeulen_2019.ttl,Rongen_2020.ttl,Grinshteyn_2018.ttl,Hillsdon_2006.ttl
 - *Script to run inferences and queries over article descriptions* : main.py  
 - *Result tables* : table2.tex, table3.tex 

@@ -14,7 +14,7 @@ This is an overview of the classes specified in this ontology pattern ([Exposure
 
 ![overview](exposureStudy/overview.png)
 
-The ontology inherits classes from [*Dolce Ultra Light (DUL)*](http://ontologydesignpatterns.org/wiki/Ontology:DOLCE+DnS_Ultralite) and the [*amount ontology (GeoAMMO)*](http://geographicknowledge.de/vocab/GeoAmmo) published in [10.3233/AO-220268]( https://doi.org/10.3233/AO-220268). Classes are defined using possible causal exposure relations between the following base classes:
+The ontology inherits classes from [*DOLCE+DnS Ultralite (DUL)*](http://ontologydesignpatterns.org/wiki/Ontology:DOLCE+DnS_Ultralite) and the [*amount ontology (GeoAMMO)*](http://geographicknowledge.de/vocab/GeoAmmo) published in [10.3233/AO-220268]( https://doi.org/10.3233/AO-220268). Classes are defined using possible causal exposure relations between the following base classes:
 
 <center>
 <img src="exposureStudy/exposureBasis.PNG" alt= "exposureBasis" width="500"></img>

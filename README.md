@@ -1,8 +1,6 @@
 # exposureStudy
  
-This folder contains the data sources and script used in the article "Ontology of active and passive
-environmental exposure". The script is used to load ontology based RDF descriptions of exposure related articles
-and to run inferences and queries over these descriptions in order to distinguish approaches
+This folder contains the data sources and script used in the article "Ontology of active and passive environmental exposure". The script is used to load ontology based RDF descriptions of exposure related articles and to run inferences and queries over these descriptions in order to distinguish approaches
 towards exposure measurement in the article.
 
 ## Data sources
@@ -12,4 +10,6 @@ towards exposure measurement in the article.
 4. *Result tables* : [table2.tex](exposureStudy/table2.tex), [table3.tex](exposureStudy/table3.tex) 
 
 ## ExposureBasis
-This is an overview of the classes specified in this ontology ([ExposureBasis](http://geographicknowledge.de/vocab/ExposureBasis))
+This is an overview of the classes specified in this ontology ([ExposureBasis](http://geographicknowledge.de/vocab/ExposureBasis)).
+
+![Tux, the Linux mascot](exposureStudy/overview.png)

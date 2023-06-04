@@ -16,7 +16,8 @@ This is an overview of the classes specified in this ontology ([ExposureBasis](h
 
 Classes are defined using possible causal exposure relations between the following base classes:
 
-![exposure basis](exposureStudy/exposureBasis.PNG)
+<img src="exposureStudy/exposureBasis.PNG" alt= “” width="200">
+
 
 For details, see the article.
 

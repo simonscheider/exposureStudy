@@ -12,11 +12,11 @@ towards exposure measurement in the article.
 ## ExposureBasis
 This is an overview of the classes specified in this ontology ([ExposureBasis](http://geographicknowledge.de/vocab/ExposureBasis)):
 
-![Tux, the Linux mascot](exposureStudy/overview.png)
+![overview](exposureStudy/overview.png)
 
 Classes are defined using possible causal exposure relations between the following base classes:
 
-![exposure basis](exposureStudy/exposureBasis.png)
+![exposure basis](exposureStudy/exposureBasis.PNG)
 
 For details, see the article.
 

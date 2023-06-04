@@ -10,6 +10,14 @@ towards exposure measurement in the article.
 4. *Result tables* : [table2.tex](exposureStudy/table2.tex), [table3.tex](exposureStudy/table3.tex) 
 
 ## ExposureBasis
-This is an overview of the classes specified in this ontology ([ExposureBasis](http://geographicknowledge.de/vocab/ExposureBasis)).
+This is an overview of the classes specified in this ontology ([ExposureBasis](http://geographicknowledge.de/vocab/ExposureBasis)):
 
 ![Tux, the Linux mascot](exposureStudy/overview.png)
+
+Classes are defined using possible causal exposure relations between the following base classes:
+
+![Tux, the Linux mascot](exposureStudy/exposureBasis.png)
+
+For details, see the article.
+
+## 

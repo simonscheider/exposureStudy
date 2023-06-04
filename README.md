@@ -18,7 +18,7 @@ Classes are defined using possible causal exposure relations between the followi
 
 <center>
 <img src="exposureStudy/exposureBasis.PNG" alt= “exposureBasis” width="500">
-<\center>
+</center>
  
 For details, see the article.
 

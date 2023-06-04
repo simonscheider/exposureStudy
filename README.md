@@ -17,7 +17,7 @@ This is an overview of the classes specified in this ontology pattern ([Exposure
 Classes are defined using possible causal exposure relations between the following base classes:
 
 <center>
-<img src="exposureStudy/exposureBasis.PNG" alt= “exposureBasis” width="500">
+<img src="exposureStudy/exposureBasis.PNG" alt= “exposureBasis” width="500"></img>
 </center>
  
 For details, see the article.

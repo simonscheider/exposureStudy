@@ -4,7 +4,7 @@ This folder contains the data sources and script used in the article "Ontology o
 towards exposure measurement in a given article.
 
 ## Data sources
-1. *Ontology pattern of active and passive exposure* (OWL 2) : [ExposureBasis.ttl](exposureStudy/ExposureBasis.ttl)
+1. *Ontology pattern of active and passive exposure* (prefix *exp:*) (OWL 2) : [ExposureBasis.ttl](exposureStudy/ExposureBasis.ttl)
 2. *Article descriptions in RDF* : [Helbich_2016.ttl](Helbich_2016.ttl),[Lipsett_2011.ttl](exposureStudy/Lipsett_2011.ttl),[Vermeulen_2019.ttl](exposureStudy/Vermeulen_2019.ttl),[Rongen_2020.ttl](exposureStudy/Rongen_2020.ttl),[Grinshteyn_2018.ttl](exposureStudy/Grinshteyn_2018.ttl),[Hillsdon_2006.ttl](exposureStudy/Hillsdon_2006.ttl)
 3. *Python Script to run inferences and queries over article descriptions* : [main.py](exposureStudy/main.py)  
 4. *Result tables* : [table2.tex](exposureStudy/table2.tex), [table3.tex](exposureStudy/table3.tex) 

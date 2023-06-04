@@ -23,7 +23,7 @@ Classes are defined using possible causal exposure relations between the followi
 For details, see the article.
 
 ## Article descriptions in RDF
-Using this ontology pattern, the content of articles regarding their methods of exposure measurement can be encoded using RDF (including data sources, derivations and used exposure concepts):
+Using this ontology pattern together with other ontologies ([DCAT](https://www.w3.org/TR/vocab-dcat-3/) and [PROV](https://www.w3.org/TR/prov-o/)), the content of articles regarding their methods of exposure measurement can be encoded using RDF (including data sources, derivations and used exposure concepts):
 
 <img src="/exposureStudy/overview_prov.png" alt= "overview prov" width="500">
 

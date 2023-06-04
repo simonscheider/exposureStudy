@@ -25,7 +25,7 @@ For details, see the article.
 ## Article descriptions in RDF
 Using this ontology pattern, the content of articles regarding their methods of exposure measurement can be encoded using RDF (including data sources, derivations and used exposure concepts):
 
-<img src="/exposureStudy/overview_prov.PNG" alt= “exposureBasis” width="500">
+<img src="/exposureStudy/overview_prov.png" alt= “overview prov” width="500">
 
 ## Run inferences and queries over articles
 The Python code in [main.py](exposureStudy/main.py) can be used to run RDFS/OWL-RL inference and SPARQL queries over these articles and the ontology pattern. As a result, exposure methods can be automatically classified and retrieved according to the classes of the ontology. For example, a distinction between passive and active exposure variants can be drawn in this way. Query results are stored in results tables [table2.tex](exposureStudy/table2.tex) and [table3.tex](exposureStudy/table3.tex).

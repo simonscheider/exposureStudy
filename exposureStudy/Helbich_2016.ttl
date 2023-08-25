@@ -34,9 +34,9 @@ _:schooltrips expB:causedBy  _:homes, _:schools, _:child, _:accidentdensity, _:p
 _:schooltrips rdfs:comment "walking or biking or motorized transport".
 _:schooltrips expB:has  _:Triplengths, _:Modes, _:weekday.
 
-_:homes a dcat:Dataset,expB:EnvironmentalFactor;rdfs:comment "homes".
+_:homes a dcat:Dataset,expB:Environment;rdfs:comment "homes".
 
-_:schools a dcat:Dataset, expB:EnvironmentalFactor;rdfs:comment "schools".
+_:schools a dcat:Dataset, expB:Environment;rdfs:comment "schools".
 #_:schools dcat:distribution 
 
 _:child a expB:Person, dcat:Dataset;rdfs:comment "School children (GPS tracks)".
@@ -49,7 +49,7 @@ _:child expB:has _:BMI.
 
 
 
-_:majorroads a dcat:Dataset, expB:EnvironmentalFactor ; prov:wasDerivedFrom _:roads;rdfs:comment "major roads".
+_:majorroads a dcat:Dataset, expB:Environment ; prov:wasDerivedFrom _:roads;rdfs:comment "major roads".
 
 _:availabilityofmr prov:wasDerivedFrom _:majorroads.
 
@@ -75,7 +75,7 @@ _:propcul-de-sac prov:wasDerivedFrom _:cul-de-sac.
 
 _:propcul-de-sac a expB:EnvironmentalFactor, dcat:Dataset;rdfs:comment "proportion of cul-de-sac".
 
-_:cul-de-sac a dcat:Dataset, expB:EnvironmentalFactor; prov:wasDerivedFrom _:roads;rdfs:comment "cul-de-sac".
+_:cul-de-sac a dcat:Dataset, expB:Environment; prov:wasDerivedFrom _:roads;rdfs:comment "cul-de-sac".
 
 _:propwayints a expB:EnvironmentalFactor, dcat:Dataset;rdfs:comment "proportion of way intersections".
 
@@ -104,7 +104,7 @@ _:buildingroughness prov:wasDerivedFrom _:buildings.
  
  _:streetdensity a dcat:Datast, expB:EnvironmentalFactor;rdfs:comment "street density".
   _:streetdensity prov:wasDerivedFrom _:roads.
- _:roads a dcat:Dataset, expB:EnvironmentalFactor;rdfs:comment "roads".
+ _:roads a dcat:Dataset, expB:Environment;rdfs:comment "roads".
 
 #_:schooltrips a dcat:Dataset.
 #_:schooltrips prov:wasDerivedFrom _:child, _:accidentdensity, _:propcul-de-sac, _:availabilityofmr, _:distance2mr, _:loggedproportionofgreen, _:windspeed, _:temperature, _:globalradiation, _:hourlyprecipitation.
@@ -112,17 +112,17 @@ _:buildingroughness prov:wasDerivedFrom _:buildings.
 
 ####How to include: Physico chemical environment? Temp? Windspeed?
 
-_:windspeed a dcat:Dataset, expB:EnvironmentalFactor;rdfs:comment "wind speed";
+_:windspeed a dcat:Dataset, expB:Environment;rdfs:comment "wind speed";
 dcat:distribution <https://www.knmi.nl/nederland-nu/klimatologie/uurgegevens>.
 
-_:temperature a dcat:Dataset,  expB:EnvironmentalFactor;rdfs:comment "temperature".
+_:temperature a dcat:Dataset,  expB:Environment;rdfs:comment "temperature".
 _:temperature dcat:distribution <https://www.knmi.nl/nederland-nu/klimatologie/uurgegevens>.
-_:globalradiation a dcat:Dataset,  expB:EnvironmentalFactor;rdfs:comment "global radiation".
+_:globalradiation a dcat:Dataset,  expB:Environment;rdfs:comment "global radiation".
 _:globalradiation dcat:distribution <https://www.knmi.nl/nederland-nu/klimatologie/uurgegevens>.
 _:hourlyprecipitation a dcat:Dataset,  expB:EnvironmentalFactor;rdfs:comment "hourly precipitation".
 _:hourlyprecipitation dcat:distribution <https://www.knmi.nl/nederland-nu/klimatologie/uurgegevens>.
 
-_:green a dcat:Dataset, expB:EnvironmentalFactor;rdfs:comment "green landuse".
+_:green a dcat:Dataset, expB:Environment;rdfs:comment "green landuse".
 _:green prov:wasDerivedFrom  _:LGNlanduse.
 
 _:loggedproportionofgreen a expB:EnvironmentalFactor, dcat:Dataset;rdfs:comment "proportion of green landuse".

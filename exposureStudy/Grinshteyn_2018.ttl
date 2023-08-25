@@ -56,7 +56,7 @@ _:NonViolentCrime a dcat:Dataset, expB:EnvironmentalFactor;rdfs:comment "non vio
 _:ViolentCrime expB:causedBy  _:AreaLevelCrimeRates, _:Neighborhood.
 _:NonViolentCrime expB:causedBy  _:AreaLevelCrimeRates, _:Neighborhood.
 
-_:Neighborhood a dcat:Dataset,expB:EnvironmentalFactor;rdfs:comment "neighborhood".
+_:Neighborhood a dcat:Dataset,expB:Environment;rdfs:comment "neighborhood".
 
 _:Neighborhood expB:has _:AreaLevelCrimeRates.
 _:AreaLevelCrimeRates a dcat:Dataset,expB:EnvironmentalFactor;rdfs:comment "crime rates".

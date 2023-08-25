@@ -34,7 +34,7 @@ _:EatingAtFastFoodOutlets expB:isPromotedBy _:FastFoodOutlets.
 
 _:EatingAtFastFoodOutlets expB:causedBy _:Adults,_:PercievedSocialNorms.
 
-_:FastFoodOutlets a dcat:Dataset, expB:EnvironmentalFactor;rdfs:comment "fast food outlets"; dcat:distribution <https://locatus.com/applicatie/retail-facts/>.
+_:FastFoodOutlets a dcat:Dataset, expB:Environment;rdfs:comment "fast food outlets"; dcat:distribution <https://locatus.com/applicatie/retail-facts/>.
 
 _:EatingAtFastFoodOutlets a dcat:Dataset, expB:Activity;rdfs:comment "eating at fast food outlets".
 
@@ -42,7 +42,7 @@ _:PercievedSocialNorms a dcat:Dataset, expB:Quality;rdfs:comment "percieved soci
 
 _:PercievedSocialNorms expB:causedBy _:Neighborhood.
 
-_:Neighborhood a dcat:Dataset, expB:EnvironmentalFactor;rdfs:comment "neighborhood".
+_:Neighborhood a dcat:Dataset, expB:Environment;rdfs:comment "neighborhood".
 
 
 

@@ -38,10 +38,10 @@ _:IndoorFuelUse a dcat:Dataset, expB:SpatialActivity;rdfs:comment "indoor fuel u
 
 _:IndoorFuelUse expB:causedBy _:NeverSmokingWomen,_:CoalDeposits, _:SocioEconomicStatus, _:HouseholdCharacteristics, _:Homes.
   
-_:CoalDeposits a dcat:Dataset, expB:EnvironmentalFactor;rdfs:comment "coal deposits or mines"; dcat:distribution <https://onlinelibrary.wiley.com/doi/10.1002/ijc.32034L>.
+_:CoalDeposits a dcat:Dataset, expB:Environment;rdfs:comment "coal deposits or mines"; dcat:distribution <https://onlinelibrary.wiley.com/doi/10.1002/ijc.32034L>.
 
-_:Homes a dcat:Dataset, expB:EnvironmentalFactor; rdfs:comment "homes located in Chinese Counties Xuanwei or Fuyuan, data collected on a questionaire".
+_:Homes a dcat:Dataset, expB:Environment; rdfs:comment "homes located in Chinese Counties Xuanwei or Fuyuan, data collected on a questionaire".
 
-_:SocioEconomicStatus a dcat:Dataset, expB:EnvironmentalFactor;rdfs:comment "socio-economic status".
+_:SocioEconomicStatus a dcat:Dataset, expB:Environment;rdfs:comment "socio-economic status".
 _:HouseholdCharacteristics a dcat:Dataset, expB:EnvironmentalFactor;rdfs:comment "household characteristics".
 

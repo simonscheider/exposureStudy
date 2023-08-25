@@ -62,9 +62,9 @@ _:LivingInCalifornia a expB:SpatialActivity;rdfs:comment "Living in California".
 _:LivingInCalifornia expB:causedBy  _:Monitors, _:Neighborhoods, _:Regions,_:FemaleTeacher.
 
 
-_:Neighborhoods a expB:EnvironmentalFactor;rdfs:comment "Neighborhoods".
+_:Neighborhoods a expB:Environment;rdfs:comment "Neighborhoods".
 
-_:Regions a expB:EnvironmentalFactor;rdfs:comment "Regions".
+_:Regions a expB:Environment;rdfs:comment "Regions".
 
 
 #Datasets

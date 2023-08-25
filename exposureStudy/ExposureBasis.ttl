@@ -41,6 +41,15 @@ exp:hinders rdf:type owl:ObjectProperty ;
             owl:propertyDisjointWith exp:promotes .
 
 
+###  http://geographicknowledge.de/vocab/exposureBasis#involves
+exp:involves rdf:type owl:ObjectProperty ;
+             rdfs:subPropertyOf <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#involvesAgent> ;
+             owl:inverseOf exp:participatesIn ;
+             rdfs:domain exp:Activity ;
+             rdfs:range <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Person> ;
+             rdfs:comment "Relation  between activities and persons that are involved in these. If the person is additionally causing the activity, then it is an intended action. If not, the person might be involved involuntarily."@en .
+
+
 ###  http://geographicknowledge.de/vocab/exposureBasis#isHinderedBy
 exp:isHinderedBy rdf:type owl:ObjectProperty ;
                  rdfs:subPropertyOf exp:causedBy .
@@ -50,6 +59,13 @@ exp:isHinderedBy rdf:type owl:ObjectProperty ;
 exp:isPromotedBy rdf:type owl:ObjectProperty ;
                  rdfs:subPropertyOf exp:causedBy ;
                  owl:inverseOf exp:promotes .
+
+
+###  http://geographicknowledge.de/vocab/exposureBasis#participatesIn
+exp:participatesIn rdf:type owl:ObjectProperty ;
+                   rdfs:subPropertyOf <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isAgentInvolvedIn> ;
+                   rdfs:domain <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Person> ;
+                   rdfs:range exp:Activity .
 
 
 ###  http://geographicknowledge.de/vocab/exposureBasis#promotes
@@ -105,7 +121,7 @@ exp:Activity rdf:type owl:Class ;
                               exp:Exposure ,
                               exp:Person ,
                               exp:Risk ;
-             rdfs:comment "An activity is caused by one person"@en .
+             rdfs:comment "An activity is caused (intended) by some persons and may involve other persons unintentionally."@en .
 
 
 ###  http://geographicknowledge.de/vocab/exposureBasis#Dose
@@ -118,13 +134,19 @@ exp:Dose rdf:type owl:Class ;
          rdfs:comment "The effect of some exposure on the body"@en .
 
 
+###  http://geographicknowledge.de/vocab/exposureBasis#Environment
+exp:Environment rdf:type owl:Class ;
+                rdfs:subClassOf <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Place> ;
+                rdfs:comment "An environment contains potentially many georeferenced phenomena in the context of an activity of a person. Environments are usually represented by layer/map datasets. For example, a layer of buildings may represent the built environment for a person living at a place in that environment, and a raster layer of temperature measurements represents a temperature field in a city. Geographic environments may be categorized based on core concepts of spatial information (field, objects, events, networks)."@en .
+
+
 ###  http://geographicknowledge.de/vocab/exposureBasis#EnvironmentalFactor
 exp:EnvironmentalFactor rdf:type owl:Class ;
-                        rdfs:subClassOf <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalPlace> ;
+                        rdfs:subClassOf exp:Quality ;
                         owl:disjointWith exp:Exposure ,
                                          exp:Person ,
                                          exp:Risk ;
-                        rdfs:comment "Environment playing a role in some exposure. Can be conceptualized in different ways (see core concepts)"@en .
+                        rdfs:comment "An environmental factor is a quality value obtained by spatial aggregation of some environment measured on a linear scale. For exampe, the density of green at a location or the temperature at the place of activity of a person. Whereas an environment contains potentially many geolocated phenomena in the context of an activity of a person, a factor aggreates this environment into some value. Data about environments and factors can be related by derivation procedures."@en .
 
 
 ###  http://geographicknowledge.de/vocab/exposureBasis#EnvironmentalStressor
@@ -227,7 +249,7 @@ exp:Perceptual rdf:type owl:Class ;
 exp:Person rdf:type owl:Class ;
            rdfs:subClassOf <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Person> ;
            owl:disjointWith exp:Risk ;
-           rdfs:comment "A person as a cause for activities"@en .
+           rdfs:comment "A person can participate in activities"@en .
 
 
 ###  http://geographicknowledge.de/vocab/exposureBasis#Physiological

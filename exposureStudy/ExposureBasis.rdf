@@ -64,6 +64,18 @@
     
 
 
+    <!-- http://geographicknowledge.de/vocab/exposureBasis#involves -->
+
+    <owl:ObjectProperty rdf:about="http://geographicknowledge.de/vocab/exposureBasis#involves">
+        <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#involvesAgent"/>
+        <owl:inverseOf rdf:resource="http://geographicknowledge.de/vocab/exposureBasis#participatesIn"/>
+        <rdfs:domain rdf:resource="http://geographicknowledge.de/vocab/exposureBasis#Activity"/>
+        <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Person"/>
+        <rdfs:comment xml:lang="en">Relation  between activities and persons that are involved in these. If the person is additionally causing the activity, then it is an intended action. If not, the person might be involved involuntarily.</rdfs:comment>
+    </owl:ObjectProperty>
+    
+
+
     <!-- http://geographicknowledge.de/vocab/exposureBasis#isHinderedBy -->
 
     <owl:ObjectProperty rdf:about="http://geographicknowledge.de/vocab/exposureBasis#isHinderedBy">
@@ -77,6 +89,16 @@
     <owl:ObjectProperty rdf:about="http://geographicknowledge.de/vocab/exposureBasis#isPromotedBy">
         <rdfs:subPropertyOf rdf:resource="http://geographicknowledge.de/vocab/exposureBasis#causedBy"/>
         <owl:inverseOf rdf:resource="http://geographicknowledge.de/vocab/exposureBasis#promotes"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://geographicknowledge.de/vocab/exposureBasis#participatesIn -->
+
+    <owl:ObjectProperty rdf:about="http://geographicknowledge.de/vocab/exposureBasis#participatesIn">
+        <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isAgentInvolvedIn"/>
+        <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Person"/>
+        <rdfs:range rdf:resource="http://geographicknowledge.de/vocab/exposureBasis#Activity"/>
     </owl:ObjectProperty>
     
 
@@ -161,7 +183,7 @@
         <owl:disjointWith rdf:resource="http://geographicknowledge.de/vocab/exposureBasis#Exposure"/>
         <owl:disjointWith rdf:resource="http://geographicknowledge.de/vocab/exposureBasis#Person"/>
         <owl:disjointWith rdf:resource="http://geographicknowledge.de/vocab/exposureBasis#Risk"/>
-        <rdfs:comment xml:lang="en">An activity is caused by one person</rdfs:comment>
+        <rdfs:comment xml:lang="en">An activity is caused (intended) by some persons and may involve other persons unintentionally.</rdfs:comment>
     </owl:Class>
     
 
@@ -179,14 +201,23 @@
     
 
 
+    <!-- http://geographicknowledge.de/vocab/exposureBasis#Environment -->
+
+    <owl:Class rdf:about="http://geographicknowledge.de/vocab/exposureBasis#Environment">
+        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Place"/>
+        <rdfs:comment xml:lang="en">An environment contains potentially many georeferenced phenomena in the context of an activity of a person. Environments are usually represented by layer/map datasets. For example, a layer of buildings may represent the built environment for a person living at a place in that environment, and a raster layer of temperature measurements represents a temperature field in a city. Geographic environments may be categorized based on core concepts of spatial information (field, objects, events, networks).</rdfs:comment>
+    </owl:Class>
+    
+
+
     <!-- http://geographicknowledge.de/vocab/exposureBasis#EnvironmentalFactor -->
 
     <owl:Class rdf:about="http://geographicknowledge.de/vocab/exposureBasis#EnvironmentalFactor">
-        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalPlace"/>
+        <rdfs:subClassOf rdf:resource="http://geographicknowledge.de/vocab/exposureBasis#Quality"/>
         <owl:disjointWith rdf:resource="http://geographicknowledge.de/vocab/exposureBasis#Exposure"/>
         <owl:disjointWith rdf:resource="http://geographicknowledge.de/vocab/exposureBasis#Person"/>
         <owl:disjointWith rdf:resource="http://geographicknowledge.de/vocab/exposureBasis#Risk"/>
-        <rdfs:comment xml:lang="en">Environment playing a role in some exposure. Can be conceptualized in different ways (see core concepts)</rdfs:comment>
+        <rdfs:comment xml:lang="en">An environmental factor is a quality value obtained by spatial aggregation of some environment measured on a linear scale. For exampe, the density of green at a location or the temperature at the place of activity of a person. Whereas an environment contains potentially many geolocated phenomena in the context of an activity of a person, a factor aggreates this environment into some value. Data about environments and factors can be related by derivation procedures.</rdfs:comment>
     </owl:Class>
     
 
@@ -333,7 +364,7 @@
     <owl:Class rdf:about="http://geographicknowledge.de/vocab/exposureBasis#Person">
         <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Person"/>
         <owl:disjointWith rdf:resource="http://geographicknowledge.de/vocab/exposureBasis#Risk"/>
-        <rdfs:comment xml:lang="en">A person as a cause for activities</rdfs:comment>
+        <rdfs:comment xml:lang="en">A person can participate in activities</rdfs:comment>
     </owl:Class>
     
 

@@ -42,19 +42,19 @@ _:COExposure a expB:Exposure,dcat:Dataset;rdfs:comment "CO exposure";expB:caused
 _:SO2Exposure a expB:Exposure,dcat:Dataset;rdfs:comment "SO2 exposure";expB:causedBy _:LivingInCalifornia,_:SO2.
 
 
-_:PM10 a dcat:Dataset,expB:EnvironmentalFactor;rdfs:comment "PM 10 concentration raster";expB:causes _:PM10Exposure; prov:wasDerivedFrom _:PM10monitoringstations.
+_:PM10 a dcat:Dataset,expB:Environment;rdfs:comment "PM 10 concentration raster";expB:causes _:PM10Exposure; prov:wasDerivedFrom _:PM10monitoringstations.
 
-_:PM25 a dcat:Dataset,expB:EnvironmentalFactor;rdfs:comment "PM 25 concentration raster";expB:causes _:PM25Exposure; prov:wasDerivedFrom _:PM25monitoringstations.
+_:PM25 a dcat:Dataset,expB:Environment;rdfs:comment "PM 25 concentration raster";expB:causes _:PM25Exposure; prov:wasDerivedFrom _:PM25monitoringstations.
 
-_:O3 a dcat:Dataset,expB:EnvironmentalFactor;rdfs:comment "O3 concentration raster";expB:causes _:O3Exposure; prov:wasDerivedFrom _:O3monitoringstations.
+_:O3 a dcat:Dataset,expB:Environment;rdfs:comment "O3 concentration raster";expB:causes _:O3Exposure; prov:wasDerivedFrom _:O3monitoringstations.
 
-_:NO2 a dcat:Dataset,expB:EnvironmentalFactor;rdfs:comment "NO2 concentration raster";expB:causes _:NO2Exposure; prov:wasDerivedFrom _:NO2monitoringstations.
+_:NO2 a dcat:Dataset,expB:Environment;rdfs:comment "NO2 concentration raster";expB:causes _:NO2Exposure; prov:wasDerivedFrom _:NO2monitoringstations.
 
-_:NOx a dcat:Dataset,expB:EnvironmentalFactor;rdfs:comment "NOx concentration raster";expB:causes _:NOxExposure; prov:wasDerivedFrom _:NOxmonitoringstations.
+_:NOx a dcat:Dataset,expB:Environment;rdfs:comment "NOx concentration raster";expB:causes _:NOxExposure; prov:wasDerivedFrom _:NOxmonitoringstations.
 
-_:CO a dcat:Dataset,expB:EnvironmentalFactor;rdfs:comment "CO concentration raster";expB:causes _:COExposure; prov:wasDerivedFrom _:COmonitoringstations.
+_:CO a dcat:Dataset,expB:Environment;rdfs:comment "CO concentration raster";expB:causes _:COExposure; prov:wasDerivedFrom _:COmonitoringstations.
 
-_:SO2 a dcat:Dataset,expB:EnvironmentalFactor;rdfs:comment "SO2 concentration raster";expB:causes _:SO2Exposure; prov:wasDerivedFrom _:SO2monitoringstations.
+_:SO2 a dcat:Dataset,expB:Environment;rdfs:comment "SO2 concentration raster";expB:causes _:SO2Exposure; prov:wasDerivedFrom _:SO2monitoringstations.
 
 
 _:LivingInCalifornia a expB:SpatialActivity;rdfs:comment "Living in California".

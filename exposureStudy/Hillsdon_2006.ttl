@@ -39,11 +39,11 @@ _:PhysicalActivity expB:causedBy  _:Adult,_:LargeUrbanGreenSpace, _:QualityUrban
 
 _:LargeUrbanGreenSpace a dcat:Dataset, expB:Environment;rdfs:comment "large urban green space".
 
-_:QualityUrbanGreenSpace a dcat:Dataset, expB:EnvironmentalFactor;rdfs:comment "quality urban green space".
+_:QualityUrbanGreenSpace a dcat:Dataset, expB:Environment;rdfs:comment "quality urban green space".
 
-_:DistanceToGreenSpace a dcat:Dataset, expB:EnvironmentalFactor;rdfs:comment "distance to green space".
+_:DistanceToGreenSpace a dcat:Dataset, expB:Environment;rdfs:comment "distance to green space".
 
-_:DistanceToCityBoundary a dcat:Dataset, expB:EnvironmentalFactor;rdfs:comment "distance to city boundary".
+_:DistanceToCityBoundary a dcat:Dataset, expB:Environment;rdfs:comment "distance to city boundary".
 
 
 #Study did not find a correlation between access to urban green space and physical activity!

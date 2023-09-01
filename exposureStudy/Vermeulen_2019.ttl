@@ -43,5 +43,5 @@ _:CoalDeposits a dcat:Dataset, expB:Environment;rdfs:comment "coal deposits or m
 _:Homes a dcat:Dataset, expB:Environment; rdfs:comment "homes located in Chinese Counties Xuanwei or Fuyuan, data collected on a questionaire".
 
 _:SocioEconomicStatus a dcat:Dataset, expB:Environment;rdfs:comment "socio-economic status".
-_:HouseholdCharacteristics a dcat:Dataset, expB:EnvironmentalFactor;rdfs:comment "household characteristics".
+_:HouseholdCharacteristics a dcat:Dataset, expB:Environment;rdfs:comment "household characteristics".
 

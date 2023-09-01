@@ -105,7 +105,7 @@ exp:ActiveExposure rdf:type owl:Class ;
                                          rdf:type owl:Class
                                        ] ;
                    rdfs:subClassOf exp:Exposure ;
-                   rdfs:comment "Exposure caused only by active things, e.g. by some activity, or some environmental factor that is itself caused by some activity."@en .
+                   rdfs:comment "Exposure caused only by active things, e.g. by some activity, or some environment that is itself caused by some activity."@en .
 
 
 ###  http://geographicknowledge.de/vocab/exposureBasis#Activity
@@ -113,21 +113,21 @@ exp:Activity rdf:type owl:Class ;
              rdfs:subClassOf <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Action> ,
                              [ rdf:type owl:Restriction ;
                                owl:onProperty exp:causedBy ;
-                               owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-                               owl:onClass exp:Person
+                               owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                               owl:onClass <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Person>
                              ] ;
              owl:disjointWith exp:Dose ,
-                              exp:EnvironmentalFactor ,
+                              exp:Environment ,
                               exp:Exposure ,
                               exp:Person ,
                               exp:Risk ;
-             rdfs:comment "An activity is caused (intended) by some persons and may involve other persons unintentionally."@en .
+             rdfs:comment "An activity is caused by at least one person. If a person causes an activity,  then the activity is intended by that person. Persons can participate also in activities without causing/intending them. Every person causing an activity is also involved in the activity"@en .
 
 
 ###  http://geographicknowledge.de/vocab/exposureBasis#Dose
 exp:Dose rdf:type owl:Class ;
          rdfs:subClassOf <http://geographicknowledge.de/vocab/GeoAMMO#AccumulationAmount> ;
-         owl:disjointWith exp:EnvironmentalFactor ,
+         owl:disjointWith exp:Environment ,
                           exp:Exposure ,
                           exp:Person ,
                           exp:Risk ;
@@ -137,21 +137,15 @@ exp:Dose rdf:type owl:Class ;
 ###  http://geographicknowledge.de/vocab/exposureBasis#Environment
 exp:Environment rdf:type owl:Class ;
                 rdfs:subClassOf <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Place> ;
+                owl:disjointWith exp:Exposure ,
+                                 exp:Person ,
+                                 exp:Risk ;
                 rdfs:comment "An environment contains potentially many georeferenced phenomena in the context of an activity of a person. Environments are usually represented by layer/map datasets. For example, a layer of buildings may represent the built environment for a person living at a place in that environment, and a raster layer of temperature measurements represents a temperature field in a city. Geographic environments may be categorized based on core concepts of spatial information (field, objects, events, networks)."@en .
-
-
-###  http://geographicknowledge.de/vocab/exposureBasis#EnvironmentalFactor
-exp:EnvironmentalFactor rdf:type owl:Class ;
-                        rdfs:subClassOf exp:Quality ;
-                        owl:disjointWith exp:Exposure ,
-                                         exp:Person ,
-                                         exp:Risk ;
-                        rdfs:comment "An environmental factor is a quality value obtained by spatial aggregation of some environment measured on a linear scale. For exampe, the density of green at a location or the temperature at the place of activity of a person. Whereas an environment contains potentially many geolocated phenomena in the context of an activity of a person, a factor aggreates this environment into some value. Data about environments and factors can be related by derivation procedures."@en .
 
 
 ###  http://geographicknowledge.de/vocab/exposureBasis#EnvironmentalStressor
 exp:EnvironmentalStressor rdf:type owl:Class ;
-                          owl:equivalentClass [ owl:intersectionOf ( exp:EnvironmentalFactor
+                          owl:equivalentClass [ owl:intersectionOf ( exp:Environment
                                                                      [ rdf:type owl:Restriction ;
                                                                        owl:onProperty exp:promotes ;
                                                                        owl:someValuesFrom exp:RiskPromotingExposure
@@ -159,7 +153,7 @@ exp:EnvironmentalStressor rdf:type owl:Class ;
                                                                    ) ;
                                                 rdf:type owl:Class
                                               ] ;
-                          rdfs:subClassOf exp:EnvironmentalFactor ;
+                          rdfs:subClassOf exp:Environment ;
                           rdfs:comment "A stressor is an environmental factor that promotes an exposure which promotes a health risk"@en .
 
 
@@ -173,7 +167,7 @@ exp:Exposure rdf:type owl:Class ;
                              ] ;
              owl:disjointWith exp:Person ,
                               exp:Risk ;
-             rdfs:comment "Amount of exposure of the person involved in the causing activity. Person can be exposed to the causing activity or to some environmental factor."@en .
+             rdfs:comment "Amount of exposure of the person involved in an activity which causes the exposure. Person can be exposed to this activity or to some environment."@en .
 
 
 ###  http://geographicknowledge.de/vocab/exposureBasis#HealthRelevantActivity
@@ -200,7 +194,8 @@ exp:HealthRelevantDose rdf:type owl:Class ;
                                                                 ) ;
                                              rdf:type owl:Class
                                            ] ;
-                       rdfs:subClassOf exp:Dose .
+                       rdfs:subClassOf exp:Dose ;
+                       rdfs:comment "Dose that causes some Health Risk"@en .
 
 
 ###  http://geographicknowledge.de/vocab/exposureBasis#HealthRelevantExposure
@@ -230,13 +225,13 @@ exp:PassiveExposure rdf:type owl:Class ;
                     owl:equivalentClass [ owl:intersectionOf ( exp:Exposure
                                                                [ rdf:type owl:Restriction ;
                                                                  owl:onProperty exp:causedBy ;
-                                                                 owl:someValuesFrom exp:EnvironmentalFactor
+                                                                 owl:someValuesFrom exp:Environment
                                                                ]
                                                              ) ;
                                           rdf:type owl:Class
                                         ] ;
                     rdfs:subClassOf exp:Exposure ;
-                    rdfs:comment "Being exposed to some environmental factor"@en .
+                    rdfs:comment "Being exposed to some environment"@en .
 
 
 ###  http://geographicknowledge.de/vocab/exposureBasis#Perceptual
@@ -301,7 +296,8 @@ exp:RiskPromotingDose rdf:type owl:Class ;
                                                                ) ;
                                             rdf:type owl:Class
                                           ] ;
-                      rdfs:subClassOf exp:HealthRelevantDose .
+                      rdfs:subClassOf exp:HealthRelevantDose ;
+                      rdfs:comment "Dose that promotes some health risk"@en .
 
 
 ###  http://geographicknowledge.de/vocab/exposureBasis#RiskPromotingExposure

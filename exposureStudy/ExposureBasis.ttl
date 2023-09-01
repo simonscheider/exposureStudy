@@ -31,7 +31,19 @@ exp:causes rdf:type owl:ObjectProperty ;
 
 ###  http://geographicknowledge.de/vocab/exposureBasis#has
 exp:has rdf:type owl:ObjectProperty ;
-        rdfs:range exp:Quality .
+        owl:inverseOf exp:of ;
+        rdfs:domain exp:Person ;
+        rdfs:range exp:Exposure ;
+        rdfs:comment "The exposure quality a person has"@en .
+
+
+###  http://geographicknowledge.de/vocab/exposureBasis#hasCausedBy
+exp:hasCausedBy rdf:type owl:ObjectProperty ;
+                rdfs:domain exp:Person ;
+                owl:propertyChainAxiom ( exp:has
+                                         exp:causedBy
+                                       ) ;
+                rdfs:comment "A person has an exposure that is caused by something"@en .
 
 
 ###  http://geographicknowledge.de/vocab/exposureBasis#hinders
@@ -59,6 +71,13 @@ exp:isHinderedBy rdf:type owl:ObjectProperty ;
 exp:isPromotedBy rdf:type owl:ObjectProperty ;
                  rdfs:subPropertyOf exp:causedBy ;
                  owl:inverseOf exp:promotes .
+
+
+###  http://geographicknowledge.de/vocab/exposureBasis#of
+exp:of rdf:type owl:ObjectProperty ;
+       rdfs:domain exp:Exposure ;
+       rdfs:range exp:Person ;
+       rdfs:comment "Relation linking an exposure quality to the exposed person."@en .
 
 
 ###  http://geographicknowledge.de/vocab/exposureBasis#participatesIn
@@ -112,9 +131,8 @@ exp:ActiveExposure rdf:type owl:Class ;
 exp:Activity rdf:type owl:Class ;
              rdfs:subClassOf <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Action> ,
                              [ rdf:type owl:Restriction ;
-                               owl:onProperty exp:causedBy ;
-                               owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-                               owl:onClass <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Person>
+                               owl:onProperty exp:involves ;
+                               owl:someValuesFrom exp:Person
                              ] ;
              owl:disjointWith exp:Dose ,
                               exp:Environment ,
@@ -126,7 +144,8 @@ exp:Activity rdf:type owl:Class ;
 
 ###  http://geographicknowledge.de/vocab/exposureBasis#Dose
 exp:Dose rdf:type owl:Class ;
-         rdfs:subClassOf <http://geographicknowledge.de/vocab/GeoAMMO#AccumulationAmount> ;
+         rdfs:subClassOf <http://geographicknowledge.de/vocab/GeoAMMO#AccumulationAmount> ,
+                         exp:Quality ;
          owl:disjointWith exp:Environment ,
                           exp:Exposure ,
                           exp:Person ,
@@ -157,17 +176,51 @@ exp:EnvironmentalStressor rdf:type owl:Class ;
                           rdfs:comment "A stressor is an environmental factor that promotes an exposure which promotes a health risk"@en .
 
 
+###  http://geographicknowledge.de/vocab/exposureBasis#ExposedPerson
+exp:ExposedPerson rdf:type owl:Class ;
+                  owl:equivalentClass [ rdf:type owl:Restriction ;
+                                        owl:onProperty exp:has ;
+                                        owl:someValuesFrom exp:Exposure
+                                      ] ;
+                  rdfs:subClassOf exp:Person ,
+                                  [ rdf:type owl:Restriction ;
+                                    owl:onProperty exp:participatesIn ;
+                                    owl:someValuesFrom exp:ExposureActivity
+                                  ] ;
+                  rdfs:comment "A person having an exposure caused by some activity"@en .
+
+
 ###  http://geographicknowledge.de/vocab/exposureBasis#Exposure
 exp:Exposure rdf:type owl:Class ;
              rdfs:subClassOf <http://geographicknowledge.de/vocab/GeoAMMO#AccumulationAmount> ,
+                             exp:Quality ,
                              [ rdf:type owl:Restriction ;
                                owl:onProperty exp:causedBy ;
                                owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
                                owl:onClass exp:Activity
+                             ] ,
+                             [ rdf:type owl:Restriction ;
+                               owl:onProperty exp:of ;
+                               owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                               owl:onClass <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Person>
                              ] ;
              owl:disjointWith exp:Person ,
                               exp:Risk ;
              rdfs:comment "Amount of exposure of the person involved in an activity which causes the exposure. Person can be exposed to this activity or to some environment."@en .
+
+
+###  http://geographicknowledge.de/vocab/exposureBasis#ExposureActivity
+exp:ExposureActivity rdf:type owl:Class ;
+                     owl:equivalentClass [ owl:intersectionOf ( exp:Activity
+                                                                [ rdf:type owl:Restriction ;
+                                                                  owl:onProperty exp:causes ;
+                                                                  owl:someValuesFrom exp:Exposure
+                                                                ]
+                                                              ) ;
+                                           rdf:type owl:Class
+                                         ] ;
+                     rdfs:subClassOf exp:Activity ;
+                     rdfs:comment "an activity that causes some exposure of a person involved"@en .
 
 
 ###  http://geographicknowledge.de/vocab/exposureBasis#HealthRelevantActivity

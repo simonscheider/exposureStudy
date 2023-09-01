@@ -49,7 +49,23 @@
     <!-- http://geographicknowledge.de/vocab/exposureBasis#has -->
 
     <owl:ObjectProperty rdf:about="http://geographicknowledge.de/vocab/exposureBasis#has">
-        <rdfs:range rdf:resource="http://geographicknowledge.de/vocab/exposureBasis#Quality"/>
+        <owl:inverseOf rdf:resource="http://geographicknowledge.de/vocab/exposureBasis#of"/>
+        <rdfs:domain rdf:resource="http://geographicknowledge.de/vocab/exposureBasis#Person"/>
+        <rdfs:range rdf:resource="http://geographicknowledge.de/vocab/exposureBasis#Exposure"/>
+        <rdfs:comment xml:lang="en">The exposure quality a person has</rdfs:comment>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://geographicknowledge.de/vocab/exposureBasis#hasCausedBy -->
+
+    <owl:ObjectProperty rdf:about="http://geographicknowledge.de/vocab/exposureBasis#hasCausedBy">
+        <rdfs:domain rdf:resource="http://geographicknowledge.de/vocab/exposureBasis#Person"/>
+        <owl:propertyChainAxiom rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://geographicknowledge.de/vocab/exposureBasis#has"/>
+            <rdf:Description rdf:about="http://geographicknowledge.de/vocab/exposureBasis#causedBy"/>
+        </owl:propertyChainAxiom>
+        <rdfs:comment xml:lang="en">A person has an exposure that is caused by something</rdfs:comment>
     </owl:ObjectProperty>
     
 
@@ -89,6 +105,16 @@
     <owl:ObjectProperty rdf:about="http://geographicknowledge.de/vocab/exposureBasis#isPromotedBy">
         <rdfs:subPropertyOf rdf:resource="http://geographicknowledge.de/vocab/exposureBasis#causedBy"/>
         <owl:inverseOf rdf:resource="http://geographicknowledge.de/vocab/exposureBasis#promotes"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://geographicknowledge.de/vocab/exposureBasis#of -->
+
+    <owl:ObjectProperty rdf:about="http://geographicknowledge.de/vocab/exposureBasis#of">
+        <rdfs:domain rdf:resource="http://geographicknowledge.de/vocab/exposureBasis#Exposure"/>
+        <rdfs:range rdf:resource="http://geographicknowledge.de/vocab/exposureBasis#Person"/>
+        <rdfs:comment xml:lang="en">Relation linking an exposure quality to the exposed person.</rdfs:comment>
     </owl:ObjectProperty>
     
 
@@ -173,9 +199,8 @@
         <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Action"/>
         <rdfs:subClassOf>
             <owl:Restriction>
-                <owl:onProperty rdf:resource="http://geographicknowledge.de/vocab/exposureBasis#causedBy"/>
-                <owl:minQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minQualifiedCardinality>
-                <owl:onClass rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Person"/>
+                <owl:onProperty rdf:resource="http://geographicknowledge.de/vocab/exposureBasis#involves"/>
+                <owl:someValuesFrom rdf:resource="http://geographicknowledge.de/vocab/exposureBasis#Person"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <owl:disjointWith rdf:resource="http://geographicknowledge.de/vocab/exposureBasis#Dose"/>
@@ -192,6 +217,7 @@
 
     <owl:Class rdf:about="http://geographicknowledge.de/vocab/exposureBasis#Dose">
         <rdfs:subClassOf rdf:resource="http://geographicknowledge.de/vocab/GeoAMMO#AccumulationAmount"/>
+        <rdfs:subClassOf rdf:resource="http://geographicknowledge.de/vocab/exposureBasis#Quality"/>
         <owl:disjointWith rdf:resource="http://geographicknowledge.de/vocab/exposureBasis#Environment"/>
         <owl:disjointWith rdf:resource="http://geographicknowledge.de/vocab/exposureBasis#Exposure"/>
         <owl:disjointWith rdf:resource="http://geographicknowledge.de/vocab/exposureBasis#Person"/>
@@ -233,10 +259,32 @@
     
 
 
+    <!-- http://geographicknowledge.de/vocab/exposureBasis#ExposedPerson -->
+
+    <owl:Class rdf:about="http://geographicknowledge.de/vocab/exposureBasis#ExposedPerson">
+        <owl:equivalentClass>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://geographicknowledge.de/vocab/exposureBasis#has"/>
+                <owl:someValuesFrom rdf:resource="http://geographicknowledge.de/vocab/exposureBasis#Exposure"/>
+            </owl:Restriction>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="http://geographicknowledge.de/vocab/exposureBasis#Person"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://geographicknowledge.de/vocab/exposureBasis#participatesIn"/>
+                <owl:someValuesFrom rdf:resource="http://geographicknowledge.de/vocab/exposureBasis#ExposureActivity"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:comment xml:lang="en">A person having an exposure caused by some activity</rdfs:comment>
+    </owl:Class>
+    
+
+
     <!-- http://geographicknowledge.de/vocab/exposureBasis#Exposure -->
 
     <owl:Class rdf:about="http://geographicknowledge.de/vocab/exposureBasis#Exposure">
         <rdfs:subClassOf rdf:resource="http://geographicknowledge.de/vocab/GeoAMMO#AccumulationAmount"/>
+        <rdfs:subClassOf rdf:resource="http://geographicknowledge.de/vocab/exposureBasis#Quality"/>
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://geographicknowledge.de/vocab/exposureBasis#causedBy"/>
@@ -244,9 +292,36 @@
                 <owl:onClass rdf:resource="http://geographicknowledge.de/vocab/exposureBasis#Activity"/>
             </owl:Restriction>
         </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://geographicknowledge.de/vocab/exposureBasis#of"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Person"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
         <owl:disjointWith rdf:resource="http://geographicknowledge.de/vocab/exposureBasis#Person"/>
         <owl:disjointWith rdf:resource="http://geographicknowledge.de/vocab/exposureBasis#Risk"/>
         <rdfs:comment xml:lang="en">Amount of exposure of the person involved in an activity which causes the exposure. Person can be exposed to this activity or to some environment.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://geographicknowledge.de/vocab/exposureBasis#ExposureActivity -->
+
+    <owl:Class rdf:about="http://geographicknowledge.de/vocab/exposureBasis#ExposureActivity">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://geographicknowledge.de/vocab/exposureBasis#Activity"/>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://geographicknowledge.de/vocab/exposureBasis#causes"/>
+                        <owl:someValuesFrom rdf:resource="http://geographicknowledge.de/vocab/exposureBasis#Exposure"/>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="http://geographicknowledge.de/vocab/exposureBasis#Activity"/>
+        <rdfs:comment xml:lang="en">an activity that causes some exposure of a person involved</rdfs:comment>
     </owl:Class>
     
 

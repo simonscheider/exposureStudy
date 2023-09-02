@@ -127,6 +127,24 @@ exp:ActiveExposure rdf:type owl:Class ;
                    rdfs:comment "Exposure caused only by active things, e.g. by some activity, or some environment that is itself caused by some activity."@en .
 
 
+###  http://geographicknowledge.de/vocab/exposureBasis#ActivePerson
+exp:ActivePerson rdf:type owl:Class ;
+                 owl:equivalentClass [ owl:intersectionOf ( exp:Person
+                                                            [ rdf:type owl:Restriction ;
+                                                              owl:onProperty exp:causes ;
+                                                              owl:someValuesFrom exp:Activity
+                                                            ]
+                                                          ) ;
+                                       rdf:type owl:Class
+                                     ] ;
+                 rdfs:subClassOf exp:Person ,
+                                 [ rdf:type owl:Restriction ;
+                                   owl:onProperty exp:participatesIn ;
+                                   owl:someValuesFrom exp:Activity
+                                 ] ;
+                 rdfs:comment "A person causing (intentionally) an activity"@en .
+
+
 ###  http://geographicknowledge.de/vocab/exposureBasis#Activity
 exp:Activity rdf:type owl:Class ;
              rdfs:subClassOf <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Action> ,
@@ -178,9 +196,13 @@ exp:EnvironmentalStressor rdf:type owl:Class ;
 
 ###  http://geographicknowledge.de/vocab/exposureBasis#ExposedPerson
 exp:ExposedPerson rdf:type owl:Class ;
-                  owl:equivalentClass [ rdf:type owl:Restriction ;
-                                        owl:onProperty exp:has ;
-                                        owl:someValuesFrom exp:Exposure
+                  owl:equivalentClass [ owl:intersectionOf ( exp:Person
+                                                             [ rdf:type owl:Restriction ;
+                                                               owl:onProperty exp:has ;
+                                                               owl:someValuesFrom exp:Exposure
+                                                             ]
+                                                           ) ;
+                                        rdf:type owl:Class
                                       ] ;
                   rdfs:subClassOf exp:Person ,
                                   [ rdf:type owl:Restriction ;

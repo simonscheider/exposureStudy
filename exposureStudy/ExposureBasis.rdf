@@ -193,6 +193,32 @@
     
 
 
+    <!-- http://geographicknowledge.de/vocab/exposureBasis#ActivePerson -->
+
+    <owl:Class rdf:about="http://geographicknowledge.de/vocab/exposureBasis#ActivePerson">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://geographicknowledge.de/vocab/exposureBasis#Person"/>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://geographicknowledge.de/vocab/exposureBasis#causes"/>
+                        <owl:someValuesFrom rdf:resource="http://geographicknowledge.de/vocab/exposureBasis#Activity"/>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="http://geographicknowledge.de/vocab/exposureBasis#Person"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://geographicknowledge.de/vocab/exposureBasis#participatesIn"/>
+                <owl:someValuesFrom rdf:resource="http://geographicknowledge.de/vocab/exposureBasis#Activity"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:comment xml:lang="en">A person causing (intentionally) an activity</rdfs:comment>
+    </owl:Class>
+    
+
+
     <!-- http://geographicknowledge.de/vocab/exposureBasis#Activity -->
 
     <owl:Class rdf:about="http://geographicknowledge.de/vocab/exposureBasis#Activity">
@@ -263,10 +289,15 @@
 
     <owl:Class rdf:about="http://geographicknowledge.de/vocab/exposureBasis#ExposedPerson">
         <owl:equivalentClass>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://geographicknowledge.de/vocab/exposureBasis#has"/>
-                <owl:someValuesFrom rdf:resource="http://geographicknowledge.de/vocab/exposureBasis#Exposure"/>
-            </owl:Restriction>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://geographicknowledge.de/vocab/exposureBasis#Person"/>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://geographicknowledge.de/vocab/exposureBasis#has"/>
+                        <owl:someValuesFrom rdf:resource="http://geographicknowledge.de/vocab/exposureBasis#Exposure"/>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
         </owl:equivalentClass>
         <rdfs:subClassOf rdf:resource="http://geographicknowledge.de/vocab/exposureBasis#Person"/>
         <rdfs:subClassOf>

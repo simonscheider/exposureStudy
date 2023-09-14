@@ -26,15 +26,15 @@ _:LungCancer a expB:Risk;rdfs:comment "lung cancer".
 
 _:LungCancer expB:isPromotedBy _:SmokeyCoalExposure, _:SmokelessCoalExposure.
 
-_:SmokeyCoalExposure a dcat:Dataset, expB:Exposure;rdfs:comment "exposure to smokey coal"; dcat:distribution <https://pubs.acs.org/doi/10.1021/es502201s>, <https://onlinelibrary.wiley.com/doi/10.1111/ina.12255>, <https://onlinelibrary.wiley.com/doi/10.1111/ina.12251>.
+_:SmokeyCoalExposure a dcat:Dataset, expB:Exposure;rdfs:comment "exposure to smokey coal"; dcat:distribution <https://pubs.acs.org/doi/10.1021/es502201s>, <https://onlinelibrary.wiley.com/doi/10.1111/ina.12255>, <https://onlinelibrary.wiley.com/doi/10.1111/ina.12251>; expB:of _:NeverSmokingWomen .
 
-_:SmokelessCoalExposure a dcat:Dataset, expB:Exposure;rdfs:comment "exposure to smokeless coal"; dcat:distribution <https://pubs.acs.org/doi/10.1021/es502201s>, <https://onlinelibrary.wiley.com/doi/10.1111/ina.12255>, <https://onlinelibrary.wiley.com/doi/10.1111/ina.12251>.
+_:SmokelessCoalExposure a dcat:Dataset, expB:Exposure;rdfs:comment "exposure to smokeless coal"; dcat:distribution <https://pubs.acs.org/doi/10.1021/es502201s>, <https://onlinelibrary.wiley.com/doi/10.1111/ina.12255>, <https://onlinelibrary.wiley.com/doi/10.1111/ina.12251>; expB:of _:NeverSmokingWomen .
 
 _:SmokeyCoalExposure expB:causedBy _:IndoorFuelUse.
 
 _:SmokelessCoalExposure expB:causedBy _:IndoorFuelUse.
 
-_:IndoorFuelUse a dcat:Dataset, expB:SpatialActivity;rdfs:comment "indoor fuel use, data collected on a questionaire".
+_:IndoorFuelUse a dcat:Dataset, expB:SpatialActivity;rdfs:comment "indoor fuel use, data collected on a questionaire"; expB:involves _:NeverSmokingWomen .
 
 _:IndoorFuelUse expB:causedBy _:NeverSmokingWomen,_:CoalDeposits, _:SocioEconomicStatus, _:HouseholdCharacteristics, _:Homes.
   

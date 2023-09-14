@@ -19,11 +19,9 @@
 # - for derivations and tools use prov:
 
 
-_:children a dcat:Dataset, expB:Person;rdfs:comment "children aged 11 to 18 years old".
+_:children a dcat:Dataset, expB:Person;rdfs:comment "children aged 11 to 18 years old"; expB:participatesIn _:living.
 
 _:living a expB:Activity;rdfs:comment "living in crime neighborhoods".
-
-_:living expB:causedBy _:children.
 
 _:PoorBehavioralHealth a expB:Risk;rdfs:comment "adverse behavioural health characteristics (aggressive, hyperactive, noncompliant, undercontrolled)". #"delinquent and/or aggressive behavior".
 
@@ -41,13 +39,13 @@ _:BeingaNonViolentCrimeVictim expB:causedBy  _:NonViolentCrime, _:living.
 
 #_:WitnessingNonViolentCrime, _:KnowingaNonViolentCrimeVictim, _:BeingaNonViolentCrimeVictim,
 
-_:WitnessingViolentCrime a dcat:Dataset, expB:Exposure;rdfs:comment "witnessed violent crime exposure".
-_:KnowingaViolentCrimeVictim a dcat:Dataset, expB:Exposure;rdfs:comment "hear say violent crime exposure".
-_:BeingaViolentCrimeVictim a dcat:Dataset, expB:Exposure;rdfs:comment "victim of violent crime exposure".
+_:WitnessingViolentCrime a dcat:Dataset, expB:Exposure;rdfs:comment "witnessed violent crime exposure"; expB:of _:children.
+_:KnowingaViolentCrimeVictim a dcat:Dataset, expB:Exposure;rdfs:comment "hear say violent crime exposure"; expB:of _:children.
+_:BeingaViolentCrimeVictim a dcat:Dataset, expB:Exposure;rdfs:comment "victim of violent crime exposure"; expB:of _:children.
 
-_:WitnessingNonViolentCrime a dcat:Dataset, expB:Exposure;rdfs:comment "witnessed non violent crime exposure".
-_:KnowingaNonViolentCrimeVictim a dcat:Dataset, expB:Exposure;rdfs:comment "hear say non violent crime exposure".
-_:BeingaNonViolentCrimeVictim a dcat:Dataset, expB:Exposure;rdfs:comment "victim of non violent crime exposure".
+_:WitnessingNonViolentCrime a dcat:Dataset, expB:Exposure;rdfs:comment "witnessed non violent crime exposure"; expB:of _:children.
+_:KnowingaNonViolentCrimeVictim a dcat:Dataset, expB:Exposure;rdfs:comment "hear say non violent crime exposure"; expB:of _:children.
+_:BeingaNonViolentCrimeVictim a dcat:Dataset, expB:Exposure;rdfs:comment "victim of non violent crime exposure"; expB:of _:children.
 
 _:ViolentCrime a dcat:Dataset,expB:Environment;rdfs:comment "violent crime". # expB:Activity;rdfs:comment "violent crime". 
 

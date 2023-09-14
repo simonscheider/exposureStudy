@@ -28,11 +28,12 @@ _:PoorDiet a expB:Exposure;rdfs:comment "poor diet".
 
 _:obesity expB:isPromotedBy _:PoorDiet.
 
-_:PoorDiet expB:isPromotedBy _:EatingAtFastFoodOutlets.
+_:PoorDiet expB:isPromotedBy _:EatingAtFastFoodOutlets; expB:of _:Adults.
 
 _:EatingAtFastFoodOutlets expB:isPromotedBy _:FastFoodOutlets.
 
-_:EatingAtFastFoodOutlets expB:causedBy _:Adults,_:PercievedSocialNorms.
+_:EatingAtFastFoodOutlets expB:causedBy _:Adults,_:PercievedSocialNorms; expB:involves _:Adults.
+
 
 _:FastFoodOutlets a dcat:Dataset, expB:Environment;rdfs:comment "fast food outlets"; dcat:distribution <https://locatus.com/applicatie/retail-facts/>.
 

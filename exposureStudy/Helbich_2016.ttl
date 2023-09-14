@@ -39,7 +39,9 @@ _:homes a dcat:Dataset,expB:Environment;rdfs:comment "homes".
 _:schools a dcat:Dataset, expB:Environment;rdfs:comment "schools".
 #_:schools dcat:distribution 
 
-_:child a expB:Person, dcat:Dataset;rdfs:comment "School children (GPS tracks)".
+_:child a expB:Person, dcat:Dataset;rdfs:comment "School children (GPS tracks)"; expB:participatesIn _:schooltrips.
+_:PAexposure expB:of _:child.
+
 
 _:child expB:has _:age.
 

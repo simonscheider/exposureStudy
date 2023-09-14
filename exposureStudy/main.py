@@ -183,7 +183,7 @@ WHERE {
     ?x a exp:Exposure. 
     ?x rdfs:comment ?xc.
     ?x exp:causedBy ?y. ?y a exp:Activity. ?y rdfs:comment ?yc.  
-    OPTIONAL{?y exp:causedBy ?z. ?z a exp:Person. ?z rdfs:comment ?zc.}                      
+    OPTIONAL{?x exp:of ?z. ?z a exp:Person. ?z rdfs:comment ?zc.}                      
 }
 """
 queries['What are subjects exposed to?'] = """
@@ -191,7 +191,7 @@ SELECT DISTINCT ?yc
 WHERE    
     {
     ?x a exp:Exposure. ?x exp:causedBy ?y.  ?y rdfs:comment ?yc.
-    FILTER NOT EXISTS{?x a exp:ActiveExposure. ?y a exp:EnvironmentalFactor. }     
+    FILTER NOT EXISTS{?x a exp:ActiveExposure. ?y a exp:Environment. }     
     FILTER NOT EXISTS{?x a exp:PassiveExposure. ?y a exp:Activity. } 
 }
 """
@@ -208,7 +208,7 @@ SELECT DISTINCT ?yc ?zc ?d
 WHERE {        
     ?x a exp:Exposure. 
     ?x rdfs:comment ?xc.
-    ?x exp:causedBy+ ?y. ?y a exp:EnvironmentalFactor. ?y rdfs:comment ?yc.
+    ?x exp:causedBy+ ?y. ?y a exp:Environment. ?y rdfs:comment ?yc.
     ?y prov:wasDerivedFrom* ?z. ?z a dcat:Dataset; rdfs:comment ?zc.  
     FILTER NOT EXISTS {?z prov:wasDerivedFrom ?u}
     OPTIONAL{?z dcat:distribution ?d}                    
@@ -217,7 +217,7 @@ WHERE {
 queries['What are the environmental stressors?']= """
 SELECT DISTINCT ?xc
 WHERE {
-    ?x a exp:EnvironmentalFactor; rdfs:comment ?xc. 
+    ?x a exp:Environment; rdfs:comment ?xc. 
     ?y a exp:RiskPromotingExposure; exp:causedBy ?x .  
 }
 """

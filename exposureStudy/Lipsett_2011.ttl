@@ -27,19 +27,19 @@ _:MyocardinalInfarction expB:isPromotedBy _:PM10Exposure, _:PM25Exposure, _:O3Ex
 
 _:Stroke expB:isPromotedBy _:PM10Exposure, _:PM25Exposure, _:O3Exposure, _:NO2Exposure, _:NOxExposure, _:COExposure, _:SO2Exposure.
 
-_:PM10Exposure a expB:Exposure,dcat:Dataset;rdfs:comment "PM 10 exposure";expB:causedBy _:LivingInCalifornia,_:PM10.
+_:PM10Exposure a expB:Exposure,dcat:Dataset;rdfs:comment "PM 10 exposure";expB:causedBy _:LivingInCalifornia,_:PM10;expB:of _:FemaleTeacher.
 
-_:PM25Exposure a expB:Exposure,dcat:Dataset;rdfs:comment "PM 2.5 exposure";expB:causedBy _:LivingInCalifornia,_:PM25.
+_:PM25Exposure a expB:Exposure,dcat:Dataset;rdfs:comment "PM 2.5 exposure";expB:causedBy _:LivingInCalifornia,_:PM25;expB:of _:FemaleTeacher.
 
-_:O3Exposure a expB:Exposure,dcat:Dataset;rdfs:comment "O3 exposure";expB:causedBy _:LivingInCalifornia,_:O3.
+_:O3Exposure a expB:Exposure,dcat:Dataset;rdfs:comment "O3 exposure";expB:causedBy _:LivingInCalifornia,_:O3;expB:of _:FemaleTeacher.
 
-_:NO2Exposure a expB:Exposure,dcat:Dataset;rdfs:comment "NO2 exposure";expB:causedBy _:LivingInCalifornia,_:NO2.
+_:NO2Exposure a expB:Exposure,dcat:Dataset;rdfs:comment "NO2 exposure";expB:causedBy _:LivingInCalifornia,_:NO2;expB:of _:FemaleTeacher.
 
-_:NOxExposure a expB:Exposure,dcat:Dataset;rdfs:comment "NOx exposure";expB:causedBy _:LivingInCalifornia,_:NOx.
+_:NOxExposure a expB:Exposure,dcat:Dataset;rdfs:comment "NOx exposure";expB:causedBy _:LivingInCalifornia,_:NOx;expB:of _:FemaleTeacher.
 
-_:COExposure a expB:Exposure,dcat:Dataset;rdfs:comment "CO exposure";expB:causedBy _:LivingInCalifornia,_:CO.
+_:COExposure a expB:Exposure,dcat:Dataset;rdfs:comment "CO exposure";expB:causedBy _:LivingInCalifornia,_:CO;expB:of _:FemaleTeacher.
 
-_:SO2Exposure a expB:Exposure,dcat:Dataset;rdfs:comment "SO2 exposure";expB:causedBy _:LivingInCalifornia,_:SO2.
+_:SO2Exposure a expB:Exposure,dcat:Dataset;rdfs:comment "SO2 exposure";expB:causedBy _:LivingInCalifornia,_:SO2;expB:of _:FemaleTeacher.
 
 
 _:PM10 a dcat:Dataset,expB:Environment;rdfs:comment "PM 10 concentration raster";expB:causes _:PM10Exposure; prov:wasDerivedFrom _:PM10monitoringstations.
@@ -57,7 +57,7 @@ _:CO a dcat:Dataset,expB:Environment;rdfs:comment "CO concentration raster";expB
 _:SO2 a dcat:Dataset,expB:Environment;rdfs:comment "SO2 concentration raster";expB:causes _:SO2Exposure; prov:wasDerivedFrom _:SO2monitoringstations.
 
 
-_:LivingInCalifornia a expB:SpatialActivity;rdfs:comment "Living in California".
+_:LivingInCalifornia a expB:SpatialActivity;rdfs:comment "Living in California";expB:involves _:FemaleTeacher.
 
 _:LivingInCalifornia expB:causedBy  _:Monitors, _:Neighborhoods, _:Regions,_:FemaleTeacher.
 

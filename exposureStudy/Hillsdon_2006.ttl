@@ -33,9 +33,12 @@ _:PAexposure a dcat:Dataset, expB:Exposure;rdfs:comment "exposure to physical ac
 
 _:PAexposure expB:causedBy _:PhysicalActivity.
 
+_:PAexposure expB:of _:Adult.
+
 _:PhysicalActivity a expB:Activity;rdfs:comment "physical activity".
 
 _:PhysicalActivity expB:causedBy  _:Adult,_:LargeUrbanGreenSpace, _:QualityUrbanGreenSpace, _:DistanceToGreenSpace, _:DistanceToCityBoundary.
+_:Adult expB:participatesIn _:PhysicalActivity .
 
 _:LargeUrbanGreenSpace a dcat:Dataset, expB:Environment;rdfs:comment "large urban green space".
 

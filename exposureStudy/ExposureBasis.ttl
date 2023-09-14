@@ -218,8 +218,7 @@ exp:Exposure rdf:type owl:Class ;
                              exp:Quality ,
                              [ rdf:type owl:Restriction ;
                                owl:onProperty exp:causedBy ;
-                               owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-                               owl:onClass exp:Activity
+                               owl:someValuesFrom exp:Activity
                              ] ,
                              [ rdf:type owl:Restriction ;
                                owl:onProperty exp:of ;

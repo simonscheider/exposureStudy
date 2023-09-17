@@ -20,8 +20,6 @@
 
 _:Adults a dcat:Dataset, expB:Person;rdfs:comment "adults in the Netherlands"; dcat:distribution <https://www.flycatcher.eu/nl/>.
 
-_:Adults expB:has _:PercievedSocialNorms.
-
 _:obesity a expB:Risk;rdfs:comment "obesity".
 
 _:PoorDiet a expB:Exposure;rdfs:comment "poor diet".

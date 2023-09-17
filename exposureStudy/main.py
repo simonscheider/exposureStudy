@@ -232,7 +232,7 @@ for idx,p in enumerate(list_of_paper_descriptions):
     pp[paper]=d
     for question in queries:
         qres = g.query(queries[question])
-        #print(question)
+        print(question)
         d[question]={}
         #key = None
         #item = ''
@@ -261,8 +261,8 @@ pd.set_option('display.max_colwidth', -1)
 for paper in pp.keys():
     row = pd.DataFrame()
     for idx, question in enumerate(queries):
-        #if idx < 6 and idx >= 3:
-        if idx < 3 and idx >= 0:
+        if idx < 6 and idx >= 3:
+        #if idx < 3 and idx >= 0:
             df = pd.DataFrame({question:[], 'Context':[]})
             answers = pp[paper][question].keys()
             for a in answers:
